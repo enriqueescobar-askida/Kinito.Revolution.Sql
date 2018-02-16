@@ -1,0 +1,5 @@
+﻿Intervals,PK__Interval__3214EC07864B22B6,FK_Intervals_Zones,Id
+Links,PK__Links__FF7285C029131422,FK_Links_Zones_1,LinkZoneId
+Links,PK__Links__FF7285C029131422,FK_Links_Zones_2,LinkZoneId
+VersionInfo,PK__VersionI__0F540135E4F8E39F,NULL,Version
+Zones,PK__Zones__3214EC07571F21A8,NULL,Id
