@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{DA7A21FA-8162-4350-AD77-A8D1B671F3ED}") = "SqlCommon", "SqlCommon\SqlCommon.rxproj", "{D939A4B6-EF87-4806-975B-364C6C454618}"
+EndProject
+Project("{DA7A21FA-8162-4350-AD77-A8D1B671F3ED}") = "SqlToR", "SqlToR\SqlToR.rxproj", "{CF488A21-9777-4599-BCF7-7946657E355F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D939A4B6-EF87-4806-975B-364C6C454618}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D939A4B6-EF87-4806-975B-364C6C454618}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D939A4B6-EF87-4806-975B-364C6C454618}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D939A4B6-EF87-4806-975B-364C6C454618}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF488A21-9777-4599-BCF7-7946657E355F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF488A21-9777-4599-BCF7-7946657E355F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF488A21-9777-4599-BCF7-7946657E355F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF488A21-9777-4599-BCF7-7946657E355F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
