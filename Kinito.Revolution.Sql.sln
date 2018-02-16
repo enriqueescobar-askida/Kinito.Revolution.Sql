@@ -7,6 +7,14 @@ Project("{DA7A21FA-8162-4350-AD77-A8D1B671F3ED}") = "SqlCommon", "SqlCommon\SqlC
 EndProject
 Project("{DA7A21FA-8162-4350-AD77-A8D1B671F3ED}") = "SqlToR", "SqlToR\SqlToR.rxproj", "{CF488A21-9777-4599-BCF7-7946657E355F}"
 EndProject
+Project("{DA7A21FA-8162-4350-AD77-A8D1B671F3ED}") = "SqlToXlsToR", "SqlToXlsToR\SqlToXlsToR.rxproj", "{241B3AE2-3BFE-453E-A054-34B58592D7F0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{7AA7525E-6E87-46FD-B626-D07A16D9C391}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Xls", "Xls", "{D8CF6FAC-35D5-477A-B98F-0F3B40D6A3C8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Csv", "Csv", "{C38EE311-20C3-4CC8-96CC-F72C2CD8C748}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +29,10 @@ Global
 		{CF488A21-9777-4599-BCF7-7946657E355F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF488A21-9777-4599-BCF7-7946657E355F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF488A21-9777-4599-BCF7-7946657E355F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{241B3AE2-3BFE-453E-A054-34B58592D7F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{241B3AE2-3BFE-453E-A054-34B58592D7F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{241B3AE2-3BFE-453E-A054-34B58592D7F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{241B3AE2-3BFE-453E-A054-34B58592D7F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
