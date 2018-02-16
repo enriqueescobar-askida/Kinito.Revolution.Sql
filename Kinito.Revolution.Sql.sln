@@ -10,6 +10,49 @@ EndProject
 Project("{DA7A21FA-8162-4350-AD77-A8D1B671F3ED}") = "SqlToXlsToR", "SqlToXlsToR\SqlToXlsToR.rxproj", "{241B3AE2-3BFE-453E-A054-34B58592D7F0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{7AA7525E-6E87-46FD-B626-D07A16D9C391}"
+	ProjectSection(SolutionItems) = preProject
+		Sql\DB-Constraint_list.sql = Sql\DB-Constraint_list.sql
+		Sql\DB-FKeys_count.sql = Sql\DB-FKeys_count.sql
+		Sql\DB-FKeys_list.sql = Sql\DB-FKeys_list.sql
+		Sql\DB-Function_count-Inline.sql = Sql\DB-Function_count-Inline.sql
+		Sql\DB-Function_count-Scalar.sql = Sql\DB-Function_count-Scalar.sql
+		Sql\DB-Function_count-Valued.sql = Sql\DB-Function_count-Valued.sql
+		Sql\DB-Function_count.sql = Sql\DB-Function_count.sql
+		Sql\DB-Function_list.sql = Sql\DB-Function_list.sql
+		Sql\DB-Function_listParams.sql = Sql\DB-Function_listParams.sql
+		Sql\DB-Index_count.sql = Sql\DB-Index_count.sql
+		Sql\DB-Index_list.sql = Sql\DB-Index_list.sql
+		Sql\DB-Index_listTypes.sql = Sql\DB-Index_listTypes.sql
+		Sql\DB-Object_list.sql = Sql\DB-Object_list.sql
+		Sql\DB-ParametersInFuncsAndProcs.sql = Sql\DB-ParametersInFuncsAndProcs.sql
+		Sql\DB-PKeys_count.sql = Sql\DB-PKeys_count.sql
+		Sql\DB-PKeys_list.sql = Sql\DB-PKeys_list.sql
+		Sql\DB-Procedure_count.sql = Sql\DB-Procedure_count.sql
+		Sql\DB-Procedure_list.sql = Sql\DB-Procedure_list.sql
+		Sql\DB-Procedure_listIO.sql = Sql\DB-Procedure_listIO.sql
+		Sql\DB-Procedure_listParams.sql = Sql\DB-Procedure_listParams.sql
+		Sql\DB-RowCount_list.sql = Sql\DB-RowCount_list.sql
+		Sql\DB-ServerDBBackup_list.sql = Sql\DB-ServerDBBackup_list.sql
+		Sql\DB-ServerDBSpec_list.sql = Sql\DB-ServerDBSpec_list.sql
+		Sql\DB-ServerLinked_list.sql = Sql\DB-ServerLinked_list.sql
+		Sql\DB-ServerRunning_list.sql = Sql\DB-ServerRunning_list.sql
+		Sql\DB-Table_count.sql = Sql\DB-Table_count.sql
+		Sql\DB-Table_list.sql = Sql\DB-Table_list.sql
+		Sql\DB-Table_listFootprint.sql = Sql\DB-Table_listFootprint.sql
+		Sql\DB-Table_listIO.sql = Sql\DB-Table_listIO.sql
+		Sql\DB-Table_listKeys.sql = Sql\DB-Table_listKeys.sql
+		Sql\DB-TableBranch_list.sql = Sql\DB-TableBranch_list.sql
+		Sql\DB-TableChild_list.sql = Sql\DB-TableChild_list.sql
+		Sql\DB-TableIndependent_list.sql = Sql\DB-TableIndependent_list.sql
+		Sql\DB-TableLeaf_list.sql = Sql\DB-TableLeaf_list.sql
+		Sql\DB-TableParent_list.sql = Sql\DB-TableParent_list.sql
+		Sql\DB-TableRoot_list.sql = Sql\DB-TableRoot_list.sql
+		Sql\DB-TableSelfRef_list.sql = Sql\DB-TableSelfRef_list.sql
+		Sql\DB-TableTrunk_list.sql = Sql\DB-TableTrunk_list.sql
+		Sql\DB-Usage_list.sql = Sql\DB-Usage_list.sql
+		Sql\DB-View_count.sql = Sql\DB-View_count.sql
+		Sql\DB-View_list.sql = Sql\DB-View_list.sql
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Xls", "Xls", "{D8CF6FAC-35D5-477A-B98F-0F3B40D6A3C8}"
 EndProject
