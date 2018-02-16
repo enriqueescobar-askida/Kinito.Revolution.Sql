@@ -1,0 +1,1 @@
+SELECT @@ServiceName    AS ServiceInstance;
