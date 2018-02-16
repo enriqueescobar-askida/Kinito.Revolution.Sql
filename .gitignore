@@ -1,0 +1,13 @@
+.Rproj.user
+.Rhistory
+.Ruserdata
+.RDataTmp*
+.RData
+.ini
+.vspscc
+.suo
+.rxproj.user
+*.ini
+*.vssscc
+*.vspscc
+/.vs/
