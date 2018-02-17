@@ -1,11 +1,13 @@
-
+  
 library(tm);
 library(wordcloud);
+require(tibble);
 
 #' Title
 #'
 #' @param dataFrameSortDesc
 #' @param pngFilePath
+#' @return logical
 #' @export TBD
 #'
 #' @examples TBD
@@ -30,6 +32,8 @@ WordcloudToPng <- function(dataFrameSortDesc = NULL, pngFilePath = ""){
   }
 }
 
+require(ggplot2);
+
 #' Title  WorcloudToBarplot
 #'
 #' @param aSortedDataFrame
@@ -44,11 +48,14 @@ WorcloudToBarplot <- function(aSortedDataFrame = NULL){
 
     return(NULL);
   } else {
-
+    aDataFrame <- data.frame(NULL);
+    
     if (nrow(aSortedDataFrame) > 40) {
       aDataFrame <- head(aSortedDataFrame, 40);
+    } else {
+      aDataFrame <- aSortedDataFrame;
     }
-    aDataFrame <- aSortedDataFrame;
+    
     aBarplot <- barplot(aDataFrame$freq,
                         las = 2,
                         names.arg = aDataFrame$word,
@@ -59,6 +66,35 @@ WorcloudToBarplot <- function(aSortedDataFrame = NULL){
     return(aBarplot);
   }
 }
+
+#' Title  ScreenTxtFiles
+#'
+#' @param fileList
+#' @export TBD
+#'
+#' @examples TBD
+ScreenTxtFiles <- function(fileList = list()) {
+  
+  for (singleFile in fileList) {
+    print(singleFile);
+    singleText <- readLines(singleFile);
+    corpusWords <- Corpus(VectorSource(singleText));
+    # inspect(corpusWords);
+    termDocMatrixSortDesc <- sort(rowSums(as.matrix(TermDocumentMatrix(corpusWords))),
+                                  decreasing  = TRUE);
+    termDocDataFrameSortDesc <- data.frame(word = names(termDocMatrixSortDesc),
+                                           freq = termDocMatrixSortDesc);
+    termDocDataFrameSortDesc <- tibble::as_data_frame(termDocDataFrameSortDesc);
+    print(head(termDocDataFrameSortDesc));
+    singleWordcloudPng <- gsub(".txt", ".wordcloud.png", singleFile);
+    WordcloudToPng(termDocDataFrameSortDesc, singleWordcloudPng);
+    # WorcloudToBarplot(termDocDataFrameSortDesc);
+    singleWordcloudFreq <- gsub(".txt", ".freq.csv", singleFile);
+    print(singleWordcloudFreq);
+    write.csv2(termDocDataFrameSortDesc, file = singleWordcloudFreq, row.names = FALSE);
+  }
+}
+
 #
 #
 #

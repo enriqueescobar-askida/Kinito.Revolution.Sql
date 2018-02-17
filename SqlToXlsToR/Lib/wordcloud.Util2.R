@@ -1,10 +1,8 @@
-# import
+  
 library(tm);
 library(wordcloud);
 require(tibble);
-###
-### functions
-###
+
 #' Title
 #'
 #' @param dataFrameSortDesc
@@ -14,9 +12,9 @@ require(tibble);
 #'
 #' @examples TBD
 WordcloudToPng <- function(dataFrameSortDesc = NULL, pngFilePath = ""){
-  
+
   if (is.null(dataFrameSortDesc)) {
-    
+
     return(FALSE);
   } else {
     # graph
@@ -29,12 +27,13 @@ WordcloudToPng <- function(dataFrameSortDesc = NULL, pngFilePath = ""){
               rot.per = 0.35,
               colors = brewer.pal(8, "Dark2"));
     dev.off();
-    
+
     return(TRUE);
   }
 }
-# import
+
 require(ggplot2);
+
 #' Title  WorcloudToBarplot
 #'
 #' @param aSortedDataFrame
@@ -44,9 +43,9 @@ require(ggplot2);
 #'
 #' @examples TBD
 WorcloudToBarplot <- function(aSortedDataFrame = NULL){
-  
+
   if (is.null(aSortedDataFrame)) {
-    
+
     return(NULL);
   } else {
     aDataFrame <- data.frame(NULL);
@@ -63,10 +62,11 @@ WorcloudToBarplot <- function(aSortedDataFrame = NULL){
                         col = "lightblue",
                         main = "Most frequent words",
                         ylab = "Word frequencies");
-    
+
     return(aBarplot);
   }
 }
+
 #' Title  ScreenTxtFiles
 #'
 #' @param fileList
@@ -95,3 +95,6 @@ ScreenTxtFiles <- function(fileList = list()) {
   }
 }
 
+#
+#
+#
