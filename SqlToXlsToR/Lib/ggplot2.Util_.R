@@ -1,5 +1,7 @@
+
 library(ggplot2);
 library(gridExtra);
+
 #' Title  GgplotToPng
 #'
 #' @param pngFilePath
@@ -19,6 +21,7 @@ GgplotToPng <- function(pngFilePath = "", barplot = NULL) {
     return(TRUE);
   }
 }
+
 #' Title  GenericPiechartFromTwoColumnDataFrame
 #'
 #' @param aDataFrame 
@@ -58,6 +61,7 @@ GenericPiechartFromTwoColumnDataFrame <- function(aDataFrame = NULL, mainTitle =
   
   return(aPierchart);
 }
+
 #' Title  DBUsageDataFrameToPiechart
 #'
 #' @param usageDataFrame
@@ -94,6 +98,7 @@ DBUsageDataFrameToPiechart <- function(usageDataFrame = NULL) {
     return(piePlot);
   }
 }
+
 #' Title  DBFunctionDataFrameToPiechart
 #'
 #' @param functionDataFrame
@@ -131,6 +136,7 @@ DBFunctionDataFrameToPiechart <- function(functionDataFrame = NULL) {
     return(piePlot);
   }
 }
+
 #' Title  DBUsageDataFrameToBarplot
 #'
 #' @param usageDataFrame
@@ -160,6 +166,7 @@ DBUsageDataFrameToBarplot <- function(usageDataFrame = NULL) {
     return(barplot);
   }
 }
+
 #' Title  DBRowCountFrameToBarplot
 #'
 #' @param usageDataFrame 
@@ -192,6 +199,7 @@ DBRowCountFrameToBarplot <- function(usageDataFrame = NULL) {
     return(barplot);
   }
 }
+
 #' Title  DBObjectDataFrameToBarplot
 #'
 #' @param objectDataFrame
@@ -223,6 +231,7 @@ DBObjectDataFrameToBarplot <- function(objectDataFrame = NULL) {
     return(barplot);
   }
 }
+
 #' Title DBFunctionDataFrameToBarplot
 #'
 #' @param functionDataFrame
@@ -256,6 +265,7 @@ DBFunctionDataFrameToBarplot <- function(functionDataFrame = NULL) {
     return(aBarplot);
   }
 }
+
 #' Title  DBFunctionDataFrameToBoxplot
 #'
 #' @param functionDataFrame
@@ -287,6 +297,7 @@ DBFunctionDataFrameToBoxplot <- function(functionDataFrame = NULL) {
     return(aBoxplot);
   }
 }
+
 #' Title  DBFunctionDataFrameToDensityplot
 #'
 #' @param functionDataFrame
@@ -314,6 +325,7 @@ DBFunctionDataFrameToDensityplot <- function(functionDataFrame = NULL) {
     return(aDensityplot);
   }
 }
+
 #' Title  StoredProcWithoutWithTotalDFToBarplot
 #'
 #' @param woWithTotalDataFrame
@@ -361,6 +373,7 @@ StoredProcWithoutWithTotalDFToBarplot <- function(woWithTotalDataFrame = NULL,
     return(aBarplot);
   }
 }
+
 #' Title  StoredProcWithoutWithTotalDFToPiechart
 #'
 #' @param woWithTotalDataFrame
@@ -414,6 +427,7 @@ StoredProcWithoutWithTotalDFToPiechart <- function(woWithTotalDataFrame = NULL,
     return(piePlot);
   }
 }
+
 #' Title  FunctionWithoutWithTotalDFToBarplot
 #'
 #' @param woWithTotalDataFrame
@@ -461,6 +475,7 @@ FunctionWithoutWithTotalDFToBarplot <- function(woWithTotalDataFrame = NULL,
     return(aBarplot);
   }
 }
+
 #' Title  FunctionWithoutWithTotalDFToPiechart
 #'
 #' @param woWithTotalDataFrame 
@@ -515,6 +530,7 @@ FunctionWithoutWithTotalDFToPiechart <- function(woWithTotalDataFrame = NULL,
     return(piePlot);
   }
 }
+
 #' Title  DBStoreProcDataFrameToBoxplot
 #'
 #' @param storeProcDataFrame 
@@ -545,6 +561,7 @@ DBStoreProcDataFrameToBoxplot <- function(storeProcDataFrame = NULL) {
     return(aBoxplot);
   }
 }
+
 #' Title  DBStoreProcDataFrameToDensityplot
 #'
 #' @param storeProcDataFrame
@@ -572,7 +589,9 @@ DBStoreProcDataFrameToDensityplot <- function(storeProcDataFrame = NULL) {
     return(aDensityplot);
   }
 }
+
 library(reshape2);
+
 #' Title  DBTableRatioToStackeplot
 #'
 #' @param ioRatioTableDF
@@ -598,6 +617,7 @@ DBTableRatioToStackeplot <- function(ioRatioTableDF = NULL) {
     return(stackedPlot);
   }
 }
+
 #' Title  DBTableRatioToQplot
 #'
 #' @param tableIODataFrame
@@ -629,6 +649,7 @@ DBTableRatioToQplot <- function(tableIODataFrame = NULL) {
     return(qPlot);
   }
 }
+
 #' Title  DBStoredProcRatioToStackeplot
 #'
 #' @param ioReadTableDF
@@ -657,6 +678,7 @@ DBStoredProcRatioToStackeplot <- function(ioReadTableDF = NULL) {
     return(qPlot);
   }
 }
+
 #' Title  DBStoredProcRatioToQplot
 #'
 #' @param storedProcIODataFrame
@@ -687,6 +709,7 @@ DBStoredProcRatioToQplot <- function(storedProcIODataFrame = NULL) {
     return(qPlot);
   }
 }
+
 #' Title  TwoColumnDataFrameToBarlot
 #'
 #' @param aDataFrame 
@@ -722,6 +745,7 @@ TwoColumnDataFrameToBarlot <- function(aDataFrame = NULL, mainTitle = "") {
     return(barplot);
   }
 }
+
 #
 #
 #

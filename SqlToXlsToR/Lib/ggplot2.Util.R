@@ -1,4 +1,7 @@
+
 library(ggplot2);
+library(gridExtra);
+
 #
 #
 #
@@ -26,6 +29,7 @@ DBUsageDataFrameToPiechart <- function(usageDataFrame = NULL,
     dev.off();
   }
 }
+
 #
 #
 #
@@ -51,6 +55,7 @@ DBUsageDataFrameToBarplot <- function(usageDataFrame = NULL,
     ggsave(filename = pngFilePath, plot = barplot, dpi = 100);
   }
 }
+
 #
 #
 #
@@ -75,6 +80,7 @@ DBRowCountFrameToBarplot <- function(usageDataFrame = NULL,
     ggsave(filename = pngFilePath, plot = barplot, dpi = 100);
   }
 }
+
 #
 #
 #
@@ -96,6 +102,7 @@ DBObjectDataFrameToBarplot <- function(objectDataFrame = NULL,
     ggsave(filename = pngFilePath, plot = barplot, dpi = 100);
   }
 }
+
 #
 #
 #
@@ -118,6 +125,7 @@ DBFunctionDataFrameToBarplot <- function(functionDataFrame = NULL,
     ggsave(filename = pngFilePath, plot = aBarplot, dpi = 100);
   }
 }
+
 #
 #
 #
@@ -141,6 +149,7 @@ DBFunctionDataFrameToBoxplot <- function(functionDataFrame = NULL,
     ggsave(filename = pngFilePath, plot = aBoxplot, dpi = 100);
   }
 }
+
 #
 #
 #
@@ -161,6 +170,7 @@ DBFunctionDataFrameToDensityplot <- function(functionDataFrame = NULL,
     ggsave(filename = pngFilePath, plot = aDensityplot, dpi = 100);
   }
 }
+
 #
 #
 #
@@ -198,6 +208,7 @@ StoredProcWithoutWithTotalDFToBarplot <- function(woWithTotalDataFrame = NULL,
     ggsave(filename = pngFilePath, plot = aBarplot, dpi = 100);
   }
 }
+
 #
 #
 #
@@ -337,6 +348,7 @@ DBStoredProcRatioToQplot <- function(storedProcIODataFrame = NULL,
   qPlot;
   ggsave(filename = pngFilePath, plot = qPlot, dpi = 100);
 }
+
 #
 #
 #
