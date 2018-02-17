@@ -1,7 +1,9 @@
-#
-#
-#
+
 library(plotrix);
+
+#
+#
+#
 DBFunctionDataFrameToPiechart <- function(functionDataFrame = NULL,
                                           pngFilePath = "") {
   if(is.null(functionDataFrame)){
@@ -25,6 +27,7 @@ DBFunctionDataFrameToPiechart <- function(functionDataFrame = NULL,
     dev.off();
   }
 }
+
 #
 #
 #

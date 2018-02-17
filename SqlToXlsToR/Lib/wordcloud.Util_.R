@@ -1,5 +1,7 @@
+
 library(tm);
 library(wordcloud);
+
 #' Title
 #'
 #' @param dataFrameSortDesc
@@ -27,6 +29,7 @@ WordcloudToPng <- function(dataFrameSortDesc = NULL, pngFilePath = ""){
     return(TRUE);
   }
 }
+
 #' Title  WorcloudToBarplot
 #'
 #' @param aSortedDataFrame
