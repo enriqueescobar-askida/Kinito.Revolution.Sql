@@ -57,6 +57,16 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Xls", "Xls", "{D8CF6FAC-35D5-477A-B98F-0F3B40D6A3C8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Csv", "Csv", "{C38EE311-20C3-4CC8-96CC-F72C2CD8C748}"
+	ProjectSection(SolutionItems) = preProject
+		Csv\Server-Instance-DBBackup_list.csv = Csv\Server-Instance-DBBackup_list.csv
+		Csv\Server-Instance-DBSpec_list.csv = Csv\Server-Instance-DBSpec_list.csv
+		Csv\Server-Instance-Linked_list.csv = Csv\Server-Instance-Linked_list.csv
+		Csv\Server-Instance-Running_list.csv = Csv\Server-Instance-Running_list.csv
+		Csv\Server-Instance-Usage_list.csv = Csv\Server-Instance-Usage_list.csv
+		Csv\Server-Instance.csv = Csv\Server-Instance.csv
+		Csv\Server-ServiceInstance.csv = Csv\Server-ServiceInstance.csv
+		Csv\Server-Version.csv = Csv\Server-Version.csv
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
