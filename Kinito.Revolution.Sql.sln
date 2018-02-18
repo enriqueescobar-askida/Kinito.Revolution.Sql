@@ -55,6 +55,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{7AA7525E-6E8
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Xls", "Xls", "{D8CF6FAC-35D5-477A-B98F-0F3B40D6A3C8}"
+	ProjectSection(SolutionItems) = preProject
+		Xls\Server-Instance-DBBackup_list.xls = Xls\Server-Instance-DBBackup_list.xls
+		Xls\Server-Instance-DBSpec_list.xls = Xls\Server-Instance-DBSpec_list.xls
+		Xls\Server-Instance-Linked_list.xls = Xls\Server-Instance-Linked_list.xls
+		Xls\Server-Instance-Running_list.xls = Xls\Server-Instance-Running_list.xls
+		Xls\Server-Instance-Usage_list.xls = Xls\Server-Instance-Usage_list.xls
+		Xls\Server-Instance.xls = Xls\Server-Instance.xls
+		Xls\Server-ServiceInstance.xls = Xls\Server-ServiceInstance.xls
+		Xls\Server-Version.xls = Xls\Server-Version.xls
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Csv", "Csv", "{C38EE311-20C3-4CC8-96CC-F72C2CD8C748}"
 	ProjectSection(SolutionItems) = preProject
