@@ -68,14 +68,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Xls", "Xls", "{D8CF6FAC-35D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Csv", "Csv", "{C38EE311-20C3-4CC8-96CC-F72C2CD8C748}"
 	ProjectSection(SolutionItems) = preProject
-		Csv\Server-Instance-DBBackup_list.csv = Csv\Server-Instance-DBBackup_list.csv
-		Csv\Server-Instance-DBSpec_list.csv = Csv\Server-Instance-DBSpec_list.csv
-		Csv\Server-Instance-Linked_list.csv = Csv\Server-Instance-Linked_list.csv
-		Csv\Server-Instance-Running_list.csv = Csv\Server-Instance-Running_list.csv
-		Csv\Server-Instance-Usage_list.csv = Csv\Server-Instance-Usage_list.csv
-		Csv\Server-Instance.csv = Csv\Server-Instance.csv
-		Csv\Server-ServiceInstance.csv = Csv\Server-ServiceInstance.csv
-		Csv\Server-Version.csv = Csv\Server-Version.csv
+		Csv\SqlServer-Instance-DBBackup_list.csv = Csv\SqlServer-Instance-DBBackup_list.csv
+		Csv\SqlServer-Instance-DBSpec_list.csv = Csv\SqlServer-Instance-DBSpec_list.csv
+		Csv\SqlServer-Instance-Linked_list.csv = Csv\SqlServer-Instance-Linked_list.csv
+		Csv\SqlServer-Instance-Running_list.csv = Csv\SqlServer-Instance-Running_list.csv
+		Csv\SqlServer-Instance-Usage_list.csv = Csv\SqlServer-Instance-Usage_list.csv
+		Csv\SqlServer-Instance.csv = Csv\SqlServer-Instance.csv
+		Csv\SqlServer-ServiceInstance_DESKTOP-OM0V6GG.csv = Csv\SqlServer-ServiceInstance_DESKTOP-OM0V6GG.csv
+		Csv\SqlServer-Version_DESKTOP-OM0V6GG.csv = Csv\SqlServer-Version_DESKTOP-OM0V6GG.csv
 	EndProjectSection
 EndProject
 Global
