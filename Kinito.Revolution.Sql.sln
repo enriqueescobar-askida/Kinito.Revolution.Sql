@@ -49,9 +49,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{7AA7525E-6E8
 		Sql\DB-TableRoot_list.sql = Sql\DB-TableRoot_list.sql
 		Sql\DB-TableSelfRef_list.sql = Sql\DB-TableSelfRef_list.sql
 		Sql\DB-TableTrunk_list.sql = Sql\DB-TableTrunk_list.sql
+		Sql\DB-Trigger_list.sql = Sql\DB-Trigger_list.sql
 		Sql\DB-Usage_list.sql = Sql\DB-Usage_list.sql
 		Sql\DB-View_count.sql = Sql\DB-View_count.sql
 		Sql\DB-View_list.sql = Sql\DB-View_list.sql
+		Sql\Server-Instance-Usage_list.sql = Sql\Server-Instance-Usage_list.sql
+		Sql\Server-Instance.sql = Sql\Server-Instance.sql
+		Sql\Server-InstanceDBBackup_list.sql = Sql\Server-InstanceDBBackup_list.sql
+		Sql\Server-InstanceDBSpec_list.sql = Sql\Server-InstanceDBSpec_list.sql
+		Sql\Server-InstanceLinked_list.sql = Sql\Server-InstanceLinked_list.sql
+		Sql\Server-InstanceRunning_list.sql = Sql\Server-InstanceRunning_list.sql
+		Sql\Server-ServiceInstance.sql = Sql\Server-ServiceInstance.sql
+		Sql\Server-Version.sql = Sql\Server-Version.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Xls", "Xls", "{D8CF6FAC-35D5-477A-B98F-0F3B40D6A3C8}"
