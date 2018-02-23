@@ -3,21 +3,22 @@ require("R6");
 SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
 # public members
   public = list(
-    name = "_name_",
+    Path = "_path_",
     hair = "_hair_",
     hundred = 100,
 #' Title
 #'
-#' @param name 
+#' @param Path 
 #' @param hair 
 #'
 #' @return
 #' @export
 #'
 #' @examples
-    initialize = function(name, hair) {
-      if (!missing(name)) self$name <- name;
+    initialize = function(Path, hair) {
+      if (!missing(Path)) self$Path <- Path;
       if (!missing(hair)) self$hair <- hair;
+      private$set_path();
       self$to_str();
     },
 #' Title
@@ -28,7 +29,7 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
 #' @examples
     finalize = function() {
       print("SqlToCsvSqlServer.Finalizer has been called!");
-      self$name <- NA;
+      self$Path <- NA;
       self$hair <- NA;
       self$hundred <- NA;
       self$x2 <- NA;
@@ -67,9 +68,9 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
 #' @export
 #'
 #' @examples
-    set_name = function(val) name <<- val,
+    set_name = function(val) Path <<- val,
     #   {
-    #   self$name <- val;
+    #   self$Path <- val;
     # },
 #' Title
 #'
@@ -90,7 +91,7 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
 #'
 #' @examples
     to_str = function() {
-      cat(paste0("Hello, my name is ", self$name, "_", self$hair, "_", self$hundred, "_", self$x2 , ".\n"));
+      cat(paste0("Hello, my Path is ", self$Path, "_", self$hair, "_", self$hundred, "_", self$x2 , ".\n"));
     }
   ),
 # active members
@@ -104,6 +105,15 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
 # private members
   private = list(
     queue = list(),
+#' Title
+#'
+#' @return
+#' @export
+#'
+#' @examples
+    set_path = function(){
+      self$Path <- paste0(self$Path, "../Csv");
+    },
     length = function() base::length(private$queue)
   )
 )

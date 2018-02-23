@@ -4,12 +4,12 @@ write(paste0(c("sourcePath ...\t", projectSourcePath), sep = "", collapse = ""),
 # sourceFile
 projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServer.R");
 write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
-source(SqlToCsvSqlServerPath);
+source(projectSourceFile);
 
-sqlToCsvSqlServer <- SqlToCsvSqlServer$new("Ann", "black")
+sqlToCsvSqlServer <- SqlToCsvSqlServer$new(projectPath, "black")
 sqlToCsvSqlServer$hair
 sqlToCsvSqlServer$hundred
-sqlToCsvSqlServer$name
+sqlToCsvSqlServer$Path
 sqlToCsvSqlServer$x2
 rm(sqlToCsvSqlServer)
 gc()
