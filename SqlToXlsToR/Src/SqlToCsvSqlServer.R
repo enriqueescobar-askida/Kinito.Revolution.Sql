@@ -4,9 +4,11 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
 # public members
   public = list(
     Path = "_path_",
-    Version = "_version_",
+    VersionVector = c("_version_"),
     HasVersion = FALSE,
-    HasInstance = FALSE,
+    ServiceInstance = "_server_instance_",
+    HasService = FALSE,
+    Instance = "_instance_",
 #' Title
 #'
 #' @param Path 
@@ -19,6 +21,7 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
       if (!missing(Path)) self$Path <- Path;
       private$set_path();
       private$set_version();
+      private$set_service_instance();
       self$to_str();
     },
 #' Title
@@ -129,14 +132,48 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
     set_version = function(){
       aPattern <- paste0("*", self$Ext, "$"); 
       csvList <- list.files(self$Path, pattern = aPattern, all.files = TRUE);
-      self$Version <- csvList[grepl(self$HeadVersion, csvList)];
-      if (length(self$Version) == 1) {
-        self$Version <- paste0(self$Path, self$Version);
-        self$Version <- read.csv(self$Version, header = FALSE, sep = "\t")[[1]];
-        self$Version <- strsplit(as.character(self$Version), "\t");
-        self$Version <- trimws(unlist(self$Version), which = c("both", "left", "right"));
+      self$VersionVector <- csvList[grepl(self$HeadVersion, csvList)];
+      if (length(self$VersionVector) == 1) {
+        self$VersionVector <- paste0(self$Path, self$VersionVector);
+        self$VersionVector <-
+          read.csv(self$VersionVector, header = FALSE, sep = "\t")[[1]];
+        self$VersionVector <- strsplit(as.character(self$VersionVector), "\t");
+        self$VersionVector <-
+          trimws(unlist(self$VersionVector), which = c("both", "left", "right"));
         self$HasVersion = TRUE;
       }
+    },
+#' Title
+#'
+#' @return
+#' @export
+#'
+#' @examples
+    set_service_instance = function() {
+      aPattern <- paste0("*", self$Ext, "$"); 
+      csvList <- list.files(self$Path, pattern = aPattern, all.files = TRUE);
+      private$set_instance(self$ServiceInstance);
+      if (length(self$ServiceInstance) == 1) {
+        self$ServiceInstance <- paste0(self$Path, self$ServiceInstance);
+        self$ServiceInstance <-
+          read.table(self$ServiceInstance, row.names=NULL, quote="\"", comment.char="")[[1]];
+        self$ServiceInstance <- as.character(self$ServiceInstance);
+        self$ServiceInstance <-
+          trimws(self$ServiceInstance, which = c("both", "left", "right"));
+        self$HasService = TRUE;
+      }
+    },
+#' Title
+#'
+#' @param serviceInstance 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+    set_instance = function(serviceInstance = ""){
+      self$Instance <- gsub(self$HeadInstance, "", serviceInstance);
+      self$Instance <- gsub(self$Ext, "", self$Instance);
     },
     length = function() base::length(private$queue)
   )
