@@ -4,21 +4,21 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
 # public members
   public = list(
     Path = "_path_",
-    hair = "_hair_",
-    hundred = 100,
+    Version = "_version_",
+    HasVersion = FALSE,
+    HasInstance = FALSE,
 #' Title
 #'
 #' @param Path 
-#' @param hair 
 #'
 #' @return
 #' @export
 #'
 #' @examples
-    initialize = function(Path, hair) {
+    initialize = function(Path) {
       if (!missing(Path)) self$Path <- Path;
-      if (!missing(hair)) self$hair <- hair;
       private$set_path();
+      private$set_version();
       self$to_str();
     },
 #' Title
@@ -30,9 +30,9 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
     finalize = function() {
       print("SqlToCsvSqlServer.Finalizer has been called!");
       self$Path <- NA;
-      self$hair <- NA;
-      self$hundred <- NA;
-      self$x2 <- NA;
+      self$HeadVersion <- NA;
+      self$HeadInstance <- NA;
+      self$Ext <- NA;
       self$to_str();
     },
 #' Title
@@ -69,9 +69,6 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
 #'
 #' @examples
     set_name = function(val) Path <<- val,
-    #   {
-    #   self$Path <- val;
-    # },
 #' Title
 #'
 #' @param val 
@@ -80,10 +77,7 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
 #' @export
 #'
 #' @examples
-    set_hair = function(val) hair <<- val,
-    #   {
-    #   self$hair <- val;
-    # },
+    set_HeadVersion = function(val) HeadVersion <<- val,
 #' Title
 #'
 #' @return
@@ -91,16 +85,28 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
 #'
 #' @examples
     to_str = function() {
-      cat(paste0("Hello, my Path is ", self$Path, "_", self$hair, "_", self$hundred, "_", self$x2 , ".\n"));
+      return(paste0("Hello ", self$Path, "_", self$HeadVersion, "_", self$HeadInstance, "_", self$Ext , "\n"));
     }
   ),
 # active members
   active = list(
-    x2 = function(value) {
-      if (missing(value)) return(self$hundred * 2);
-      #else self$hundred <- value / 2;
-    }#,
-    #rand = function() rnorm(1);
+#' Title
+#'
+#' @param value 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+    Ext = function(value) {
+      if (missing(value)) return(".csv");
+    },
+    HeadInstance = function(value) {
+      if (missing(value)) return("SqlServer-ServiceInstance_");
+    },
+    HeadVersion = function(value) {
+      if (missing(value)) return("SqlServer-Version_");
+    }
   ),
 # private members
   private = list(
@@ -112,7 +118,19 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
 #'
 #' @examples
     set_path = function(){
-      self$Path <- paste0(self$Path, "../Csv");
+      self$Path <- paste0(self$Path, "/../Csv/");
+    },
+#' Title
+#'
+#' @return
+#' @export
+#'
+#' @examples
+    set_version = function(){
+      aPattern <- paste0("*", self$Ext, "$"); 
+      csvList <- list.files(self$Path, pattern = aPattern, all.files = TRUE);
+      self$Version <- csvList[grepl(self$HeadVersion, csvList)];
+      if (length(self$Version) == 1) self$HasVersion = TRUE;
     },
     length = function() base::length(private$queue)
   )

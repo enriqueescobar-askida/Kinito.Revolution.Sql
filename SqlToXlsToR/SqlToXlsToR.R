@@ -6,11 +6,16 @@ projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServer.R");
 write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
 source(projectSourceFile);
 
-sqlToCsvSqlServer <- SqlToCsvSqlServer$new(projectPath, "black")
-sqlToCsvSqlServer$hair
-sqlToCsvSqlServer$hundred
+csv <- "E:/Disk_X/Kinito.Revolution.Sql/SqlToXlsToR/../Csv/SqlServer-Version_DESKTOP-OM0V6GG.csv"
+
+
+sqlToCsvSqlServer <- SqlToCsvSqlServer$new(projectPath)
+sqlToCsvSqlServer$HeadVersion
+sqlToCsvSqlServer$HeadInstance
 sqlToCsvSqlServer$Path
-sqlToCsvSqlServer$x2
+sqlToCsvSqlServer$Ext
+sqlToCsvSqlServer$Version
+sqlToCsvSqlServer$HasVersion
 rm(sqlToCsvSqlServer)
 gc()
 # sqlToCsvSqlServer$add("something")
