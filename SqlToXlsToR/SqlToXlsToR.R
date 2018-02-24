@@ -7,7 +7,7 @@ write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""),
 source(projectSourceFile);
 
 csv <- "E:/Disk_X/Kinito.Revolution.Sql/SqlToXlsToR/../Csv/SqlServer-Version_DESKTOP-OM0V6GG.csv"
-
+#newdataset <- read.csv(file.choose(), header = FALSE, sep = "\t")
 
 sqlToCsvSqlServer <- SqlToCsvSqlServer$new(projectPath)
 sqlToCsvSqlServer$HeadVersion

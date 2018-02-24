@@ -130,7 +130,13 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
       aPattern <- paste0("*", self$Ext, "$"); 
       csvList <- list.files(self$Path, pattern = aPattern, all.files = TRUE);
       self$Version <- csvList[grepl(self$HeadVersion, csvList)];
-      if (length(self$Version) == 1) self$HasVersion = TRUE;
+      if (length(self$Version) == 1) {
+        self$Version <- paste0(self$Path, self$Version);
+        self$Version <- read.csv(self$Version, header = FALSE, sep = "\t")[[1]];
+        self$Version <- strsplit(as.character(self$Version), "\t");
+        self$Version <- trimws(unlist(self$Version), which = c("both", "left", "right"));
+        self$HasVersion = TRUE;
+      }
     },
     length = function() base::length(private$queue)
   )
