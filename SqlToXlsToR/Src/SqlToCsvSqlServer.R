@@ -9,130 +9,81 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
     ServiceInstance = "_server_instance_",
     HasService = FALSE,
     Instance = "_instance_",
+    HasInstance = FALSE,
 #' Title
-#'
+#' Constructor
 #' @param Path 
-#'
-#' @return
+#' 
 #' @export
-#'
-#' @examples
     initialize = function(Path) {
       if (!missing(Path)) self$Path <- Path;
       private$set_path();
       private$set_version();
       private$set_service_instance();
+      private$set_instance();
       self$to_str();
     },
 #' Title
-#'
-#' @return
+#' Destructor
 #' @export
-#'
-#' @examples
     finalize = function() {
       print("SqlToCsvSqlServer.Finalizer has been called!");
       self$Path <- NA;
       self$HeadVersion <- NA;
-      self$HeadInstance <- NA;
+      self$HeadService <- NA;
       self$Ext <- NA;
       self$to_str();
     },
 #' Title
-#'
-#' @param x 
-#'
-#' @return
-#' @export
-#'
-#' @examples
-    add_item = function(x) {
-      private$queue <- c(private$queue, list(x));
-      invisible(self);
-    },
-#' Title
-#'
-#' @return
-#' @export
-#'
-#' @examples
-    rm_item = function() {
-      if (private$length() == 0) return(NULL);
-      # Can use private$queue for explicit access
-      head <- private$queue[[1]];
-      private$queue <- private$queue[-1];
-      head;
-    },
-#' Title
-#'
+#' set_HeadVersion
 #' @param val 
 #'
-#' @return
+#' @return HeadVersion
 #' @export
-#'
-#' @examples
-    set_name = function(val) Path <<- val,
-#' Title
-#'
-#' @param val 
-#'
-#' @return
-#' @export
-#'
-#' @examples
     set_HeadVersion = function(val) HeadVersion <<- val,
 #' Title
-#'
+#' to_str
 #' @return
 #' @export
-#'
-#' @examples
     to_str = function() {
-      return(paste0("Hello ", self$Path, "_", self$HeadVersion, "_", self$HeadInstance, "_", self$Ext , "\n"));
+      return(paste0("Hello ", self$Path, "_", self$HeadVersion, "_", self$HeadService, "_", self$Ext , "\n"));
     }
   ),
 # active members
   active = list(
 #' Title
-#'
+#' Ext
 #' @param value 
 #'
-#' @return
+#' @return Ext
 #' @export
-#'
-#' @examples
     Ext = function(value) {
       if (missing(value)) return(".csv");
     },
-    HeadInstance = function(value) {
+    HeadService = function(value) {
       if (missing(value)) return("SqlServer-ServiceInstance_");
     },
     HeadVersion = function(value) {
       if (missing(value)) return("SqlServer-Version_");
+    },
+    HeadInstance = function(value) {
+      if (missing(value)) return("SqlServer-Instance_");
     }
   ),
 # private members
   private = list(
     queue = list(),
 #' Title
-#'
-#' @return
+#' set_path
 #' @export
-#'
-#' @examples
     set_path = function(){
       self$Path <- paste0(self$Path, "/../Csv/");
     },
 #' Title
-#'
-#' @return
+#' set_version
 #' @export
-#'
-#' @examples
     set_version = function(){
-      aPattern <- paste0("*", self$Ext, "$"); 
-      csvList <- list.files(self$Path, pattern = aPattern, all.files = TRUE);
-      self$VersionVector <- csvList[grepl(self$HeadVersion, csvList)];
+      self$VersionVector <- private$filter_csv_files(self$HeadVersion);
       if (length(self$VersionVector) == 1) {
         self$VersionVector <- paste0(self$Path, self$VersionVector);
         self$VersionVector <-
@@ -144,15 +95,30 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
       }
     },
 #' Title
-#'
-#' @return
+#' set_instance
 #' @export
-#'
-#' @examples
+    set_instance = function() {
+      self$Instance <- paste0(self$HeadInstance, self$ServiceInstance, "_*");
+      self$Instance <- private$filter_csv_files(self$Instance);
+      index <- which(nchar(self$Instance) %in% min(nchar(self$Instance)));
+      self$Instance <- self$Instance[index];
+      index <- paste0(self$Path, self$Instance);
+      index <- read.table(index, row.names=NULL, quote="\"", comment.char="")[[1]];
+      index <- as.character(index);
+      index <- trimws(index, which = c("both", "left", "right"));
+      self$HasInstance <- index; #grepl(paste0("*", self$Instance, "$"), index);
+      self$Instance <- gsub(self$HeadInstance, "", self$Instance);
+      self$Instance <- gsub(self$ServiceInstance, "", self$Instance);
+      self$Instance <- gsub(self$Ext, "", self$Instance);
+      self$Instance <- gsub("_", "", self$Instance);
+      #if (self$HasInstance) self$Instance <- self$Instance;
+    },
+#' Title
+#' set_service_instance
+#' @export
     set_service_instance = function() {
-      aPattern <- paste0("*", self$Ext, "$"); 
-      csvList <- list.files(self$Path, pattern = aPattern, all.files = TRUE);
-      private$set_instance(self$ServiceInstance);
+      self$ServiceInstance <- private$filter_csv_files(self$HeadService);
+      private$check_service_instance(self$ServiceInstance);
       if (length(self$ServiceInstance) == 1) {
         self$ServiceInstance <- paste0(self$Path, self$ServiceInstance);
         self$ServiceInstance <-
@@ -160,22 +126,31 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
         self$ServiceInstance <- as.character(self$ServiceInstance);
         self$ServiceInstance <-
           trimws(self$ServiceInstance, which = c("both", "left", "right"));
-        self$HasService = TRUE;
+        self$HasService <- grepl(paste0("*", self$Instance, "$"), self$ServiceInstance);
+        if (self$HasService) self$ServiceInstance <- self$Instance;
       }
     },
 #' Title
-#'
+#' check_service_instance
 #' @param serviceInstance 
 #'
-#' @return
 #' @export
-#'
-#' @examples
-    set_instance = function(serviceInstance = ""){
-      self$Instance <- gsub(self$HeadInstance, "", serviceInstance);
+    check_service_instance = function(serviceInstance = ""){
+      self$Instance <- gsub(self$HeadService, "", serviceInstance);
       self$Instance <- gsub(self$Ext, "", self$Instance);
     },
-    length = function() base::length(private$queue)
+#' Title
+#' filter_csv_files
+#' @param aFilter 
+#'
+#' @return csvList
+#' @export
+    filter_csv_files = function(aFilter = ""){
+      aPattern <- paste0("*", self$Ext, "$"); 
+      csvList <- list.files(self$Path, pattern = aPattern, all.files = TRUE);
+      
+      return(csvList[grepl(aFilter, csvList)]);
+    }
   )
 )
 

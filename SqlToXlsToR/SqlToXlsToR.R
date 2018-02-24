@@ -7,14 +7,16 @@ write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""),
 source(projectSourceFile);
 
 sqlToCsvSqlServer <- SqlToCsvSqlServer$new(projectPath)
-sqlToCsvSqlServer$HeadVersion
-sqlToCsvSqlServer$HeadInstance
 sqlToCsvSqlServer$Path
 sqlToCsvSqlServer$Ext
+sqlToCsvSqlServer$HeadVersion
 sqlToCsvSqlServer$VersionVector
 sqlToCsvSqlServer$HasVersion
+sqlToCsvSqlServer$HeadService
 sqlToCsvSqlServer$ServiceInstance
 sqlToCsvSqlServer$HasService
+sqlToCsvSqlServer$HeadInstance
 sqlToCsvSqlServer$Instance
+sqlToCsvSqlServer$HasInstance
 rm(sqlToCsvSqlServer)
 gc()
