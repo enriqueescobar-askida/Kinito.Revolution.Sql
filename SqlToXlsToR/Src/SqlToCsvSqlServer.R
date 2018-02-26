@@ -30,8 +30,11 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
       print("SqlToCsvSqlServer.Finalizer has been called!");
       self$Path <- NA;
       self$HasVersion <- NA;
+      self$VersionVector <- NA;
       self$HasService <- NA;
+      self$ServiceInstance <- NA;
       self$HasInstance <- NA;
+      self$Instance <- NA;
       cat(self$to_str());
     },
 #' Title
