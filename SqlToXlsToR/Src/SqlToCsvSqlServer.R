@@ -21,7 +21,7 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
       private$set_version();
       private$set_service_instance();
       private$set_instance();
-      self$to_str();
+      cat(self$to_str());
     },
 #' Title
 #' Destructor
@@ -29,10 +29,10 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
     finalize = function() {
       print("SqlToCsvSqlServer.Finalizer has been called!");
       self$Path <- NA;
-      self$HeadVersion <- NA;
-      self$HeadService <- NA;
-      self$Ext <- NA;
-      self$to_str();
+      self$HasVersion <- NA;
+      self$HasService <- NA;
+      self$HasInstance <- NA;
+      cat(self$to_str());
     },
 #' Title
 #' set_HeadVersion
@@ -46,7 +46,13 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
 #' @return
 #' @export
     to_str = function() {
-      return(paste0("Hello ", self$Path, "_", self$HeadVersion, "_", self$HeadService, "_", self$Ext , "\n"));
+      aStr <- paste0("--\n", projectNamespace, "\n\t");
+      aStr <- paste0(aStr, self$Ext, "\t", self$Path, "\n\t");
+      aStr <- paste0(aStr, self$HeadVersion, "\t", self$HasVersion, "\n\t");
+      aStr <- paste0(aStr, self$HeadService, "\t", self$HasService, "\n\t");
+      aStr <- paste0(aStr, self$HeadInstance, "\t", self$HasInstance, "\n\t");
+      
+      return(aStr);
     }
   ),
 # active members
@@ -72,7 +78,6 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
   ),
 # private members
   private = list(
-    queue = list(),
 #' Title
 #' set_path
 #' @export
@@ -106,11 +111,12 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
       index <- read.table(index, row.names=NULL, quote="\"", comment.char="")[[1]];
       index <- as.character(index);
       index <- trimws(index, which = c("both", "left", "right"));
-      self$HasInstance <- index; #grepl(paste0("*", self$Instance, "$"), index);
       self$Instance <- gsub(self$HeadInstance, "", self$Instance);
       self$Instance <- gsub(self$ServiceInstance, "", self$Instance);
       self$Instance <- gsub(self$Ext, "", self$Instance);
       self$Instance <- gsub("_", "", self$Instance);
+      self$HasInstance <- index; #grepl(paste0("*", self$Instance, "$"), index);
+      rm(index);
       self$HasInstance <- grepl(paste0("*", self$Instance, "$"), self$HasInstance);
       if (self$HasInstance) self$Instance <- self$Instance;
     },
