@@ -111,7 +111,8 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
       self$Instance <- gsub(self$ServiceInstance, "", self$Instance);
       self$Instance <- gsub(self$Ext, "", self$Instance);
       self$Instance <- gsub("_", "", self$Instance);
-      #if (self$HasInstance) self$Instance <- self$Instance;
+      self$HasInstance <- grepl(paste0("*", self$Instance, "$"), self$HasInstance);
+      if (self$HasInstance) self$Instance <- self$Instance;
     },
 #' Title
 #' set_service_instance

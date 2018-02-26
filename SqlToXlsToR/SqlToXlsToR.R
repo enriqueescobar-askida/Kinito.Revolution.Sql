@@ -20,3 +20,4 @@ sqlToCsvSqlServer$Instance
 sqlToCsvSqlServer$HasInstance
 rm(sqlToCsvSqlServer)
 gc()
+
