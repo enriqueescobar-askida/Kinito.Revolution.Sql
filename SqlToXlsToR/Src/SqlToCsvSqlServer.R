@@ -3,7 +3,6 @@ require("R6");
 SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
 # public members
   public = list(
-    Path = "_path_",
     VersionVector = c("_version_"),
     HasVersion = FALSE,
     ServiceInstance = "_server_instance_",
@@ -12,31 +11,31 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
     HasInstance = FALSE,
 #' Title
 #' Constructor
-#' @param Path 
+#' @param path 
 #' 
 #' @export
-    initialize = function(Path) {
-      if (!missing(Path)) self$Path <- Path;
-      private$set_path();
+    initialize = function(path) {
+      if (!missing(path)) private$setPath(path);
       private$set_version();
       private$set_service_instance();
       private$set_instance();
-      cat(self$to_str());
+      cat(self$toString());
     },
 #' Title
 #' Destructor
 #' @export
     finalize = function() {
       print("SqlToCsvSqlServer.Finalizer has been called!");
-      self$Path <- NA;
-      self$HasVersion <- NA;
-      self$VersionVector <- NA;
-      self$HasService <- NA;
-      self$ServiceInstance <- NA;
-      self$HasInstance <- NA;
-      self$Instance <- NA;
-      cat(self$to_str());
+      private$Path <- NULL;
+      self$HasVersion <- NULL;
+      self$VersionVector <- NULL;
+      self$HasService <- NULL;
+      self$ServiceInstance <- NULL;
+      self$HasInstance <- NULL;
+      self$Instance <- NULL;
+      cat(self$toString());
     },
+    getPath = function() private$Path,
 #' Title
 #' set_HeadVersion
 #' @param val 
@@ -45,17 +44,17 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
 #' @export
     set_HeadVersion = function(val) HeadVersion <<- val,
 #' Title
-#' to_str
+#' toString
 #' @return
 #' @export
-    to_str = function() {
+    toString = function() {
       aStr <- paste0("--\n", projectNamespace, "\n\t");
-      aStr <- paste0(aStr, self$Ext, "\t", self$Path, "\n\t");
+      aStr <- paste0(aStr, self$Ext, "\t", private$Path, "\n\t");
       aStr <- paste0(aStr, self$HeadVersion, "\t", self$HasVersion, "\n\t");
       aStr <- paste0(aStr, self$HeadService, "\t", self$HasService, "\n\t");
       aStr <- paste0(aStr, self$HeadInstance, "\t", self$HasInstance, "\n\t");
       
-      return(aStr);
+      return(base::toString(aStr));
     }
   ),
 # active members
@@ -81,11 +80,12 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
   ),
 # private members
   private = list(
+    Path = "_path_",
 #' Title
-#' set_path
+#' setPath
 #' @export
-    set_path = function(){
-      self$Path <- paste0(self$Path, "/../Csv/");
+    setPath = function(value){
+      private$Path <- paste0(value, "/../Csv/");
     },
 #' Title
 #' set_version
@@ -93,7 +93,7 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
     set_version = function(){
       self$VersionVector <- private$filter_csv_files(self$HeadVersion);
       if (length(self$VersionVector) == 1) {
-        self$VersionVector <- paste0(self$Path, self$VersionVector);
+        self$VersionVector <- paste0(private$Path, self$VersionVector);
         self$VersionVector <-
           read.csv(self$VersionVector, header = FALSE, sep = "\t")[[1]];
         self$VersionVector <- strsplit(as.character(self$VersionVector), "\t");
@@ -110,7 +110,7 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
       self$Instance <- private$filter_csv_files(self$Instance);
       index <- which(nchar(self$Instance) %in% min(nchar(self$Instance)));
       self$Instance <- self$Instance[index];
-      index <- paste0(self$Path, self$Instance);
+      index <- paste0(private$Path, self$Instance);
       index <- read.table(index, row.names=NULL, quote="\"", comment.char="")[[1]];
       index <- as.character(index);
       index <- trimws(index, which = c("both", "left", "right"));
@@ -130,7 +130,7 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
       self$ServiceInstance <- private$filter_csv_files(self$HeadService);
       private$check_service_instance(self$ServiceInstance);
       if (length(self$ServiceInstance) == 1) {
-        self$ServiceInstance <- paste0(self$Path, self$ServiceInstance);
+        self$ServiceInstance <- paste0(private$Path, self$ServiceInstance);
         self$ServiceInstance <-
           read.table(self$ServiceInstance, row.names=NULL, quote="\"", comment.char="")[[1]];
         self$ServiceInstance <- as.character(self$ServiceInstance);
@@ -157,7 +157,7 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
 #' @export
     filter_csv_files = function(aFilter = ""){
       aPattern <- paste0("*", self$Ext, "$"); 
-      csvList <- list.files(self$Path, pattern = aPattern, all.files = TRUE);
+      csvList <- list.files(private$Path, pattern = aPattern, all.files = TRUE);
       
       return(csvList[grepl(aFilter, csvList)]);
     }
