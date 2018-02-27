@@ -18,6 +18,9 @@ sqlServerInstance <- sqlToCsvSqlServer$getInstance();
 rm(sqlToCsvSqlServer);
 gc();
 # sourceFile Sql Server Instance
+projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServerInstanceAbstractList.R");
+write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+source(projectSourceFile);
 ## sourceFile Sql Server Instance Linked List
 projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServerInstanceLinkedList.R");
 write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
@@ -36,6 +39,8 @@ sqlToCsvSqlServerInstanceUsageList <-
   SqlToCsvSqlServerInstanceUsageList$new(projectPath, sqlServiceInstance, sqlServerInstance);
 sqlToCsvSqlServerInstanceUsageList$fileToTibble();
 sqlServerInstanceUsageList <- sqlToCsvSqlServerInstanceUsageList$getTibble();
+rm(sqlToCsvSqlServerInstanceUsageList);
+gc();
 ##
 rm(sqlServiceInstance);
 rm(sqlServerInstance);
@@ -43,3 +48,4 @@ rm(sqlServerVersionVector);
 rm(sqlServerInstanceLinkedList);
 rm(sqlServerInstanceUsageList);
 gc();
+

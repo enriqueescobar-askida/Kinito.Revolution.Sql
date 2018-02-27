@@ -3,15 +3,11 @@ require("readr");
 require("tibble");
 # class
 SqlToCsvSqlServerInstanceLinkedList <- R6Class("SqlToCsvSqlServerInstanceLinkedList",
+  inherit = SqlToCsvSqlServerInstanceAbstractList,
   portable = TRUE,
   class = TRUE,
   cloneable = TRUE,
   public = list(
-    getPath = function() private$Path,
-    getServiceInstance = function() private$ServiceInstance,
-    getInstance = function() private$Instance,
-    getFile = function() private$File,
-    getTibble = function() private$Tibble,
 #' Title
 #' initialize
 #' @param path 
@@ -39,17 +35,6 @@ SqlToCsvSqlServerInstanceLinkedList <- R6Class("SqlToCsvSqlServerInstanceLinkedL
       cat(self$toString());
     },
 #' Title
-#' toString
-#' @export
-    toString = function() {
-      aStr <- paste0("--\n", projectNamespace, "\n\t");
-      aStr <- paste0(aStr, self$Ext, "\t", private$Path, "\n\t");
-      aStr <- paste0(aStr, private$ServiceInstance, "\t", private$Instance, "\n\t");
-      aStr <- paste0(aStr, private$File, "\t", colnames(private$Tibble), "\n\t");
-      
-      return(base::toString(aStr));
-    },
-#' Title
 #' fileToTibble
 #' @export
     fileToTibble = function() {
@@ -61,12 +46,6 @@ SqlToCsvSqlServerInstanceLinkedList <- R6Class("SqlToCsvSqlServerInstanceLinkedL
     }
   ),
   active = list(
-    Ext = function(value) {
-      if (missing(value)) return(".csv");
-    },
-    HeadInstance = function(value) {
-      if (missing(value)) return("SqlServer-Instance_");
-    },
     Tail = function(value) {
       if (missing(value)) return("_LinkedList");
     },
@@ -75,15 +54,5 @@ SqlToCsvSqlServerInstanceLinkedList <- R6Class("SqlToCsvSqlServerInstanceLinkedL
     }
   ),
   private = list(
-    Path = "_path_",
-    ServiceInstance = "_service_instance_",
-    Instance = "_instance_",
-    File = "_file_",
-    Tibble = tibble::as_tibble(data.frame(NULL)),
-    setPath = function(value) private$Path <- paste0(value, "/../Csv/"),
-    setServiceInstance = function(value) private$ServiceInstance <- value,
-    setInstance = function(value) private$Instance <- value,
-    setFile = function() private$File <-
-      paste0(private$Path, self$HeadInstance, private$ServiceInstance, "_", private$Instance, self$Tail, self$Ext)
   )
 )

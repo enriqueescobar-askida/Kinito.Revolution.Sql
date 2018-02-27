@@ -64,7 +64,7 @@ SqlToCsvSqlServerInstanceUsageList <- R6Class("SqlToCsvSqlServerInstanceUsageLis
     Ext = function(value) {
       if (missing(value)) return(".csv");
     },
-    HeadInstance = function(value) {
+    Header = function(value) {
       if (missing(value)) return("SqlServer-Instance_");
     },
     Tail = function(value) {
@@ -84,6 +84,6 @@ SqlToCsvSqlServerInstanceUsageList <- R6Class("SqlToCsvSqlServerInstanceUsageLis
     setServiceInstance = function(value) private$ServiceInstance <- value,
     setInstance = function(value) private$Instance <- value,
     setFile = function() private$File <-
-      paste0(private$Path, self$HeadInstance, private$ServiceInstance, "_", private$Instance, self$Tail, self$Ext)
+      paste0(private$Path, self$Header, private$ServiceInstance, "_", private$Instance, self$Tail, self$Ext)
   )
 )
