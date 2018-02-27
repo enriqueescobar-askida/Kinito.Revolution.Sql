@@ -1,13 +1,11 @@
 require("R6");
+require("readr");
 # class
 SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
 # public members
   public = list(
-    VersionVector = c("_version_"),
     HasVersion = FALSE,
-    ServiceInstance = "_server_instance_",
     HasService = FALSE,
-    Instance = "_instance_",
     HasInstance = FALSE,
 #' Title
 #' Constructor
@@ -16,9 +14,9 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
 #' @export
     initialize = function(path) {
       if (!missing(path)) private$setPath(path);
-      private$set_version();
-      private$set_service_instance();
-      private$set_instance();
+      private$setVersion();
+      private$setServiceInstance();
+      private$setInstance();
       cat(self$toString());
     },
 #' Title
@@ -28,21 +26,17 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
       print("SqlToCsvSqlServer.Finalizer has been called!");
       private$Path <- NULL;
       self$HasVersion <- NULL;
-      self$VersionVector <- NULL;
+      private$VersionVector <- NULL;
       self$HasService <- NULL;
-      self$ServiceInstance <- NULL;
+      private$ServiceInstance <- NULL;
       self$HasInstance <- NULL;
-      self$Instance <- NULL;
+      private$Instance <- NULL;
       cat(self$toString());
     },
     getPath = function() private$Path,
-#' Title
-#' set_HeadVersion
-#' @param val 
-#'
-#' @return HeadVersion
-#' @export
-    set_HeadVersion = function(val) HeadVersion <<- val,
+    getVersionVector = function() private$VersionVector,
+    getServiceInstance = function() private$ServiceInstance,
+    getInstance = function() private$Instance,
 #' Title
 #' toString
 #' @return
@@ -81,6 +75,9 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
 # private members
   private = list(
     Path = "_path_",
+    VersionVector = c("_version_"),
+    ServiceInstance = "_server_instance_",
+    Instance = "_instance_",
 #' Title
 #' setPath
 #' @export
@@ -88,74 +85,75 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
       private$Path <- paste0(value, "/../Csv/");
     },
 #' Title
-#' set_version
+#' setVersion
 #' @export
-    set_version = function(){
-      self$VersionVector <- private$filter_csv_files(self$HeadVersion);
-      if (length(self$VersionVector) == 1) {
-        self$VersionVector <- paste0(private$Path, self$VersionVector);
-        self$VersionVector <-
-          read.csv(self$VersionVector, header = FALSE, sep = "\t")[[1]];
-        self$VersionVector <- strsplit(as.character(self$VersionVector), "\t");
-        self$VersionVector <-
-          trimws(unlist(self$VersionVector), which = c("both", "left", "right"));
+    setVersion = function(){
+      private$VersionVector <- private$filterCsvFiles(self$HeadVersion);
+      if (length(private$VersionVector) == 1) {
+        private$VersionVector <- paste0(private$Path, private$VersionVector);
+        private$VersionVector <-
+          read_csv(private$VersionVector, col_names = FALSE, locale = locale(asciify = TRUE), na = "NA")[[1]];
+        private$VersionVector <- strsplit(as.character(private$VersionVector), "\t");
+        private$VersionVector <-
+          trimws(unlist(private$VersionVector), which = c("both", "left", "right"));
         self$HasVersion = TRUE;
       }
     },
 #' Title
-#' set_instance
+#' setInstance
 #' @export
-    set_instance = function() {
-      self$Instance <- paste0(self$HeadInstance, self$ServiceInstance, "_*");
-      self$Instance <- private$filter_csv_files(self$Instance);
-      index <- which(nchar(self$Instance) %in% min(nchar(self$Instance)));
-      self$Instance <- self$Instance[index];
-      index <- paste0(private$Path, self$Instance);
-      index <- read.table(index, row.names=NULL, quote="\"", comment.char="")[[1]];
+    setInstance = function() {
+      private$Instance <- paste0(self$HeadInstance, private$ServiceInstance, "_*");
+      private$Instance <- private$filterCsvFiles(private$Instance);
+      index <- which(nchar(private$Instance) %in% min(nchar(private$Instance)));
+      private$Instance <- private$Instance[index];
+      index <- paste0(private$Path, private$Instance);
+      index <-
+        read_csv(index, col_names = FALSE, locale = locale(asciify = TRUE), na = "NA")[[1]];
       index <- as.character(index);
       index <- trimws(index, which = c("both", "left", "right"));
-      self$Instance <- gsub(self$HeadInstance, "", self$Instance);
-      self$Instance <- gsub(self$ServiceInstance, "", self$Instance);
-      self$Instance <- gsub(self$Ext, "", self$Instance);
-      self$Instance <- gsub("_", "", self$Instance);
-      self$HasInstance <- index; #grepl(paste0("*", self$Instance, "$"), index);
+      private$Instance <- gsub(self$HeadInstance, "", private$Instance);
+      private$Instance <- gsub(private$ServiceInstance, "", private$Instance);
+      private$Instance <- gsub(self$Ext, "", private$Instance);
+      private$Instance <- gsub("_", "", private$Instance);
+      self$HasInstance <- index; #grepl(paste0("*", private$Instance, "$"), index);
       rm(index);
-      self$HasInstance <- grepl(paste0("*", self$Instance, "$"), self$HasInstance);
-      if (self$HasInstance) self$Instance <- self$Instance;
+      self$HasInstance <- grepl(paste0("*", private$Instance, "$"), self$HasInstance);
+      if (self$HasInstance) private$Instance <- private$Instance;
     },
 #' Title
-#' set_service_instance
+#' setServiceInstance
 #' @export
-    set_service_instance = function() {
-      self$ServiceInstance <- private$filter_csv_files(self$HeadService);
-      private$check_service_instance(self$ServiceInstance);
-      if (length(self$ServiceInstance) == 1) {
-        self$ServiceInstance <- paste0(private$Path, self$ServiceInstance);
-        self$ServiceInstance <-
-          read.table(self$ServiceInstance, row.names=NULL, quote="\"", comment.char="")[[1]];
-        self$ServiceInstance <- as.character(self$ServiceInstance);
-        self$ServiceInstance <-
-          trimws(self$ServiceInstance, which = c("both", "left", "right"));
-        self$HasService <- grepl(paste0("*", self$Instance, "$"), self$ServiceInstance);
-        if (self$HasService) self$ServiceInstance <- self$Instance;
+    setServiceInstance = function() {
+      private$ServiceInstance <- private$filterCsvFiles(self$HeadService);
+      private$checkServiceInstance(private$ServiceInstance);
+      if (length(private$ServiceInstance) == 1) {
+        private$ServiceInstance <- paste0(private$Path, private$ServiceInstance);
+        private$ServiceInstance <-
+          read_csv(private$ServiceInstance, col_names = FALSE, locale = locale(asciify = TRUE), na = "NA")[[1]];
+        private$ServiceInstance <- as.character(private$ServiceInstance);
+        private$ServiceInstance <-
+          trimws(private$ServiceInstance, which = c("both", "left", "right"));
+        self$HasService <- grepl(paste0("*", private$Instance, "$"), private$ServiceInstance);
+        if (self$HasService) private$ServiceInstance <- private$Instance;
       }
     },
 #' Title
-#' check_service_instance
+#' checkServiceInstance
 #' @param serviceInstance 
 #'
 #' @export
-    check_service_instance = function(serviceInstance = ""){
-      self$Instance <- gsub(self$HeadService, "", serviceInstance);
-      self$Instance <- gsub(self$Ext, "", self$Instance);
+    checkServiceInstance = function(serviceInstance = ""){
+      private$Instance <- gsub(self$HeadService, "", serviceInstance);
+      private$Instance <- gsub(self$Ext, "", private$Instance);
     },
 #' Title
-#' filter_csv_files
+#' filterCsvFiles
 #' @param aFilter 
 #'
 #' @return csvList
 #' @export
-    filter_csv_files = function(aFilter = ""){
+    filterCsvFiles = function(aFilter = ""){
       aPattern <- paste0("*", self$Ext, "$"); 
       csvList <- list.files(private$Path, pattern = aPattern, all.files = TRUE);
       
