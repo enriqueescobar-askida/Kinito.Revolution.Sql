@@ -14,6 +14,22 @@ SqlToCsvSqlServerInstanceAbstractList <-
     getInstance = function() private$Instance,
     getFile = function() private$File,
     getTibble = function() private$Tibble,
+    initialize = function(path, serviceInstance, instance) {
+      if (!missing(path)) private$setPath(path);
+      if (!missing(serviceInstance)) private$setServiceInstance(serviceInstance);
+      if (!missing(instance)) private$setInstance(instance);
+      private$setFile();
+      cat(self$toString());
+    },
+    finalize = function() {
+      print("SqlToCsvSqlServerInstanceAbstractList.finalize has been called!");
+      private$Path <- NULL;
+      private$ServiceInstance <- NULL;
+      private$Instance <- NULL;
+      private$File <- NULL;
+      private$Tibble <- NULL;
+      cat(self$toString());
+    },
     toString = function() {
       aStr <- paste0("--\n", projectNamespace, "\t", self$Ext, "\n\t");
       aStr <- paste0(aStr, self$Header, "\t", private$Path, "\n\t");
@@ -21,6 +37,13 @@ SqlToCsvSqlServerInstanceAbstractList <-
       aStr <- paste0(aStr, private$File, "\t", colnames(private$Tibble), "\n\t");
       
       return(base::toString(aStr));
+    },
+    fileToTibble = function() {
+      df <- 
+        read_csv(private$File, col_names = FALSE, locale = locale(asciify = TRUE), na = "NA");
+      colnames(df) <- self$ColumnTitles;
+      private$Tibble <- df;
+      rm(df);
     }
   ),
   active = list(
@@ -29,6 +52,12 @@ SqlToCsvSqlServerInstanceAbstractList <-
     },
     Header = function(value) {
       if (missing(value)) return("SqlServer-Instance_");
+    },
+    Tail = function(value) {
+      if (missing(value)) return("_tail_");
+    },
+    ColumnTitles = function(value) {
+      if (missing(value)) return(c(""));
     }
   ),
   private = list(
