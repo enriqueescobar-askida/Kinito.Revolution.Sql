@@ -2,7 +2,7 @@ require("R6");
 require("readr");
 require("tibble");
 # class
-SqlToCsvSqlServerInstanceLinkedList <- R6Class("SqlToCsvSqlServerInstanceLinkedList",
+SqlToCsvSqlServerInstanceUsageList <- R6Class("SqlToCsvSqlServerInstanceUsageList",
   portable = TRUE,
   class = TRUE,
   cloneable = TRUE,
@@ -30,7 +30,7 @@ SqlToCsvSqlServerInstanceLinkedList <- R6Class("SqlToCsvSqlServerInstanceLinkedL
 #' finalize
 #' @export
     finalize = function() {
-      print("SqlToCsvSqlServerInstanceLinkedList.Finalizer has been called!");
+      print("SqlToCsvSqlServerInstanceUsageList.Finalizer has been called!");
       private$Path <- NULL;
       private$ServiceInstance <- NULL;
       private$Instance <- NULL;
@@ -68,10 +68,10 @@ SqlToCsvSqlServerInstanceLinkedList <- R6Class("SqlToCsvSqlServerInstanceLinkedL
       if (missing(value)) return("SqlServer-Instance_");
     },
     Tail = function(value) {
-      if (missing(value)) return("_LinkedList");
+      if (missing(value)) return("_UsageList");
     },
     ColumnTitles = function(value) {
-      if (missing(value)) return(c("ServerName", "LinkedServerID", "LinkedServer", "Product", "Provider", "DataSource", "ModificationDate", "IsLinked"));
+     if (missing(value)) return(c("DBIdentifier", "DBName", "DBBufferPages", "DBBufferMB"));
     }
   ),
   private = list(

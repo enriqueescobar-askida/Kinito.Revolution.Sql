@@ -2,6 +2,9 @@ require("R6");
 require("readr");
 # class
 SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
+  portable = TRUE,
+  class = TRUE,
+  cloneable = TRUE,
 # public members
   public = list(
     HasVersion = FALSE,
