@@ -5,6 +5,7 @@ write(paste0(c("sourcePath ...\t", projectSourcePath), sep = "", collapse = ""),
 sqlServiceInstance <- "";
 sqlServerInstance <- "";
 sqlServerVersionVector <- vector(mode = "character");
+sourceVector <- vector(mode = "character", length = 6);
 sqlServerInstanceLinkedList <- tibble::as_tibble(data.frame(NULL));
 sqlServerInstanceUsageList <- tibble::as_tibble(data.frame(NULL));
 sqlServerInstanceDBBackupList <- tibble::as_tibble(data.frame(NULL));
@@ -20,61 +21,48 @@ sqlServiceInstance <- sqlToCsvSqlServer$getServiceInstance();
 sqlServerInstance <- sqlToCsvSqlServer$getInstance();
 rm(sqlToCsvSqlServer);
 gc();
-# sourceFile Sql Server Instance
-projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServerInstanceAbstractList.R");
+# R source files
+# R source files Sql Server Instance Abstract List
+sourceVector[1] <- "SqlToCsvSqlServerInstanceAbstractList.R";
+# Sql Server Instance Linked List
+sourceVector[2] <- "SqlToCsvSqlServerInstanceLinkedList.R";
+# Sql Server Instance Usage List
+sourceVector[3] <- "SqlToCsvSqlServerInstanceUsageList.R";
+# Sql Server Instance DB Backup List
+sourceVector[4] <- "SqlToCsvSqlServerInstanceDBBackupList.R";
+# Sql Server Instance Running List
+sourceVector[5] <- "SqlToCsvSqlServerInstanceRunningList.R";
+# Sql Server Instance DB Spec List
+sourceVector[6] <- "SqlToCsvSqlServerInstanceDBSpecList.R";
+# load
+for (sourceIndex in seq_along(sourceVector)) {
+  projectSourceFile <- paste0(projectSourcePath, "/", sourceVector[sourceIndex]);
+  write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+  source(projectSourceFile);
+}
+rm(sourceIndex);
+# sourceFile Sql Server Instance Abstract Factory
+projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServerInstanceFactory.R");
 write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
 source(projectSourceFile);
-## sourceFile Sql Server Instance Linked List
-projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServerInstanceLinkedList.R");
-write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
-source(projectSourceFile);
-sqlToCsvSqlServerInstanceLinkedList <-
-  SqlToCsvSqlServerInstanceLinkedList$new(projectPath, sqlServiceInstance, sqlServerInstance);
-sqlToCsvSqlServerInstanceLinkedList$fileToTibble();
-sqlServerInstanceLinkedList <- sqlToCsvSqlServerInstanceLinkedList$getTibble();
-rm(sqlToCsvSqlServerInstanceLinkedList);
-gc();
+sqlToCsvSqlServerInstanceFactory <-
+  SqlToCsvSqlServerInstanceFactory$new(projectSourcePath, sourceVector);
+sqlToCsvSqlServerInstanceFactory$setSqlServerInstance(sqlServerInstance);
+sqlToCsvSqlServerInstanceFactory$setSqlServiceInstance(sqlServiceInstance);
+# sourceFile Sql Server Instance Linked List
+sqlServerInstanceLinkedList <-sqlToCsvSqlServerInstanceFactory$getLinkedList();
 ## sourceFile Sql Server Instance Usage List
-projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServerInstanceUsageList.R");
-write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
-source(projectSourceFile);
-sqlToCsvSqlServerInstanceUsageList <-
-  SqlToCsvSqlServerInstanceUsageList$new(projectPath, sqlServiceInstance, sqlServerInstance);
-sqlToCsvSqlServerInstanceUsageList$fileToTibble();
-sqlServerInstanceUsageList <- sqlToCsvSqlServerInstanceUsageList$getTibble();
-rm(sqlToCsvSqlServerInstanceUsageList);
-gc();
+sqlServerInstanceUsageList <- sqlToCsvSqlServerInstanceFactory$getUsageList();
 ## sourceFile Sql Server Instance DB Backup List
-projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServerInstanceDBBackupList.R");
-write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
-source(projectSourceFile);
-sqlToCsvSqlServerInstanceDBBackupList <-
-  SqlToCsvSqlServerInstanceDBBackupList$new(projectPath, sqlServiceInstance, sqlServerInstance);
-sqlToCsvSqlServerInstanceDBBackupList$fileToTibble();
-sqlServerInstanceDBBackupList <- sqlToCsvSqlServerInstanceDBBackupList$getTibble();
-rm(sqlToCsvSqlServerInstanceDBBackupList);
-gc();
+sqlServerInstanceDBBackupList <- sqlToCsvSqlServerInstanceFactory$getDBBackupList();
 ## sourceFile Sql Server Instance Running List
-projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServerInstanceRunningList.R");
-write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
-source(projectSourceFile);
-sqlToCsvSqlServerInstanceRunningList <-
-  SqlToCsvSqlServerInstanceRunningList$new(projectPath, sqlServiceInstance, sqlServerInstance);
-sqlToCsvSqlServerInstanceRunningList$fileToTibble();
-sqlServerInstanceRunningList <- sqlToCsvSqlServerInstanceRunningList$getTibble();
-rm(sqlToCsvSqlServerInstanceRunningList);
-gc();
+sqlServerInstanceRunningList <- sqlToCsvSqlServerInstanceFactory$getRunningList();
 ## sourceFile Sql Server Instance DB Spec List
-projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServerInstanceDBSpecList.R");
-write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
-source(projectSourceFile);
-sqlToCsvSqlServerInstanceDBSpecList <-
-  SqlToCsvSqlServerInstanceDBSpecList$new(projectPath, sqlServiceInstance, sqlServerInstance);
-sqlToCsvSqlServerInstanceDBSpecList$fileToTibble();
-sqlServerInstanceDBSpecList <- sqlToCsvSqlServerInstanceDBSpecList$getTibble();
-rm(sqlToCsvSqlServerInstanceDBSpecList);
+sqlServerInstanceDBSpecList <- sqlToCsvSqlServerInstanceFactory$getDBSpecList();
+rm(sqlToCsvSqlServerInstanceFactory);
 gc();
 ##
+rm(sourceVector);
 rm(sqlServiceInstance);
 rm(sqlServerInstance);
 rm(sqlServerVersionVector);
