@@ -34,7 +34,7 @@ SqlToCsvSqlServerInstanceAbstractList <-
       aStr <- paste0("--\n", projectNamespace, "\t", self$Ext, "\n\t");
       aStr <- paste0(aStr, self$Header, "\t", private$Path, "\n\t");
       aStr <- paste0(aStr, private$ServiceInstance, "\t", private$Instance, "\n\t");
-      aStr <- paste0(aStr, private$File, "\t", colnames(private$Tibble), "\n\t");
+      aStr <- paste0(aStr, private$File, "\t", paste(colnames(private$Tibble),collapse=" "), "\n\t");
       
       return(base::toString(aStr));
     },
