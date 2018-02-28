@@ -8,7 +8,6 @@ SqlToCsvSqlServerInstanceAbstractList <-
   class = TRUE,
   cloneable = TRUE,
   public = list(
-    Name = NA,
     getPath = function() private$Path,
     getServiceInstance = function() private$ServiceInstance,
     getInstance = function() private$Instance,
@@ -40,9 +39,9 @@ SqlToCsvSqlServerInstanceAbstractList <-
     },
     fileToTibble = function() {
       df <- 
-        read_csv(private$File, col_names = FALSE, locale = locale(asciify = TRUE), na = "NA");
-      colnames(df) <- self$ColumnTitles;
-      private$Tibble <- df;
+        read_csv(private$File, col_names = self$ColumnTitles,
+                 locale = locale(asciify = TRUE), na = "NA");
+      private$Tibble <- tibble::as_tibble(df);
       rm(df);
     }
   ),

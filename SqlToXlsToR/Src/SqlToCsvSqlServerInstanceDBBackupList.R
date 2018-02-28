@@ -14,7 +14,7 @@ SqlToCsvSqlServerInstanceDBBackupList <- R6Class("SqlToCsvSqlServerInstanceDBBac
       if (missing(value)) return("_DBBackupList");
     },
     ColumnTitles = function(value) {
-     if (missing(value)) return(c("ServerName", "ServiceName", "DBName", "BackupEndDate", "PhysicalDeviceName"));
+      if (missing(value)) return(c("ServerName", "ServiceName", "DBName", "BackupEndDate", "PhysicalDeviceName"));
     }
   ),
   private = list(
