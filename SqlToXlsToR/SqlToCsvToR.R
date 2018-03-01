@@ -50,7 +50,7 @@ sqlToCsvSqlServerInstanceFactory <-
 sqlToCsvSqlServerInstanceFactory$setSqlServerInstance(sqlServerInstance);
 sqlToCsvSqlServerInstanceFactory$setSqlServiceInstance(sqlServiceInstance);
 # sourceFile Sql Server Instance Linked List
-sqlServerInstanceLinkedList <-sqlToCsvSqlServerInstanceFactory$getLinkedList();
+sqlServerInstanceLinkedList <- sqlToCsvSqlServerInstanceFactory$getLinkedList();
 ## sourceFile Sql Server Instance Usage List
 sqlServerInstanceUsageList <- sqlToCsvSqlServerInstanceFactory$getUsageList();
 ## sourceFile Sql Server Instance DB Backup List
