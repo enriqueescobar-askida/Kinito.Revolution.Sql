@@ -1,5 +1,5 @@
 require("R6");
-require("readr");
+require("readxl");
 # class
 SqlToXlsSqlServer <- R6Class("SqlToXlsSqlServer",
   portable = TRUE,
@@ -95,7 +95,8 @@ SqlToXlsSqlServer <- R6Class("SqlToXlsSqlServer",
       if (length(private$VersionVector) == 1) {
         private$VersionVector <- paste0(private$Path, private$VersionVector);
         private$VersionVector <-
-          read_xls(private$VersionVector, col_names = FALSE, locale = locale(asciify = TRUE), na = "NA")[[1]];
+          read_excel(private$VersionVector, col_names = FALSE, skip = 1,
+                     trim_ws = TRUE, na = "NA")[[1]];#, locale = locale(asciify = TRUE)
         private$VersionVector <- strsplit(as.character(private$VersionVector), "\t");
         private$VersionVector <-
           trimws(unlist(private$VersionVector), which = c("both", "left", "right"));
@@ -112,17 +113,21 @@ SqlToXlsSqlServer <- R6Class("SqlToXlsSqlServer",
       private$Instance <- private$Instance[index];
       index <- paste0(private$Path, private$Instance);
       index <-
-        read_xls(index, col_names = FALSE, locale = locale(asciify = TRUE), na = "NA")[[1]];
-      index <- as.character(index);
-      index <- trimws(index, which = c("both", "left", "right"));
-      private$Instance <- gsub(self$HeadInstance, "", private$Instance);
-      private$Instance <- gsub(private$ServiceInstance, "", private$Instance);
-      private$Instance <- gsub(self$Ext, "", private$Instance);
+        read_excel(index, col_names = FALSE, skip = 1,
+                   trim_ws = TRUE, na = "NA")[[1]];#, locale = locale(asciify = TRUE)
+      # index <- as.character(index);
+      # index <- trimws(index, which = c("both", "left", "right"));
+      # private$Instance <- gsub(self$HeadInstance, "", private$Instance);
+      # private$Instance <- gsub(private$ServiceInstance, "", private$Instance);
+      # private$Instance <- gsub(self$Ext, "", private$Instance);
+      # private$Instance <- gsub("_", "", private$Instance);
+      private$Instance <- index;
       private$Instance <- gsub("_", "", private$Instance);
-      self$HasInstance <- index; #grepl(paste0("*", private$Instance, "$"), index);
+      private$Instance <- gsub("\\\\","-",private$Instance);
+      self$HasInstance <- TRUE; #grepl(paste0("*", private$Instance, "$"), index);
       rm(index);
-      self$HasInstance <- grepl(paste0("*", private$Instance, "$"), self$HasInstance);
-      if (self$HasInstance) private$Instance <- private$Instance;
+      # self$HasInstance <- grepl(paste0("*", private$Instance, "$"), self$HasInstance);
+      # if (self$HasInstance) private$Instance <- private$Instance;
     },
 #' Title
 #' setServiceInstance
@@ -133,7 +138,8 @@ SqlToXlsSqlServer <- R6Class("SqlToXlsSqlServer",
       if (length(private$ServiceInstance) == 1) {
         private$ServiceInstance <- paste0(private$Path, private$ServiceInstance);
         private$ServiceInstance <-
-          read_xls(private$ServiceInstance, col_names = FALSE, locale = locale(asciify = TRUE), na = "NA")[[1]];
+          read_excel(private$ServiceInstance, col_names = FALSE, skip = 1,
+                     trim_ws = TRUE, na = "NA")[[1]];#, locale = locale(asciify = TRUE)
         private$ServiceInstance <- as.character(private$ServiceInstance);
         private$ServiceInstance <-
           trimws(private$ServiceInstance, which = c("both", "left", "right"));

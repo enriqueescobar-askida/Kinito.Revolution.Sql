@@ -63,9 +63,9 @@ gc();
 # gc();
 # ##
 # rm(sourceVector);
-# rm(sqlServiceInstance);
-# rm(sqlServerInstance);
-# rm(sqlServerVersionVector);
+rm(sqlServiceInstance);
+rm(sqlServerInstance);
+rm(sqlServerVersionVector);
 # rm(sqlServerInstanceLinkedList);
 # rm(sqlServerInstanceUsageList);
 # rm(sqlServerInstanceDBBackupList);
