@@ -95,8 +95,8 @@ SqlToXlsSqlServer <- R6Class("SqlToXlsSqlServer",
       if (length(private$VersionVector) == 1) {
         private$VersionVector <- paste0(private$Path, private$VersionVector);
         private$VersionVector <-
-          read_excel(private$VersionVector, col_names = FALSE, skip = 1,
-                     trim_ws = TRUE, na = "NA")[[1]];#, locale = locale(asciify = TRUE)
+          read_excel(private$VersionVector, na = "NA", skip = 1,
+                    col_names = FALSE, trim_ws = TRUE)[[1]];#, locale = locale(asciify = TRUE)
         private$VersionVector <- strsplit(as.character(private$VersionVector), "\t");
         private$VersionVector <-
           trimws(unlist(private$VersionVector), which = c("both", "left", "right"));
@@ -113,8 +113,8 @@ SqlToXlsSqlServer <- R6Class("SqlToXlsSqlServer",
       private$Instance <- private$Instance[index];
       index <- paste0(private$Path, private$Instance);
       index <-
-        read_excel(index, col_names = FALSE, skip = 1,
-                   trim_ws = TRUE, na = "NA")[[1]];#, locale = locale(asciify = TRUE)
+        read_excel(index, na = "NA", skip = 1,
+                   col_names = FALSE, trim_ws = TRUE)[[1]];#, locale = locale(asciify = TRUE)
       # index <- as.character(index);
       # index <- trimws(index, which = c("both", "left", "right"));
       # private$Instance <- gsub(self$HeadInstance, "", private$Instance);
@@ -138,8 +138,8 @@ SqlToXlsSqlServer <- R6Class("SqlToXlsSqlServer",
       if (length(private$ServiceInstance) == 1) {
         private$ServiceInstance <- paste0(private$Path, private$ServiceInstance);
         private$ServiceInstance <-
-          read_excel(private$ServiceInstance, col_names = FALSE, skip = 1,
-                     trim_ws = TRUE, na = "NA")[[1]];#, locale = locale(asciify = TRUE)
+          read_excel(private$ServiceInstance, na = "NA", skip = 1,
+                     col_names = FALSE, trim_ws = TRUE)[[1]];#, locale = locale(asciify = TRUE)
         private$ServiceInstance <- as.character(private$ServiceInstance);
         private$ServiceInstance <-
           trimws(private$ServiceInstance, which = c("both", "left", "right"));
