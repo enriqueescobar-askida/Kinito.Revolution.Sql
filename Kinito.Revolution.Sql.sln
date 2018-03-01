@@ -73,6 +73,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Xls", "Xls", "{D8CF6FAC-35D
 		Xls\Server-Instance.xls = Xls\Server-Instance.xls
 		Xls\Server-ServiceInstance.xls = Xls\Server-ServiceInstance.xls
 		Xls\Server-Version.xls = Xls\Server-Version.xls
+		Xls\SqlServer-Instance_DEV_DEV01-HS-DEV.xls = Xls\SqlServer-Instance_DEV_DEV01-HS-DEV.xls
+		Xls\SqlServer-ServiceInstance_DEV.xls = Xls\SqlServer-ServiceInstance_DEV.xls
+		Xls\SqlServer-Version_DEV.xls = Xls\SqlServer-Version_DEV.xls
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Csv", "Csv", "{C38EE311-20C3-4CC8-96CC-F72C2CD8C748}"
