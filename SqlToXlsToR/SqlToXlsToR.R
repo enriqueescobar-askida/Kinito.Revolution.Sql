@@ -45,31 +45,31 @@ rm(sourceIndex);
 projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceFactory.R");
 write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
 source(projectSourceFile);
-# sqlToXlsSqlServerInstanceFactory <-
-#   SqlToXlsSqlServerInstanceFactory$new(projectSourcePath, sourceVector);
-# sqlToXlsSqlServerInstanceFactory$setSqlServerInstance(sqlServerInstance);
-# sqlToXlsSqlServerInstanceFactory$setSqlServiceInstance(sqlServiceInstance);
-# # sourceFile Sql Server Instance Linked List
-# sqlServerInstanceLinkedList <-sqlToXlsSqlServerInstanceFactory$getLinkedList();
-# ## sourceFile Sql Server Instance Usage List
-# sqlServerInstanceUsageList <- sqlToXlsSqlServerInstanceFactory$getUsageList();
-# ## sourceFile Sql Server Instance DB Backup List
-# sqlServerInstanceDBBackupList <- sqlToXlsSqlServerInstanceFactory$getDBBackupList();
-# ## sourceFile Sql Server Instance Running List
-# sqlServerInstanceRunningList <- sqlToXlsSqlServerInstanceFactory$getRunningList();
-# ## sourceFile Sql Server Instance DB Spec List
-# sqlServerInstanceDBSpecList <- sqlToXlsSqlServerInstanceFactory$getDBSpecList();
+sqlToXlsSqlServerInstanceFactory <-
+  SqlToXlsSqlServerInstanceFactory$new(projectSourcePath, sourceVector);
+sqlToXlsSqlServerInstanceFactory$setSqlServerInstance(sqlServerInstance);
+sqlToXlsSqlServerInstanceFactory$setSqlServiceInstance(sqlServiceInstance);
+# sourceFile Sql Server Instance Linked List
+sqlServerInstanceLinkedList <- sqlToXlsSqlServerInstanceFactory$getLinkedList();
+## sourceFile Sql Server Instance Usage List
+sqlServerInstanceUsageList <- sqlToXlsSqlServerInstanceFactory$getUsageList();
+## sourceFile Sql Server Instance DB Backup List
+sqlServerInstanceDBBackupList <- sqlToXlsSqlServerInstanceFactory$getDBBackupList();
+## sourceFile Sql Server Instance Running List
+sqlServerInstanceRunningList <- sqlToXlsSqlServerInstanceFactory$getRunningList();
+## sourceFile Sql Server Instance DB Spec List
+sqlServerInstanceDBSpecList <- sqlToXlsSqlServerInstanceFactory$getDBSpecList();
 rm(sqlToXlsSqlServerInstanceFactory);
 gc();
-# ##
+##
 rm(sourceVector);
 rm(sqlServiceInstance);
 rm(sqlServerInstance);
 rm(sqlServerVersionVector);
-# rm(sqlServerInstanceLinkedList);
-# rm(sqlServerInstanceUsageList);
-# rm(sqlServerInstanceDBBackupList);
-# rm(sqlServerInstanceRunningList);
-# rm(sqlServerInstanceDBSpecList);
-# gc();
+rm(sqlServerInstanceLinkedList);
+rm(sqlServerInstanceUsageList);
+rm(sqlServerInstanceDBBackupList);
+rm(sqlServerInstanceRunningList);
+rm(sqlServerInstanceDBSpecList);
+gc();
 

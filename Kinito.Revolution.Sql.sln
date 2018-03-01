@@ -74,6 +74,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Xls", "Xls", "{D8CF6FAC-35D
 		Xls\Server-ServiceInstance.xls = Xls\Server-ServiceInstance.xls
 		Xls\Server-Version.xls = Xls\Server-Version.xls
 		Xls\SqlServer-Instance_DEV_DEV01-HS-DEV.xls = Xls\SqlServer-Instance_DEV_DEV01-HS-DEV.xls
+		Xls\SqlServer-Instance_DEV_DEV01-HS-DEV_DBBackupList.xls = Xls\SqlServer-Instance_DEV_DEV01-HS-DEV_DBBackupList.xls
+		Xls\SqlServer-Instance_DEV_DEV01-HS-DEV_DBSpecList.xls = Xls\SqlServer-Instance_DEV_DEV01-HS-DEV_DBSpecList.xls
+		Xls\SqlServer-Instance_DEV_DEV01-HS-DEV_LinkedList.xls = Xls\SqlServer-Instance_DEV_DEV01-HS-DEV_LinkedList.xls
+		Xls\SqlServer-Instance_DEV_DEV01-HS-DEV_RunningList.xls = Xls\SqlServer-Instance_DEV_DEV01-HS-DEV_RunningList.xls
+		Xls\SqlServer-Instance_DEV_DEV01-HS-DEV_UsageList.xls = Xls\SqlServer-Instance_DEV_DEV01-HS-DEV_UsageList.xls
 		Xls\SqlServer-ServiceInstance_DEV.xls = Xls\SqlServer-ServiceInstance_DEV.xls
 		Xls\SqlServer-Version_DEV.xls = Xls\SqlServer-Version_DEV.xls
 	EndProjectSection

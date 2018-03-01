@@ -57,6 +57,9 @@ SqlToXlsSqlServerInstanceAbstractList <-
     },
     ColumnTitles = function(value) {
       if (missing(value)) return(c(""));
+    },
+    ColumnTypes = function(value) {
+      if (missing(value)) return(c("?"));
     }
   ),
   private = list(
