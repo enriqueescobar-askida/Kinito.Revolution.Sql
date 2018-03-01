@@ -24,17 +24,17 @@ gc();
 # R source files
 # R source files Sql Server Instance Abstract List
 sourceVector[1] <- "SqlToXlsSqlServerInstanceAbstractList.R";
-# # Sql Server Instance Linked List
-# sourceVector[2] <- "SqlToXlsSqlServerInstanceLinkedList.R";
-# # Sql Server Instance Usage List
-# sourceVector[3] <- "SqlToXlsSqlServerInstanceUsageList.R";
-# # Sql Server Instance DB Backup List
-# sourceVector[4] <- "SqlToXlsSqlServerInstanceDBBackupList.R";
-# # Sql Server Instance Running List
-# sourceVector[5] <- "SqlToXlsSqlServerInstanceRunningList.R";
-# # Sql Server Instance DB Spec List
-# sourceVector[6] <- "SqlToXlsSqlServerInstanceDBSpecList.R";
-# # load
+# Sql Server Instance Linked List
+sourceVector[2] <- "SqlToXlsSqlServerInstanceLinkedList.R";
+# Sql Server Instance Usage List
+sourceVector[3] <- "SqlToXlsSqlServerInstanceUsageList.R";
+# Sql Server Instance DB Backup List
+sourceVector[4] <- "SqlToXlsSqlServerInstanceDBBackupList.R";
+# Sql Server Instance Running List
+sourceVector[5] <- "SqlToXlsSqlServerInstanceRunningList.R";
+# Sql Server Instance DB Spec List
+sourceVector[6] <- "SqlToXlsSqlServerInstanceDBSpecList.R";
+# load
 for (sourceIndex in seq_along(sourceVector)) {
   projectSourceFile <- paste0(projectSourcePath, "/", sourceVector[sourceIndex]);
   write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
@@ -45,10 +45,10 @@ rm(sourceIndex);
 projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceFactory.R");
 write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
 source(projectSourceFile);
-sqlToXlsSqlServerInstanceFactory <-
-  SqlToXlsSqlServerInstanceFactory$new(projectSourcePath, sourceVector);
-sqlToXlsSqlServerInstanceFactory$setSqlServerInstance(sqlServerInstance);
-sqlToXlsSqlServerInstanceFactory$setSqlServiceInstance(sqlServiceInstance);
+# sqlToXlsSqlServerInstanceFactory <-
+#   SqlToXlsSqlServerInstanceFactory$new(projectSourcePath, sourceVector);
+# sqlToXlsSqlServerInstanceFactory$setSqlServerInstance(sqlServerInstance);
+# sqlToXlsSqlServerInstanceFactory$setSqlServiceInstance(sqlServiceInstance);
 # # sourceFile Sql Server Instance Linked List
 # sqlServerInstanceLinkedList <-sqlToXlsSqlServerInstanceFactory$getLinkedList();
 # ## sourceFile Sql Server Instance Usage List

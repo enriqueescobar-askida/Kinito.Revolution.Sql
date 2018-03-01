@@ -14,7 +14,7 @@ SqlToXlsSqlServerInstanceFactory <-
       if (!missing(path)) private$setPath(path);
       if (!missing(stringVector)) private$setSourceVector(stringVector);
       self$IsVectorValid <- private$validateSourceVector();
-      #private$loadSourceVector();
+      private$loadSourceVector();
     },
     getLinkedList = function(){
       aList <-
@@ -81,16 +81,17 @@ SqlToXlsSqlServerInstanceFactory <-
                (length(private$SourceVector) >= 1));
     },
     loadSourceVector = function(){
-      if (self$IsVectorValid){
-        for (sourceIndex in seq_along(private$SourceVector)) {
-          projectSourceFile <- paste0(private$Path, "/", private$SourceVector[sourceIndex]);
-          write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
-          source(projectSourceFile);
-        }
-        rm(sourceIndex);
-        private$SourceVector <- private$SourceVector[-1];
-      }
-      private$Path <- paste0(private$Path, "/..");
+      cat(self$IsVectorValid);
+      # if (self$IsVectorValid){
+      #   for (sourceIndex in seq_along(private$SourceVector)) {
+      #     projectSourceFile <- paste0(private$Path, "/", private$SourceVector[sourceIndex]);
+      #     write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+      #     source(projectSourceFile);
+      #   }
+      #   rm(sourceIndex);
+      #   private$SourceVector <- private$SourceVector[-1];
+      # }
+      # private$Path <- paste0(private$Path, "/..");
     },
     getSqlServerInstanceList = function(){
       df <- as.tibble(data.frame(NULL));

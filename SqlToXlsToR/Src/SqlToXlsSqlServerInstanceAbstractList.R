@@ -39,8 +39,8 @@ SqlToXlsSqlServerInstanceAbstractList <-
     },
     fileToTibble = function() {
       df <- 
-        read_excel(private$File, col_names = self$ColumnTitles,
-                 locale = locale(asciify = TRUE), na = "NA");
+        read_excel(private$File, na = "NA", skip = 1,
+                  col_names = self$ColumnTitles, trim_ws = TRUE);#locale = locale(asciify = TRUE),
       private$Tibble <- tibble::as_tibble(df);
       rm(df);
     }
