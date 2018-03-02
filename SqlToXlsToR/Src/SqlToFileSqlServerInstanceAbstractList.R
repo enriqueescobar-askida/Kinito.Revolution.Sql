@@ -20,7 +20,7 @@ SqlToFileSqlServerInstanceAbstractList <-
       cat(self$toString());
     },
     finalize = function() {
-      print("SqlToCsvSqlServerInstanceAbstractList.finalize has been called!");
+      print("SqlToFileSqlServerInstanceAbstractList.finalize has been called!");
       private$Path <- NULL;
       private$ServiceInstance <- NULL;
       private$Instance <- NULL;

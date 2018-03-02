@@ -20,16 +20,7 @@ SqlToCsvSqlServerInstanceAbstractList <-
   active = list(
     Ext = function(value) {
       if (missing(value)) return(".csv");
-    }#,
-    # Header = function(value) {
-    #   if (missing(value)) return("SqlServer-Instance_");
-    # },
-    # Tail = function(value) {
-    #   if (missing(value)) return("_tail_");
-    # },
-    # ColumnTitles = function(value) {
-    #   if (missing(value)) return(c(""));
-    # }
+    }
   ),
   private = list(
     setPath = function(value) private$Path <- paste0(value, "/../Csv/")

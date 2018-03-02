@@ -88,7 +88,7 @@ SqlToXlsSqlServerInstanceFactory <-
           source(projectSourceFile);
         }
         rm(sourceIndex);
-        private$SourceVector <- private$SourceVector[-1];
+        private$SourceVector <- private$SourceVector[-c(1, 2)];
       }
       private$Path <- paste0(private$Path, "/..");
     },

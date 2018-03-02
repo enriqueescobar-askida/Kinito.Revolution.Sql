@@ -23,17 +23,19 @@ rm(sqlToXlsSqlServer);
 gc();
 # R source files
 # R source files Sql Server Instance Abstract List
-sourceVector[1] <- "SqlToXlsSqlServerInstanceAbstractList.R";
+sourceVector[1] <- "SqlToFileSqlServerInstanceAbstractList.R";
+# R source Xls Sql Server Instance Abstract List
+sourceVector[2] <- "SqlToXlsSqlServerInstanceAbstractList.R";
 # Sql Server Instance Linked List
-sourceVector[2] <- "SqlToXlsSqlServerInstanceLinkedList.R";
+sourceVector[3] <- "SqlToXlsSqlServerInstanceLinkedList.R";
 # Sql Server Instance Usage List
-sourceVector[3] <- "SqlToXlsSqlServerInstanceUsageList.R";
+sourceVector[4] <- "SqlToXlsSqlServerInstanceUsageList.R";
 # Sql Server Instance DB Backup List
-sourceVector[4] <- "SqlToXlsSqlServerInstanceDBBackupList.R";
+sourceVector[5] <- "SqlToXlsSqlServerInstanceDBBackupList.R";
 # Sql Server Instance Running List
-sourceVector[5] <- "SqlToXlsSqlServerInstanceRunningList.R";
+sourceVector[6] <- "SqlToXlsSqlServerInstanceRunningList.R";
 # Sql Server Instance DB Spec List
-sourceVector[6] <- "SqlToXlsSqlServerInstanceDBSpecList.R";
+sourceVector[7] <- "SqlToXlsSqlServerInstanceDBSpecList.R";
 # load
 for (sourceIndex in seq_along(sourceVector)) {
   projectSourceFile <- paste0(projectSourcePath, "/", sourceVector[sourceIndex]);
