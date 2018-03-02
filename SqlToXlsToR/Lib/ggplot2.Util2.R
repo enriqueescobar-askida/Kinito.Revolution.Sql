@@ -12,17 +12,18 @@ library(gridExtra);
 #'
 #' @examples TBD
 GgplotToPng <- function(pngFilePath = "", barplot = NULL) {
-  
+
   if (is.na(barplot)) {
-    
+
     return(FALSE);
   } else {
     write(paste0("Saving to path : ", pngFilePath), stdout());
     ggsave(filename = pngFilePath, plot = barplot, dpi = 100);
-    
+
     return(TRUE);
   }
 }
+
 #' Title  TwoColumnDataFrameToHistogram
 #'
 #' @param aDataFrame 
@@ -56,6 +57,7 @@ TwoColumnDataFrameToHistogram <- function(aDataFrame = NULL, mainTitle = "") {
     return(aHist);
   }
 }
+
 #' Title  TwoColumnDataFrameToBarlot
 #'
 #' @param aDataFrame 
@@ -90,6 +92,7 @@ TwoColumnDataFrameToBarlot <- function(aDataFrame = NULL, mainTitle = "") {
     return(barplot);
   }
 }
+
 #' Title  GenericPiechartFromTwoColumnDataFrame
 #'
 #' @param aDataFrame 
@@ -103,11 +106,13 @@ GenericPiechartFromTwoColumnDataFrame <- function(aDataFrame = NULL, mainTitle =
   aPierchart <- NULL;
   
   if (!is.null(aDataFrame) & (ncol(aDataFrame) == 2)) {
+    write(paste0("Column name: ", colnames(aDataFrame)), stdout());
     # titles
     xTitle <- colnames(aDataFrame)[1];
     names(aDataFrame)[1] <- "X";
     yTitle <- colnames(aDataFrame)[2];
     names(aDataFrame)[2] <- "Y";
+    write(paste0("Column name: ", colnames(aDataFrame)), stdout());
     mainTitle <- paste0(mainTitle, " PieChart");
     # lists
     PercentList <- round(aDataFrame$Y / sum(aDataFrame$Y) * 100, digits = 1);
@@ -127,6 +132,7 @@ GenericPiechartFromTwoColumnDataFrame <- function(aDataFrame = NULL, mainTitle =
   
   return(aPierchart);
 }
+
 #' Title  DataFrameColumnToBarplot
 #'
 #' @param aDataFrame 
@@ -165,6 +171,7 @@ DataFrameColumnToBarplot <- function(aDataFrame = NULL, columnName = NULL) {
   
   return(aBarplot);
 }
+
 #' Title  DataFrameColumnToPiechart
 #'
 #' @param aDataFrame 
@@ -206,6 +213,7 @@ DataFrameColumnToPiechart <- function(aDataFrame = NULL, columnName = NULL) {
   
   return(aPiechart);
 }
+
 #' Title  DBRowCountFrameToBarplot
 #'
 #' @param usageDataFrame 
@@ -237,6 +245,7 @@ DBRowCountFrameToBarplot <- function(usageDataFrame = NULL) {
     return(barplot);
   }
 }
+
 #' Title  DBUsageDataFrameToBarplot
 #'
 #' @param usageDataFrame
@@ -268,6 +277,7 @@ DBUsageDataFrameToBarplot <- function(usageDataFrame = NULL) {
     return(barplot);
   }
 }
+
 #' Title  DBUsageDataFrameToPiechart
 #'
 #' @param usageDataFrame
@@ -303,6 +313,7 @@ DBUsageDataFrameToPiechart <- function(usageDataFrame = NULL) {
     return(piePlot);
   }
 }
+
 #' Title  DBObjectDataFrameToBarplot
 #'
 #' @param objectDataFrame
@@ -312,12 +323,13 @@ DBUsageDataFrameToPiechart <- function(usageDataFrame = NULL) {
 #'
 #' @examples  TBD
 DBObjectDataFrameToBarplot <- function(objectDataFrame = NULL) {
-  
+
   if (is.null(objectDataFrame)) {
     write("+ ERROR : Empty data.frame", stderr());
-    
+
     return(NULL);
   }else{
+    write(paste0("Column name: ", colnames(objectDataFrame)), stdout());
     # titles
     xTitle <- colnames(objectDataFrame)[1];
     yTitle <- colnames(objectDataFrame)[-1];
@@ -333,6 +345,7 @@ DBObjectDataFrameToBarplot <- function(objectDataFrame = NULL) {
     return(barplot);
   }
 }
+
 #' Title  DBFunctionDataFrameToDensityplot
 #'
 #' @param functionDataFrame
@@ -344,7 +357,7 @@ DBObjectDataFrameToBarplot <- function(objectDataFrame = NULL) {
 DBFunctionDataFrameToDensityplot <- function(functionDataFrame = NULL) {
   
   if (is.null(functionDataFrame)) {
-    
+
     return(NULL);
   }else{
     # titles
@@ -359,6 +372,7 @@ DBFunctionDataFrameToDensityplot <- function(functionDataFrame = NULL) {
     return(aDensityplot);
   }
 }
+
 #' Title  DBFunctionDataFrameToBoxplot
 #'
 #' @param functionDataFrame
@@ -368,11 +382,12 @@ DBFunctionDataFrameToDensityplot <- function(functionDataFrame = NULL) {
 #'
 #' @examples TBD
 DBFunctionDataFrameToBoxplot <- function(functionDataFrame = NULL) {
-  
+
   if (is.null(functionDataFrame)) {
-    
+
     return(NULL);
   }else{
+    write(colnames(functionDataFrame), stdout());
     # titles
     xTitle <- "Function type";
     yTitle <- "Number of parameters";
@@ -389,6 +404,7 @@ DBFunctionDataFrameToBoxplot <- function(functionDataFrame = NULL) {
     return(aBoxplot);
   }
 }
+
 #' Title DBFunctionDataFrameToBarplot
 #'
 #' @param functionDataFrame
@@ -421,6 +437,7 @@ DBFunctionDataFrameToBarplot <- function(functionDataFrame = NULL) {
     return(aBarplot);
   }
 }
+
 #' Title  DBFunctionDataFrameToPiechart
 #'
 #' @param functionDataFrame
@@ -457,6 +474,7 @@ DBFunctionDataFrameToPiechart <- function(functionDataFrame = NULL) {
     return(piePlot);
   }
 }
+
 #' Title  FunctionWithoutWithTotalDFToPiechart
 #'
 #' @param woWithTotalDataFrame 
@@ -470,7 +488,7 @@ FunctionWithoutWithTotalDFToPiechart <- function(woWithTotalDataFrame = NULL,
                                                  OutputType = "") {
   
   if (is.null(woWithTotalDataFrame)) {
-    
+
     return(NULL);
   } else {
     # rm totals/ last column & save colnames
@@ -511,6 +529,7 @@ FunctionWithoutWithTotalDFToPiechart <- function(woWithTotalDataFrame = NULL,
     return(piePlot);
   }
 }
+
 #' Title  FunctionWithoutWithTotalDFToBarplot
 #'
 #' @param woWithTotalDataFrame
@@ -558,6 +577,7 @@ FunctionWithoutWithTotalDFToBarplot <- function(woWithTotalDataFrame = NULL,
     return(aBarplot);
   }
 }
+
 #' Title  DBStoreProcDataFrameToBoxplot
 #'
 #' @param storeProcDataFrame 
@@ -568,9 +588,10 @@ FunctionWithoutWithTotalDFToBarplot <- function(woWithTotalDataFrame = NULL,
 #' @examples TBD
 DBStoreProcDataFrameToBoxplot <- function(storeProcDataFrame = NULL) {
   if (is.null(storeProcDataFrame)) {
-    
+
     return(NULL);
   }else{
+    write(paste0("Column name: ", colnames(storeProcDataFrame)), stdout());
     # titles
     xTitle <- "Procedure type";
     yTitle <- "Number of parameters";
@@ -583,7 +604,7 @@ DBStoreProcDataFrameToBoxplot <- function(storeProcDataFrame = NULL) {
       # + geom_point(aes(colour = factor(type_desc)), size=4)
       scale_y_continuous(breaks = seq(0, 12, 1.0)) +
       labs(title = mainTitle, x = xTitle, y = yTitle);
-    
+
     return(aBoxplot);
   }
 }
@@ -597,11 +618,12 @@ DBStoreProcDataFrameToBoxplot <- function(storeProcDataFrame = NULL) {
 #'
 #' @examples TBD
 DBStoreProcDataFrameToDensityplot <- function(storeProcDataFrame = NULL) {
-  
+
   if (is.null(storeProcDataFrame)) {
-    
+
     return(NULL);
   }else{
+    write(paste0("Column name: ", colnames(storeProcDataFrame)), stdout());
     # titles
     xTitle <- "Number of parameters";
     mainTitle <- "Densityplot for parameter distribution";
@@ -610,10 +632,11 @@ DBStoreProcDataFrameToDensityplot <- function(storeProcDataFrame = NULL) {
                            aes(NbParameters, fill = ProcedureType)) +
       geom_density(alpha = 0.6) +
       labs(title = mainTitle, x = xTitle);
-    
+
     return(aDensityplot);
   }
 }
+
 #' Title  StoredProcWithoutWithTotalDFToBarplot
 #'
 #' @param woWithTotalDataFrame
@@ -661,6 +684,7 @@ StoredProcWithoutWithTotalDFToBarplot <- function(woWithTotalDataFrame = NULL,
     return(aBarplot);
   }
 }
+
 #' Title  StoredProcWithoutWithTotalDFToPiechart
 #'
 #' @param woWithTotalDataFrame

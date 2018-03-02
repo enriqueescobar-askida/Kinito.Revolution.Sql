@@ -1,7 +1,9 @@
-
+# import
 library(ggplot2);
 library(gridExtra);
-
+###
+### functions
+###
 #' Title  GgplotToPng
 #'
 #' @param pngFilePath
@@ -45,18 +47,18 @@ GenericPiechartFromTwoColumnDataFrame <- function(aDataFrame = NULL, mainTitle =
     mainTitle <- paste0(mainTitle, " PieChart");
     # lists
     PercentList <- round(aDataFrame$Y / sum(aDataFrame$Y) * 100, digits = 1);
-    labelList <- paste0(aDataFrame$X," ",PercentList, "%");
+    labelList <- paste0(aDataFrame$X, " ", PercentList, "%");
     ColorList <- heat.colors(length(PercentList));
     # graph
     aPierchart <- ggplot(aDataFrame,
                          aes(x = factor(1), y = PercentList, fill = labelList)) +
-                  # make stacked bar chart with black border
-                  geom_bar(stat = "identity", color = "grey80", width = 1) +
-                  #geom_text(aes(x = 1.5, y = PercentList, label = labelList), size = 4) +
-                  ggtitle(mainTitle) +
-                  xlab(xTitle) +
-                  ylab(yTitle) +
-                  coord_polar(theta = "y");
+      # make stacked bar chart with black border
+      geom_bar(stat = "identity", color = "grey80", width = 1) +
+      #geom_text(aes(x = 1.5, y = PercentList, label = labelList), size = 4) +
+      ggtitle(mainTitle) +
+      xlab(xTitle) +
+      ylab(yTitle) +
+      coord_polar(theta = "y");
   }
   
   return(aPierchart);
@@ -223,11 +225,11 @@ DBObjectDataFrameToBarplot <- function(objectDataFrame = NULL) {
     # graph
     barplot <- ggplot(objectDataFrame,
                       aes(x = factor(ObjectName), y = ObjectCount)) +
-              geom_bar(stat = "identity", width = 0.8, position = "dodge", fill = "lightblue") +
-              ggtitle(mainTitle) +
-              xlab(xTitle) +
-              ylab(yTitle);
-
+      geom_bar(stat = "identity", width = 0.8, position = "dodge", fill = "lightblue") +
+      ggtitle(mainTitle) +
+      xlab(xTitle) +
+      ylab(yTitle);
+    
     return(barplot);
   }
 }
@@ -288,12 +290,12 @@ DBFunctionDataFrameToBoxplot <- function(functionDataFrame = NULL) {
     # graph
     aBoxplot <- ggplot(functionDataFrame,
                        aes(x = FunctionType, y = NbParameters)) +
-                geom_boxplot(aes(fill = FunctionType)) +
-                geom_jitter() +
-                # + geom_point(aes(colour = factor(type_desc)), size=4)
-                scale_y_continuous(breaks = seq(0, 12, 1.0)) +
-                labs(title = mainTitle, x = xTitle, y = yTitle);
-
+      geom_boxplot(aes(fill = FunctionType)) +
+      geom_jitter() +
+      # + geom_point(aes(colour = factor(type_desc)), size=4)
+      scale_y_continuous(breaks = seq(0, 12, 1.0)) +
+      labs(title = mainTitle, x = xTitle, y = yTitle);
+    
     return(aBoxplot);
   }
 }
@@ -552,11 +554,11 @@ DBStoreProcDataFrameToBoxplot <- function(storeProcDataFrame = NULL) {
     # graph
     aBoxplot <- ggplot(storeProcDataFrame,
                        aes(x = ProcedureType, y = NbParameters)) +
-                geom_boxplot(aes(fill = ProcedureType)) +
-                geom_jitter() +
-                # + geom_point(aes(colour = factor(type_desc)), size=4)
-                scale_y_continuous(breaks = seq(0, 12, 1.0)) +
-                labs(title = mainTitle, x = xTitle, y = yTitle);
+      geom_boxplot(aes(fill = ProcedureType)) +
+      geom_jitter() +
+      # + geom_point(aes(colour = factor(type_desc)), size=4)
+      scale_y_continuous(breaks = seq(0, 12, 1.0)) +
+      labs(title = mainTitle, x = xTitle, y = yTitle);
 
     return(aBoxplot);
   }
@@ -583,8 +585,8 @@ DBStoreProcDataFrameToDensityplot <- function(storeProcDataFrame = NULL) {
     # graph
     aDensityplot <- ggplot(storeProcDataFrame,
                            aes(NbParameters, fill = ProcedureType)) +
-                    geom_density(alpha = 0.6) +
-                    labs(title = mainTitle, x = xTitle);
+      geom_density(alpha = 0.6) +
+      labs(title = mainTitle, x = xTitle);
 
     return(aDensityplot);
   }
