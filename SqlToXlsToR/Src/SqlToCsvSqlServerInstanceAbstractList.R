@@ -12,7 +12,7 @@ SqlToCsvSqlServerInstanceAbstractList <-
     fileToTibble = function() {
       df <- 
         read_csv(private$File, col_names = self$ColumnTitles,
-                 locale = locale(asciify = TRUE), na = c("NULL","NA"));
+                 locale = locale(asciify = TRUE), na = c("NULL","NA","","NAN","NaN"));
       private$Tibble <- tibble::as_tibble(df);
       rm(df);
     }
