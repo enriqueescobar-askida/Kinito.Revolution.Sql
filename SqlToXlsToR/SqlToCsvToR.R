@@ -55,6 +55,8 @@ sqlToCsvSqlServerInstanceFactory$setSqlServiceInstance(sqlServiceInstance);
 sqlServerInstanceLinkedList <- sqlToCsvSqlServerInstanceFactory$getLinkedList();
 ## sourceFile Sql Server Instance Usage List
 sqlServerInstanceUsageList <- sqlToCsvSqlServerInstanceFactory$getUsageList();
+sqlToCsvSqlServerInstanceFactory$getUsageListBarplot();
+sqlToCsvSqlServerInstanceFactory$getUsageListPiechart();
 ## sourceFile Sql Server Instance DB Backup List
 sqlServerInstanceDBBackupList <- sqlToCsvSqlServerInstanceFactory$getDBBackupList();
 ## sourceFile Sql Server Instance Running List

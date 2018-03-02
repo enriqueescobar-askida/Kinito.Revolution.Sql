@@ -11,10 +11,16 @@ SqlToXlsSqlServerInstanceAbstractList <-
   public = list(
     fileToTibble = function() {
       df <- 
-        read_excel(private$File, na = c("NULL","NA","","NAN","NaN"), skip = 1,
+        read_excel(private$File, na = "NA", skip = 1,
                   col_names = self$ColumnTitles, trim_ws = TRUE);#locale = locale(asciify = TRUE),
       private$Tibble <- tibble::as_tibble(df);
       rm(df);
+    },
+    getPiechartGgplot2 = function(){
+      return(NULL);
+    },
+    getBarplotGgplot2 = function(){
+      return(NULL);
     }
   ),
   active = list(
