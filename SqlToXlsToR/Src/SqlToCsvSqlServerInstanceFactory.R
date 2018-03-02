@@ -32,6 +32,24 @@ SqlToCsvSqlServerInstanceFactory <-
       rm(aList);
       return(tibble::as_tibble(aTibble));
     },
+    getUsageListBarplot = function(){
+      aList <-
+        SqlToCsvSqlServerInstanceUsageList$new(private$Path, private$SqlServiceInstance, private$SqlServerInstance);
+      aList$fileToTibble();
+      aBarplot <- aList$getBarplotGgplot2();
+      rm(aList);
+      
+      return(aBarplot);
+    },
+    getUsageListPiechart = function(){
+      aList <-
+        SqlToCsvSqlServerInstanceUsageList$new(private$Path, private$SqlServiceInstance, private$SqlServerInstance);
+      aList$fileToTibble();
+      aPiechart <- aList$getPiechartGgplot2();
+      rm(aList);
+      
+      return(aPiechart);
+    },
     getDBBackupList = function(){
       aList <-
         SqlToCsvSqlServerInstanceDBBackupList$new(private$Path, private$SqlServiceInstance, private$SqlServerInstance);

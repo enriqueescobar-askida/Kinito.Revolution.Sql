@@ -15,6 +15,12 @@ SqlToCsvSqlServerInstanceAbstractList <-
                  locale = locale(asciify = TRUE), na = c("NULL","NA","","NAN","NaN"));
       private$Tibble <- tibble::as_tibble(df);
       rm(df);
+    },
+    getPiechartGgplot2 = function(){
+      return(NULL);
+    },
+    getBarplotGgplot2 = function(){
+      return(NULL);
     }
   ),
   active = list(
