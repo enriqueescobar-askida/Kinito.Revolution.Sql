@@ -53,14 +53,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{7AA7525E-6E8
 		Sql\DB-Usage_list.sql = Sql\DB-Usage_list.sql
 		Sql\DB-View_count.sql = Sql\DB-View_count.sql
 		Sql\DB-View_list.sql = Sql\DB-View_list.sql
-		Sql\Server-Instance.sql = Sql\Server-Instance.sql
-		Sql\Server-Instance_DBBackupList.sql = Sql\Server-Instance_DBBackupList.sql
-		Sql\Server-Instance_DBSpecList.sql = Sql\Server-Instance_DBSpecList.sql
-		Sql\Server-Instance_LinkedList.sql = Sql\Server-Instance_LinkedList.sql
-		Sql\Server-Instance_RunningList.sql = Sql\Server-Instance_RunningList.sql
-		Sql\Server-Instance_UsageList.sql = Sql\Server-Instance_UsageList.sql
-		Sql\Server-ServiceInstance.sql = Sql\Server-ServiceInstance.sql
-		Sql\Server-Version.sql = Sql\Server-Version.sql
+		Sql\SqlServer-Instance_SINAME_INAME.sql = Sql\SqlServer-Instance_SINAME_INAME.sql
+		Sql\SqlServer-Instance_SINAME_INAME_DBBackupList.sql = Sql\SqlServer-Instance_SINAME_INAME_DBBackupList.sql
+		Sql\SqlServer-Instance_SINAME_INAME_DBSpecList.sql = Sql\SqlServer-Instance_SINAME_INAME_DBSpecList.sql
+		Sql\SqlServer-Instance_SINAME_INAME_LinkedList.sql = Sql\SqlServer-Instance_SINAME_INAME_LinkedList.sql
+		Sql\SqlServer-Instance_SINAME_INAME_RunningList.sql = Sql\SqlServer-Instance_SINAME_INAME_RunningList.sql
+		Sql\SqlServer-Instance_SINAME_INAME_UsageList.sql = Sql\SqlServer-Instance_SINAME_INAME_UsageList.sql
+		Sql\SqlServer-ServiceInstance_SINAME.sql = Sql\SqlServer-ServiceInstance_SINAME.sql
+		Sql\SqlServer-Version_SINAME.sql = Sql\SqlServer-Version_SINAME.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Xls", "Xls", "{D8CF6FAC-35D5-477A-B98F-0F3B40D6A3C8}"
