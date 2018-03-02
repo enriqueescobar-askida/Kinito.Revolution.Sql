@@ -24,6 +24,75 @@ GgplotToPng <- function(pngFilePath = "", barplot = NULL) {
   }
 }
 
+#' Title  TwoColumnDataFrameToHistogram
+#'
+#' @param aDataFrame 
+#' @param mainTitle 
+#'
+#' @return ggplot2
+#' @export TBD
+#'
+#' @examples TBD
+TwoColumnDataFrameToHistogram <- function(aDataFrame = NULL, mainTitle = "") {
+  aHist <- NULL;
+  
+  if (is.null(aDataFrame)) {
+    
+    return(aHist);
+  } else {
+    # titles
+    xTitle <- names(aDataFrame)[1];
+    yTitle <- names(aDataFrame)[2];
+    colnames(aDataFrame) <- NULL;
+    names(aDataFrame)[1] <- "X";
+    names(aDataFrame)[2] <- "Y";
+    # graph
+    aHist <- ggplot(aDataFrame, aes(Y)) +
+      geom_histogram(colour = "grey60", fill = "lightblue", binwidth = 1, alpha = 0.5, position = "identity") +
+      xlab(xTitle) +
+      ylab(yTitle) +
+      ggtitle(mainTitle) +
+      theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5));
+    
+    return(aHist);
+  }
+}
+
+#' Title  TwoColumnDataFrameToBarlot
+#'
+#' @param aDataFrame 
+#' @param mainTitle 
+#'
+#' @return ggplot2
+#' @export TBD
+#'
+#' @examples TBD
+TwoColumnDataFrameToBarlot <- function(aDataFrame = NULL, mainTitle = "") {
+  
+  if (is.null(aDataFrame)) {
+    
+    return(NULL);
+  } else {
+    aDataFrame <- head(aDataFrame, 50);
+    # titles
+    xTitle <- colnames(aDataFrame)[1];
+    yTitle <- colnames(aDataFrame)[2];
+    colnames(aDataFrame) <- NULL;
+    names(aDataFrame)[1] <- "X";
+    names(aDataFrame)[2] <- "Y";
+    # graph
+    barplot <- ggplot(aDataFrame,
+                      aes(x = factor(X), y = Y)) +
+      geom_bar(stat = "identity", width = 0.8, position = "dodge", fill = "lightblue") +
+      xlab(xTitle) +
+      ylab(yTitle) +
+      ggtitle(mainTitle) +
+      theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5));
+    
+    return(barplot);
+  }
+}
+
 #' Title  GenericPiechartFromTwoColumnDataFrame
 #'
 #' @param aDataFrame 
