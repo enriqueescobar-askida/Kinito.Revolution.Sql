@@ -67,13 +67,23 @@ rm(sqlToCsvSqlServerInstanceFactory);
 gc();
 ##
 rm(sourceVector);
-rm(sqlServiceInstance);
-rm(sqlServerInstance);
-rm(sqlServerVersionVector);
-rm(sqlServerInstanceLinkedList);
-rm(sqlServerInstanceUsageList);
-rm(sqlServerInstanceBackupList);
-rm(sqlServerInstanceRunningList);
-rm(sqlServerInstanceSpecList);
+# rm(sqlServiceInstance);
+# rm(sqlServerInstance);
+# rm(sqlServerVersionVector);
+# rm(sqlServerInstanceLinkedList);
+# rm(sqlServerInstanceUsageList);
+# rm(sqlServerInstanceBackupList);
+# rm(sqlServerInstanceRunningList);
+# rm(sqlServerInstanceSpecList);
 gc();
+dbName <- sqlServerInstanceUsageList[[2]][[8]];
+projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServerInstanceDbObjectList.R");
+write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+source(projectSourceFile);
+objectList <-
+  SqlToCsvSqlServerInstanceDbObjectList$new(projectPath,sqlServiceInstance,sqlServerInstance,dbName);
+objectList$getFile();
+objectList$fileToTibble();
+objectList$getTibble();
+
 
