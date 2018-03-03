@@ -50,9 +50,9 @@ SqlToXlsSqlServerInstanceFactory <-
       
       return(aPiechart);
     },
-    getDBBackupList = function(){
+    getBackupList = function(){
       aList <-
-        SqlToXlsSqlServerInstanceDBBackupList$new(private$Path, private$SqlServiceInstance, private$SqlServerInstance);
+        SqlToXlsSqlServerInstanceBackupList$new(private$Path, private$SqlServiceInstance, private$SqlServerInstance);
       aList$fileToTibble();
       aTibble <- aList$getTibble();
       rm(aList);
@@ -66,9 +66,9 @@ SqlToXlsSqlServerInstanceFactory <-
       rm(aList);
       return(tibble::as_tibble(aTibble));
     },
-    getDBSpecList = function(){
+    getSpecList = function(){
       aList <-
-        SqlToXlsSqlServerInstanceDBSpecList$new(private$Path, private$SqlServiceInstance, private$SqlServerInstance);
+        SqlToXlsSqlServerInstanceSpecList$new(private$Path, private$SqlServiceInstance, private$SqlServerInstance);
       aList$fileToTibble();
       aTibble <- aList$getTibble();
       rm(aList);
@@ -122,12 +122,12 @@ SqlToXlsSqlServerInstanceFactory <-
           private$TibbleVector[[sourceIndex]] <- self$getLinkedList();
         if(grepl("UsageList", private$SourceVector[sourceIndex]))
           private$TibbleVector[[sourceIndex]] <- self$getUsageList();
-        if(grepl("DBBackupList", private$SourceVector[sourceIndex]))
-          private$TibbleVector[[sourceIndex]] <- self$getDBBackupList();
+        if(grepl("BackupList", private$SourceVector[sourceIndex]))
+          private$TibbleVector[[sourceIndex]] <- self$getBackupList();
         if(grepl("RunningList", private$SourceVector[sourceIndex]))
           private$TibbleVector[[sourceIndex]] <- self$getRunningList();
-        if(grepl("DBSpecList", private$SourceVector[sourceIndex]))
-          private$TibbleVector[[sourceIndex]] <- self$getDBSpecList();
+        if(grepl("SpecList", private$SourceVector[sourceIndex]))
+          private$TibbleVector[[sourceIndex]] <- self$getSpecList();
       }
     }
   )

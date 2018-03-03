@@ -2,7 +2,7 @@ require("R6");
 require("readxl");
 require("tibble");
 # class
-SqlToXlsSqlServerInstanceDBSpecList <- R6Class("SqlToXlsSqlServerInstanceDBSpecList",
+SqlToXlsSqlServerInstanceSpecList <- R6Class("SqlToXlsSqlServerInstanceSpecList",
   inherit = SqlToXlsSqlServerInstanceAbstractList,
   portable = TRUE,
   class = TRUE,
@@ -11,7 +11,7 @@ SqlToXlsSqlServerInstanceDBSpecList <- R6Class("SqlToXlsSqlServerInstanceDBSpecL
   ),
   active = list(
     Tail = function(value) {
-      if (missing(value)) return("_DBSpecList");
+      if (missing(value)) return("_SpecList");
     },
     ColumnTitles = function(value) {
      if (missing(value)) return(c("ServerName", "ServiceName", "DBIdentifier", "DBName", "OriginalDBName", "RecoveryModel", "CompatiblityLevel", "DBSize", "DBGrowth", "IsPercentGrowth", "CreatedDate", "CurrentState", "AutoShrink", "SnapshotState", "IsAutoUpdate", "IsArithAbort", "PageVerifyOption", "Collation", "FilePath", "IdSourceDB"));

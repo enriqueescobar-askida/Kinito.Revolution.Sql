@@ -2,7 +2,7 @@ require("R6");
 require("readr");
 require("tibble");
 # class
-SqlToCsvSqlServerInstanceDBSpecList <- R6Class("SqlToCsvSqlServerInstanceDBSpecList",
+SqlToCsvSqlServerInstanceSpecList <- R6Class("SqlToCsvSqlServerInstanceSpecList",
   inherit = SqlToCsvSqlServerInstanceAbstractList,
   portable = TRUE,
   class = TRUE,
@@ -11,7 +11,7 @@ SqlToCsvSqlServerInstanceDBSpecList <- R6Class("SqlToCsvSqlServerInstanceDBSpecL
   ),
   active = list(
     Tail = function(value) {
-      if (missing(value)) return("_DBSpecList");
+      if (missing(value)) return("_SpecList");
     },
     ColumnTitles = function(value) {
      if (missing(value)) return(c("ServerName", "ServiceName", "DBIdentifier", "DBName", "OriginalDBName", "RecoveryModel", "CompatiblityLevel", "DBSize", "DBGrowth", "IsPercentGrowth", "CreatedDate", "CurrentState", "AutoShrink", "SnapshotState", "IsAutoUpdate", "IsArithAbort", "PageVerifyOption", "Collation", "FilePath", "IdSourceDB"));

@@ -2,7 +2,7 @@ require("R6");
 require("readr");
 require("tibble");
 # class
-SqlToCsvSqlServerInstanceDBBackupList <- R6Class("SqlToCsvSqlServerInstanceDBBackupList",
+SqlToCsvSqlServerInstanceBackupList <- R6Class("SqlToCsvSqlServerInstanceBackupList",
   inherit = SqlToCsvSqlServerInstanceAbstractList,
   portable = TRUE,
   class = TRUE,
@@ -11,7 +11,7 @@ SqlToCsvSqlServerInstanceDBBackupList <- R6Class("SqlToCsvSqlServerInstanceDBBac
   ),
   active = list(
     Tail = function(value) {
-      if (missing(value)) return("_DBBackupList");
+      if (missing(value)) return("_BackupList");
     },
     ColumnTitles = function(value) {
       if (missing(value)) return(c("ServerName", "ServiceName", "DBName", "BackupEndDate", "PhysicalDeviceName"));

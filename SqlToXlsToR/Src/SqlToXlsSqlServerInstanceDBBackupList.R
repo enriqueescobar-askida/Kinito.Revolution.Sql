@@ -2,7 +2,7 @@ require("R6");
 require("readxl");
 require("tibble");
 # class
-SqlToXlsSqlServerInstanceDBBackupList <- R6Class("SqlToXlsSqlServerInstanceDBBackupList",
+SqlToXlsSqlServerInstanceBackupList <- R6Class("SqlToXlsSqlServerInstanceBackupList",
   inherit = SqlToXlsSqlServerInstanceAbstractList,
   portable = TRUE,
   class = TRUE,
@@ -11,7 +11,7 @@ SqlToXlsSqlServerInstanceDBBackupList <- R6Class("SqlToXlsSqlServerInstanceDBBac
   ),
   active = list(
     Tail = function(value) {
-      if (missing(value)) return("_DBBackupList");
+      if (missing(value)) return("_BackupList");
     },
     ColumnTitles = function(value) {
       if (missing(value)) return(c("ServerName", "ServiceName", "DBName", "BackupEndDate", "PhysicalDeviceName"));

@@ -8,9 +8,9 @@ sqlServerVersionVector <- vector(mode = "character");
 sourceVector <- vector(mode = "character", length = 6);
 sqlServerInstanceLinkedList <- tibble::as_tibble(data.frame(NULL));
 sqlServerInstanceUsageList <- tibble::as_tibble(data.frame(NULL));
-sqlServerInstanceDBBackupList <- tibble::as_tibble(data.frame(NULL));
+sqlServerInstanceBackupList <- tibble::as_tibble(data.frame(NULL));
 sqlServerInstanceRunningList <- tibble::as_tibble(data.frame(NULL));
-sqlServerInstanceDBSpecList <- tibble::as_tibble(data.frame(NULL));
+sqlServerInstanceSpecList <- tibble::as_tibble(data.frame(NULL));
 # sourceFile Sql Server
 projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServer.R");
 write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
@@ -31,11 +31,11 @@ sourceVector[3] <- "SqlToCsvSqlServerInstanceLinkedList.R";
 # Sql Server Instance Usage List
 sourceVector[4] <- "SqlToCsvSqlServerInstanceUsageList.R";
 # Sql Server Instance DB Backup List
-sourceVector[5] <- "SqlToCsvSqlServerInstanceDBBackupList.R";
+sourceVector[5] <- "SqlToCsvSqlServerInstanceBackupList.R";
 # Sql Server Instance Running List
 sourceVector[6] <- "SqlToCsvSqlServerInstanceRunningList.R";
 # Sql Server Instance DB Spec List
-sourceVector[7] <- "SqlToCsvSqlServerInstanceDBSpecList.R";
+sourceVector[7] <- "SqlToCsvSqlServerInstanceSpecList.R";
 # load
 for (sourceIndex in seq_along(sourceVector)) {
   projectSourceFile <- paste0(projectSourcePath, "/", sourceVector[sourceIndex]);
@@ -58,11 +58,11 @@ sqlServerInstanceUsageList <- sqlToCsvSqlServerInstanceFactory$getUsageList();
 sqlToCsvSqlServerInstanceFactory$getUsageListBarplot();
 sqlToCsvSqlServerInstanceFactory$getUsageListPiechart();
 ## sourceFile Sql Server Instance DB Backup List
-sqlServerInstanceDBBackupList <- sqlToCsvSqlServerInstanceFactory$getDBBackupList();
+sqlServerInstanceBackupList <- sqlToCsvSqlServerInstanceFactory$getBackupList();
 ## sourceFile Sql Server Instance Running List
 sqlServerInstanceRunningList <- sqlToCsvSqlServerInstanceFactory$getRunningList();
 ## sourceFile Sql Server Instance DB Spec List
-sqlServerInstanceDBSpecList <- sqlToCsvSqlServerInstanceFactory$getDBSpecList();
+sqlServerInstanceSpecList <- sqlToCsvSqlServerInstanceFactory$getSpecList();
 rm(sqlToCsvSqlServerInstanceFactory);
 gc();
 ##
@@ -72,8 +72,8 @@ rm(sqlServerInstance);
 rm(sqlServerVersionVector);
 rm(sqlServerInstanceLinkedList);
 rm(sqlServerInstanceUsageList);
-rm(sqlServerInstanceDBBackupList);
+rm(sqlServerInstanceBackupList);
 rm(sqlServerInstanceRunningList);
-rm(sqlServerInstanceDBSpecList);
+rm(sqlServerInstanceSpecList);
 gc();
 
