@@ -76,14 +76,25 @@ rm(sourceVector);
 # rm(sqlServerInstanceRunningList);
 # rm(sqlServerInstanceSpecList);
 gc();
-dbName <- sqlServerInstanceUsageList[[2]][[8]];
+dbNameVector <- vector(mode = "character");
+dbNameVector[1] <- sqlServerInstanceUsageList[[2]][[4]];
+dbNameVector[2] <- sqlServerInstanceUsageList[[2]][[8]];
+dbNameVector[3] <- sqlServerInstanceUsageList[[2]][[12]];
 projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServerInstanceDbObjectList.R");
 write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
 source(projectSourceFile);
-objectList <-
-  SqlToCsvSqlServerInstanceDbObjectList$new(projectPath,sqlServiceInstance,sqlServerInstance,dbName);
-objectList$getFile();
-objectList$fileToTibble();
-objectList$getTibble();
+
+#for (dbName in dbNameVector[-3]) {
+dbName <- dbNameVector[1];
+  objectList <-
+    SqlToCsvSqlServerInstanceDbObjectList$new(projectPath,sqlServiceInstance,sqlServerInstance,dbName);
+  objectList$getFile();
+  objectList$fileToTibble();
+  objectList$getTibble();
+  objectList$getBarplotGgplot2();
+  objectList$getPiechartGgplot2();
+#}
+# objectList$getBarplotGgplot2();
+# objectList$getPiechartGgplot2();
 
 
