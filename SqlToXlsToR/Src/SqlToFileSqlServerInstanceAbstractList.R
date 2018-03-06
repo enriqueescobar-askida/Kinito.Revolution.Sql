@@ -1,5 +1,6 @@
 require("R6");
 require("tibble");
+require("dplyr");
 # class
 SqlToFileSqlServerInstanceAbstractList <-
   R6Class("SqlToFileSqlServerInstanceAbstractList",

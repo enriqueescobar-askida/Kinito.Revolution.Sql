@@ -12,18 +12,21 @@ SqlToCsvSqlServerInstanceDbObjectList <- R6Class("SqlToCsvSqlServerInstanceDbObj
       instance <- paste0(instance, "_", dbName);
       super$initialize(path, serviceInstance, instance);
     },
+    fileToTibble = function() {
+      super$fileToTibble();
+      return(private$fixTibble());
+    },
     getPiechartGgplot2 = function(){
       aPierchart <- NULL;
       if (!is.null(private$Tibble) & (ncol(private$Tibble) == 2)) {
         # titles
         xTitle <- colnames(private$Tibble)[1];
-        names(private$Tibble)[1] <- "X";
         yTitle <- colnames(private$Tibble)[2];
-        names(private$Tibble)[2] <- "Y";
-        mainTitle <- paste0("mainTitle", " PieChart");#
+        mainTitle <- paste0("Object", " PieChart");
         # lists
-        PercentList <- round(private$Tibble$Y / sum(private$Tibble$Y) * 100, digits = 2);
-        labelList <- paste0(private$Tibble$X, " ", PercentList, "%");
+        PercentList <- round(private$Tibble$ObjectCount / sum(private$Tibble$ObjectCount) * 100, digits = 2);
+        labelList <- paste0(private$Tibble$ObjectName, " ", PercentList, "%");
+        labelName <- paste0(xTitle, " list");
         ColorList <- heat.colors(length(PercentList));
         # graph
         aPierchart <- ggplot(private$Tibble,
@@ -36,6 +39,7 @@ SqlToCsvSqlServerInstanceDbObjectList <- R6Class("SqlToCsvSqlServerInstanceDbObj
           ggtitle(mainTitle) +
           xlab(xTitle) +
           ylab(yTitle) +
+          labs(fill = labelName) +
           coord_polar(theta = "y");
       }
       
@@ -74,5 +78,26 @@ SqlToCsvSqlServerInstanceDbObjectList <- R6Class("SqlToCsvSqlServerInstanceDbObj
     }
   ),
   private = list(
+    fixTibble = function() {
+      objNameCol <-
+        c("Function-InlineTabValued","Function-Scalar","Function-TabValued",
+          "Internal Tables","System Tables","User Defined Tables",
+          "Stored Procedures","CLR Stored Procedures","Extended Stored Procedures",
+          "Views");
+      objCountCol = c(0,0,0,
+                      0,0,0,
+                      0,0,0,
+                      0);
+      df <- tibble(as.character(objNameCol), as.integer(objCountCol));
+      colnames(df) <- self$ColumnTitles;
+      
+      for(i in 1:nrow(df)){
+        objName <- df[i,]$ObjectName;
+        itExist <- objName %in% private$Tibble$ObjectName;
+        if(itExist) df[i,]$ObjectCount <- private$Tibble$ObjectCount[private$Tibble$ObjectName==objName];
+      }
+      private$Tibble <- tibble::as_tibble(df);
+      rm(objNameCol);rm(objCountCol);rm(objName);rm(itExist);rm(df);
+    }
   )
 )

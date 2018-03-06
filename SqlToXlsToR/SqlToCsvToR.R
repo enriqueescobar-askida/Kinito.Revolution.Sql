@@ -84,8 +84,8 @@ projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServerInstanceDb
 write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
 source(projectSourceFile);
 
-#for (dbName in dbNameVector[-3]) {
-dbName <- dbNameVector[1];
+#for (dbName in dbNameVector) {
+dbName <- dbNameVector[3];
   objectList <-
     SqlToCsvSqlServerInstanceDbObjectList$new(projectPath,sqlServiceInstance,sqlServerInstance,dbName);
   objectList$getFile();
@@ -94,7 +94,5 @@ dbName <- dbNameVector[1];
   objectList$getBarplotGgplot2();
   objectList$getPiechartGgplot2();
 #}
-# objectList$getBarplotGgplot2();
-# objectList$getPiechartGgplot2();
 
 
