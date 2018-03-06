@@ -21,7 +21,9 @@ SqlToCsvSqlServerInstanceFactory <-
         SqlToCsvSqlServerInstanceLinkedList$new(private$Path, private$SqlServiceInstance, private$SqlServerInstance);
       aList$fileToTibble();
       aTibble <- aList$getTibble();
+      
       rm(aList);
+      
       return(tibble::as_tibble(aTibble));
     },
     getUsageList = function(){
@@ -29,7 +31,9 @@ SqlToCsvSqlServerInstanceFactory <-
         SqlToCsvSqlServerInstanceUsageList$new(private$Path, private$SqlServiceInstance, private$SqlServerInstance);
       aList$fileToTibble();
       aTibble <- aList$getTibble();
+      
       rm(aList);
+      
       return(tibble::as_tibble(aTibble));
     },
     getUsageListBarplot = function(){
@@ -37,6 +41,7 @@ SqlToCsvSqlServerInstanceFactory <-
         SqlToCsvSqlServerInstanceUsageList$new(private$Path, private$SqlServiceInstance, private$SqlServerInstance);
       aList$fileToTibble();
       aBarplot <- aList$getBarplotGgplot2();
+      
       rm(aList);
       
       return(aBarplot);
@@ -46,6 +51,7 @@ SqlToCsvSqlServerInstanceFactory <-
         SqlToCsvSqlServerInstanceUsageList$new(private$Path, private$SqlServiceInstance, private$SqlServerInstance);
       aList$fileToTibble();
       aPiechart <- aList$getPiechartGgplot2();
+      
       rm(aList);
       
       return(aPiechart);
@@ -55,7 +61,9 @@ SqlToCsvSqlServerInstanceFactory <-
         SqlToCsvSqlServerInstanceBackupList$new(private$Path, private$SqlServiceInstance, private$SqlServerInstance);
       aList$fileToTibble();
       aTibble <- aList$getTibble();
+      
       rm(aList);
+      
       return(tibble::as_tibble(aTibble));
     },
     getRunningList = function(){
@@ -63,7 +71,9 @@ SqlToCsvSqlServerInstanceFactory <-
         SqlToCsvSqlServerInstanceRunningList$new(private$Path, private$SqlServiceInstance, private$SqlServerInstance);
       aList$fileToTibble();
       aTibble <- aList$getTibble();
+      
       rm(aList);
+      
       return(tibble::as_tibble(aTibble));
     },
     getSpecList = function(){
@@ -71,7 +81,9 @@ SqlToCsvSqlServerInstanceFactory <-
         SqlToCsvSqlServerInstanceSpecList$new(private$Path, private$SqlServiceInstance, private$SqlServerInstance);
       aList$fileToTibble();
       aTibble <- aList$getTibble();
+      
       rm(aList);
+      
       return(tibble::as_tibble(aTibble));
     },
     setSqlServerInstance = function(value) private$SqlServerInstance <- value,
@@ -105,6 +117,7 @@ SqlToCsvSqlServerInstanceFactory <-
           write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
           source(projectSourceFile);
         }
+        
         rm(sourceIndex);
         private$SourceVector <- private$SourceVector[-c(1, 2)];
       }

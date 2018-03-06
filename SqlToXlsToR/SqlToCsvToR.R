@@ -4,6 +4,7 @@ write(paste0(c("sourcePath ...\t", projectSourcePath), sep = "", collapse = ""),
 # sql server info
 sqlServiceInstance <- "";
 sqlServerInstance <- "";
+sqlServerInstanceUsageFile <- "";
 sqlServerVersionVector <- vector(mode = "character");
 sourceVector <- vector(mode = "character", length = 6);
 sqlServerInstanceLinkedList <- tibble::as_tibble(data.frame(NULL));
