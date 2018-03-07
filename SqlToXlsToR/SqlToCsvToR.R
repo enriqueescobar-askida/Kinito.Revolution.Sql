@@ -4,7 +4,7 @@ write(paste0(c("sourcePath ...\t", projectSourcePath), sep = "", collapse = ""),
 # sql server info
 sqlServiceInstance <- "";
 sqlServerInstance <- "";
-sqlServerInstanceUsageFile <- "";
+sqlServerInstanceUsageFile <- paste0(projectPath, "/../Csv/SqlServer-Instance_");
 sqlServerVersionVector <- vector(mode = "character");
 sourceVector <- vector(mode = "character", length = 6);
 sqlServerInstanceLinkedList <- tibble::as_tibble(data.frame(NULL));
@@ -19,7 +19,9 @@ source(projectSourceFile);
 sqlToCsvSqlServer <- SqlToCsvSqlServer$new(projectPath);
 sqlServerVersionVector <- sqlToCsvSqlServer$getVersionVector();
 sqlServiceInstance <- sqlToCsvSqlServer$getServiceInstance();
+sqlServerInstanceUsageFile <- paste0(sqlServerInstanceUsageFile,sqlServiceInstance,"_");
 sqlServerInstance <- sqlToCsvSqlServer$getInstance();
+sqlServerInstanceUsageFile <- paste0(sqlServerInstanceUsageFile,sqlServerInstance,"_UsageList.txt");
 rm(sqlToCsvSqlServer);
 gc();
 # R source files
