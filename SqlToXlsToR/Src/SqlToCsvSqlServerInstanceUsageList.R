@@ -11,17 +11,17 @@ SqlToCsvSqlServerInstanceUsageList <- R6Class("SqlToCsvSqlServerInstanceUsageLis
   cloneable = TRUE,
   public = list(
     getPiechartGgplot2 = function(){
-      if (is.null(private$Tibble)) {
-        
-        return(NULL);
-      } else {
-        PercentList <- round(private$Tibble$DBBufferMB / sum(private$Tibble$DBBufferMB) * 100, digits = 2);
-        labelList <- paste0(private$Tibble$DBName," ",PercentList, "%");
-        ColorList <- heat.colors(length(PercentList));
+      piechart <- NULL;
+      if (!is.null(private$Tibble)) {
         # titles
         xTitle <- colnames(private$Tibble)[2];
         yTitle <- colnames(rev(private$Tibble)[1]);
         mainTitle <- "Usage List Piechart";
+        # lists
+        PercentList <- round(private$Tibble$DBBufferMB / sum(private$Tibble$DBBufferMB) * 100, digits = 2);
+        labelList <- paste0(private$Tibble$DBName," ",PercentList, "%");
+        labelName <- paste0(xTitle, " list");
+        ColorList <- heat.colors(length(PercentList));
         # graph
         piechart <- ggplot(private$Tibble,
                            aes(x = factor(1), y = PercentList, fill = labelList)) +
@@ -34,16 +34,17 @@ SqlToCsvSqlServerInstanceUsageList <- R6Class("SqlToCsvSqlServerInstanceUsageLis
           ggtitle(mainTitle) +
           xlab(xTitle) +
           ylab(yTitle) +
+          labs(fill = labelName) +
           coord_polar(theta = "y");
-        
-        return(piechart);
       }
+      
+      return(piechart);
     },
     getBarplotGgplot2 = function(){
       if (is.null(private$Tibble)) {
         
         return(NULL);
-      } else {
+      }else{
         # titles
         xTitle <- colnames(private$Tibble)[2];
         yTitle <- colnames(rev(private$Tibble)[1]);
@@ -55,9 +56,9 @@ SqlToCsvSqlServerInstanceUsageList <- R6Class("SqlToCsvSqlServerInstanceUsageLis
                    width = 0.8,
                    position = "dodge",
                    fill = "lightblue") +
+          ggtitle(mainTitle) +
           xlab(xTitle) +
           ylab(yTitle) +
-          ggtitle(mainTitle) +
           theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5));
         
         return(barplot);

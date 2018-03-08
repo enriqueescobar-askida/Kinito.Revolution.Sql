@@ -38,8 +38,17 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
     },
     getPath = function() private$Path,
     getVersionVector = function() private$VersionVector,
-    getServiceInstance = function() private$ServiceInstance,
-    getInstance = function() private$Instance,
+    getServiceInstance = function() {
+      private$UsageFile <- paste0(private$Path, self$HeadInstance, private$ServiceInstance);
+      
+      return(private$ServiceInstance);
+    },
+    getInstance = function() {
+      private$UsageFile <- paste0(private$UsageFile, "_", private$Instance, "_UsageList.txt");
+      
+      return(private$Instance);
+    },
+    getUsageFile = function() private$UsageFile,
 #' Title
 #' toString
 #' @return
@@ -81,6 +90,7 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
     VersionVector = c("_version_"),
     ServiceInstance = "_server_instance_",
     Instance = "_instance_",
+    UsageFile = "_usage_file_",
 #' Title
 #' setPath
 #' @export

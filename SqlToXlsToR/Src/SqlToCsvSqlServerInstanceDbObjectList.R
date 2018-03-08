@@ -17,7 +17,7 @@ SqlToCsvSqlServerInstanceDbObjectList <- R6Class("SqlToCsvSqlServerInstanceDbObj
       return(private$fixTibble());
     },
     getPiechartGgplot2 = function(){
-      aPierchart <- NULL;
+      piechart <- NULL;
       if (!is.null(private$Tibble) & (ncol(private$Tibble) == 2)) {
         # titles
         xTitle <- colnames(private$Tibble)[1];
@@ -29,12 +29,13 @@ SqlToCsvSqlServerInstanceDbObjectList <- R6Class("SqlToCsvSqlServerInstanceDbObj
         labelName <- paste0(xTitle, " list");
         ColorList <- heat.colors(length(PercentList));
         # graph
-        aPierchart <- ggplot(private$Tibble,
-                             aes(x = factor(1), y = PercentList, fill = labelList)) +
+        piechart <- ggplot(private$Tibble,
+                           aes(x = factor(1), y = PercentList, fill = labelList)) +
           # make stacked bar chart with black border
           geom_bar(stat = "identity",
                    color = "grey80",
                    width = 1) +
+          # add the percents to the interior of the chart
           #geom_text(aes(x = 1.5, y = PercentList, label = labelList), size = 4) +
           ggtitle(mainTitle) +
           xlab(xTitle) +
@@ -43,7 +44,7 @@ SqlToCsvSqlServerInstanceDbObjectList <- R6Class("SqlToCsvSqlServerInstanceDbObj
           coord_polar(theta = "y");
       }
       
-      return(aPierchart);
+      return(piechart);
     },
     getBarplotGgplot2 = function(){
       if (is.null(private$Tibble)) {
@@ -63,7 +64,8 @@ SqlToCsvSqlServerInstanceDbObjectList <- R6Class("SqlToCsvSqlServerInstanceDbObj
                    fill = "lightblue") +
           ggtitle(mainTitle) +
           xlab(xTitle) +
-          ylab(yTitle);
+          ylab(yTitle) +
+          theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5));
         
         return(barplot);
       }
