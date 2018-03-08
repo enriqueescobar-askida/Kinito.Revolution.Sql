@@ -81,10 +81,10 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       objectList$getPiechartGgplot2();
     }
     
-    rm(dbName);
-    rm(objectList);
-    rm(dbNameVector);
-    rm(sqlServerInstanceUsageFile);
+    # rm(dbName);
+    # rm(objectList);
+    # rm(dbNameVector);
+    # rm(sqlServerInstanceUsageFile);
   }
 }
 
