@@ -36,6 +36,12 @@ SqlToFileSqlServerInstanceAbstractList <-
       aStr <- paste0(aStr, private$File, "\t", paste(colnames(private$Tibble),collapse=" "), "\n\t");
       
       return(base::toString(aStr));
+    },
+    getPiechartGgplot2 = function(){
+      return(NULL);
+    },
+    getBarplotGgplot2 = function(){
+      return(NULL);
     }
   ),
   active = list(
