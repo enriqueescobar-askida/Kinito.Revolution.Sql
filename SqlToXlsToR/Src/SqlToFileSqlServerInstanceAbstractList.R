@@ -42,6 +42,29 @@ SqlToFileSqlServerInstanceAbstractList <-
     },
     getBarplotGgplot2 = function(){
       return(NULL);
+    },
+    pngPiechartGgplot2 = function(){
+      if(!is.null(private$Tibble)){
+        if(!is.null(self$getPiechartGgplot2())){
+          
+          return(self$pngGgplot2("_Piechart", self$getPiechartGgplot2()));
+        }
+      }
+    },
+    pngBarplotGgplot2 = function(){
+      if(!is.null(private$Tibble)){
+        if(!is.null(self$getBarplotGgplot2())){
+          
+          return(self$pngGgplot2("_Barplot", self$getBarplotGgplot2()));
+        }
+      }
+    },
+    pngGgplot2 = function(tail = "", aPlot = NULL) {
+      pngFile <- gsub(self$Ext, "", private$File);
+      pngFile <- paste0(pngFile,tail,".png");
+      #ggsave(filename = private$File, plot = aPlot, dpi = 100);
+      
+      return(pngFile);
     }
   ),
   active = list(
