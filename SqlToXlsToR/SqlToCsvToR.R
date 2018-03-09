@@ -70,8 +70,8 @@ if (file.exists(sqlServerInstanceUsageFile)) {
     # DB list
     dbNameVector <- scan(file = sqlServerInstanceUsageFile, what = character());
     
-    for (dbName in dbNameVector) {
-      #dbName <- dbNameVector[3];
+    #for (dbName in dbNameVector) {
+      dbName <- dbNameVector[3];
       objectList <-
         SqlToCsvSqlServerInstanceDbObjectList$new(projectPath,sqlServiceInstance,sqlServerInstance,dbName);
       objectList$getFile();
@@ -79,7 +79,8 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       objectList$getTibble();
       objectList$getBarplotGgplot2();
       objectList$getPiechartGgplot2();
-    }
+      rm(objectList);
+    #}
     
     # rm(dbName);
     # rm(objectList);
