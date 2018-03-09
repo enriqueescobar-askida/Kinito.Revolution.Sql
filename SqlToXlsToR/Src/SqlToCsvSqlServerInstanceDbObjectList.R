@@ -8,6 +8,10 @@ SqlToCsvSqlServerInstanceDbObjectList <- R6Class("SqlToCsvSqlServerInstanceDbObj
   class = TRUE,
   cloneable = TRUE,
   public = list(
+    HasViews = FALSE,
+    HasTables = FALSE,
+    HasFunctions = FALSE,
+    HasProcedures = FALSE,
     initialize = function(path, serviceInstance, instance, dbName) {
       instance <- paste0(instance, "_", dbName);
       super$initialize(path, serviceInstance, instance);
@@ -98,8 +102,22 @@ SqlToCsvSqlServerInstanceDbObjectList <- R6Class("SqlToCsvSqlServerInstanceDbObj
         itExist <- objName %in% private$Tibble$ObjectName;
         if(itExist) df[i,]$ObjectCount <- private$Tibble$ObjectCount[private$Tibble$ObjectName==objName];
       }
+      
       private$Tibble <- tibble::as_tibble(df);
+      self$HasTables <- private$findInTibble("Tables");
+      self$HasViews <- private$findInTibble("Views");
+      self$HasFunctions <- private$findInTibble("Function-");
+      self$HasProcedures <- private$findInTibble("Procedures");
+      
       rm(objNameCol);rm(objCountCol);rm(objName);rm(itExist);rm(df);
+    },
+    findInTibble = function(str = ""){
+      isFound <- FALSE;
+      matches <- private$Tibble[grep(str, private$Tibble$ObjectName),][[2]];
+      
+      for(m in matches) isFound <- isFound || m!=0;
+      
+      return(isFound);
     }
   )
 )

@@ -76,7 +76,11 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         SqlToCsvSqlServerInstanceDbObjectList$new(projectPath,sqlServiceInstance,sqlServerInstance,dbName);
       objectList$getFile();
       objectList$fileToTibble();
-      objectList$getTibble();
+      objectList$HasTables;
+      objectList$HasViews;
+      objectList$HasFunctions;
+      objectList$HasProcedures;
+      objectTibble <- objectList$getTibble();
       objectList$getBarplotGgplot2();
       objectList$getPiechartGgplot2();
       rm(objectList);
