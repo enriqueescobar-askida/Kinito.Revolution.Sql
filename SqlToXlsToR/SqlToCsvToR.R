@@ -72,15 +72,19 @@ if (file.exists(sqlServerInstanceUsageFile)) {
     
     #for (dbName in dbNameVector) {
       dbName <- dbNameVector[3];
+      objectTables <- NULL;
+      objectViews <- NULL;
+      objectFunctions <- NULL;
+      objectProcedures <- NULL;
       objectList <-
         SqlToCsvSqlServerInstanceDbObjectList$new(projectPath,sqlServiceInstance,sqlServerInstance,dbName);
       objectList$getFile();
       objectList$fileToTibble();
-      objectList$HasTables;
-      objectList$HasViews;
-      objectList$HasFunctions;
-      objectList$HasProcedures;
       objectTibble <- objectList$getTibble();
+      if(objectList$HasTables) objectTables <- objectList$getTables();
+      if(objectList$HasViews) objectViews <- objectList$getViews();
+      if(objectList$HasFunctions) objectFunctions <- objectList$getFunctions();
+      if(objectList$HasProcedures) objectProcedures <- objectList$getProcedures();
       objectList$getBarplotGgplot2();
       objectList$getPiechartGgplot2();
       rm(objectList);

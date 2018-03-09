@@ -73,6 +73,18 @@ SqlToCsvSqlServerInstanceDbObjectList <- R6Class("SqlToCsvSqlServerInstanceDbObj
         
         return(barplot);
       }
+    },
+    getTables = function(){
+      return(private$TableTibble);
+    },
+    getViews = function(){
+      return(private$ViewTibble);
+    },
+    getFunctions = function(){
+      return(private$FunctionTibble);
+    },
+    getProcedures = function(){
+      return(private$ProcedureTibble);
     }
   ),
   active = list(
@@ -84,6 +96,10 @@ SqlToCsvSqlServerInstanceDbObjectList <- R6Class("SqlToCsvSqlServerInstanceDbObj
     }
   ),
   private = list(
+    TableTibble = NULL,
+    ViewTibble = NULL,
+    FunctionTibble = NULL,
+    ProcedureTibble = NULL,
     fixTibble = function() {
       objNameCol <-
         c("Function-InlineTabValued","Function-Scalar","Function-TabValued",
@@ -105,9 +121,13 @@ SqlToCsvSqlServerInstanceDbObjectList <- R6Class("SqlToCsvSqlServerInstanceDbObj
       
       private$Tibble <- tibble::as_tibble(df);
       self$HasTables <- private$findInTibble("Tables");
+      if(self$HasTables) private$TableTibble <- private$getInTibble("Tables");
       self$HasViews <- private$findInTibble("Views");
+      if(self$HasViews) private$ViewTibble <- private$getInTibble("Views");
       self$HasFunctions <- private$findInTibble("Function-");
+      if(self$HasFunctions) private$FunctionTibble <- private$getInTibble("Function-");
       self$HasProcedures <- private$findInTibble("Procedures");
+      if(self$HasProcedures) private$ProcedureTibble <- private$getInTibble("Procedures");
       
       rm(objNameCol);rm(objCountCol);rm(objName);rm(itExist);rm(df);
     },
@@ -118,6 +138,10 @@ SqlToCsvSqlServerInstanceDbObjectList <- R6Class("SqlToCsvSqlServerInstanceDbObj
       for(m in matches) isFound <- isFound || m!=0;
       
       return(isFound);
+    },
+    getInTibble = function(str = ""){
+      
+      return(private$Tibble[grep(str, private$Tibble$ObjectName),]);
     }
   )
 )
