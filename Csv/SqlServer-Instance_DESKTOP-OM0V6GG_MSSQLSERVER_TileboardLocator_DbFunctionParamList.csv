@@ -1,0 +1,4 @@
+﻿GetProductConfigValue,dbo,FN,SQL_SCALAR_FUNCTION,0,,varchar,-1,0,0,1
+GetProductConfigValue,dbo,FN,SQL_SCALAR_FUNCTION,1,@PRD_cID,uniqueidentifier,16,0,0,0
+GetProductConfigValue,dbo,FN,SQL_SCALAR_FUNCTION,2,@Datetime,datetime,8,23,3,0
+GetProductConfigValue,dbo,FN,SQL_SCALAR_FUNCTION,3,@Key,varchar,-1,0,0,0
