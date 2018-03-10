@@ -10,9 +10,12 @@ SqlToCsvSqlServerInstanceAbstractList <-
   cloneable = TRUE,
   public = list(
     fileToTibble = function() {
-      df <- 
-        read_csv(private$File, col_names = self$ColumnTitles,
-                 locale = locale(asciify = TRUE), na = c("NULL","NA","","NAN","NaN"));
+      df <- NULL;
+      if(!self$IsFileNullOrEmpty){
+        df <-
+          read_csv(private$File, col_names = self$ColumnTitles,
+                   locale = locale(asciify = TRUE), na = c("NULL","NA","","NAN","NaN"));
+      }
       private$Tibble <- tibble::as_tibble(df);
       rm(df);
     }

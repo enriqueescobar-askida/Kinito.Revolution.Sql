@@ -8,6 +8,7 @@ SqlToFileSqlServerInstanceAbstractList <-
   class = TRUE,
   cloneable = TRUE,
   public = list(
+    IsFileNullOrEmpty = TRUE,
     getPath = function() private$Path,
     getServiceInstance = function() private$ServiceInstance,
     getInstance = function() private$Instance,
@@ -86,7 +87,12 @@ SqlToFileSqlServerInstanceAbstractList <-
     Tibble = tibble::as_tibble(data.frame(NULL)),
     setServiceInstance = function(value) private$ServiceInstance <- value,
     setInstance = function(value) private$Instance <- value,
-    setFile = function() private$File <-
-      paste0(private$Path, self$Header, private$ServiceInstance, "_", private$Instance, self$Tail, self$Ext)
+    setFile = function() {
+      private$File <-
+      paste0(private$Path, self$Header, private$ServiceInstance, "_", private$Instance, self$Tail, self$Ext);
+      isNull <- !file.exists(private$File);
+      isEmpty <- if(file.exists(private$File)) (file.info(private$File)$size == 0) else FALSE;
+      self$IsFileNullOrEmpty <- isNull || isEmpty;
+    }
   )
 )

@@ -72,6 +72,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
     
     #for (dbName in dbNameVector) {
       dbName <- dbNameVector[3];
+      #DB Objects
       objectTables <- NULL;
       objectViews <- NULL;
       objectFunctions <- NULL;
@@ -88,6 +89,8 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       objectList$getBarplotGgplot2();
       objectList$getPiechartGgplot2();
       rm(objectList);
+      #DB Constraints
+      objectConstraints <- NULL;
     #}
     
     # rm(dbName);
