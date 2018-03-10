@@ -106,6 +106,8 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       rm(constraintList);
     #}
     
+      rm(objectTibble);
+      rm(constraintTibble);
     # rm(dbName);
     # rm(objectList);
     # rm(dbNameVector);
