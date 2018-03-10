@@ -64,16 +64,19 @@ gc();
 # Screen DB list
 if (file.exists(sqlServerInstanceUsageFile)) {
   if (file.info(sqlServerInstanceUsageFile)$size > 0) {
-    # DB objects
+    # DB object source
     projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServerInstanceDbObjectList.R");
+    write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+    source(projectSourceFile);
+    # DB constraint source
+    projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServerInstanceDbConstraintList.R");
     write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
     source(projectSourceFile);
     # DB list
     dbNameVector <- scan(file = sqlServerInstanceUsageFile, what = character());
-    
     #for (dbName in dbNameVector) {
       dbName <- dbNameVector[1];
-      #DB Objects
+      ## DB Object items
       objectTables <- NULL;
       objectViews <- NULL;
       objectFunctions <- NULL;
@@ -81,6 +84,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       objectTibble <- NULL;
       objectList <-
         SqlToCsvSqlServerInstanceDbObjectList$new(projectPath,sqlServiceInstance,sqlServerInstance,dbName);
+      ## DB object actions
       objectList$getFile();
       objectList$fileToTibble();
       objectTibble <- objectList$getTibble();
@@ -91,13 +95,11 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       objectList$getBarplotGgplot2();
       objectList$getPiechartGgplot2();
       rm(objectList);
-      #DB Constraints
-      projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServerInstanceDbConstraintList.R");
-      write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
-      source(projectSourceFile);
+      ## DB Constraint items
       constraintTibble <- NULL;
       constraintList <-
         SqlToCsvSqlServerInstanceDbConstraintList$new(projectPath,sqlServiceInstance,sqlServerInstance,dbName);
+      ## DB Constraint actions
       constraintList$getFile();
       constraintList$fileToTibble();
       constraintTibble <- constraintList$getTibble();
