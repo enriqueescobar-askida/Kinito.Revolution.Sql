@@ -64,6 +64,7 @@ gc();
 # Screen DB list
 if (file.exists(sqlServerInstanceUsageFile)) {
   if (file.info(sqlServerInstanceUsageFile)$size > 0) {
+    # DB objects
     projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServerInstanceDbObjectList.R");
     write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
     source(projectSourceFile);
@@ -71,12 +72,13 @@ if (file.exists(sqlServerInstanceUsageFile)) {
     dbNameVector <- scan(file = sqlServerInstanceUsageFile, what = character());
     
     #for (dbName in dbNameVector) {
-      dbName <- dbNameVector[3];
+      dbName <- dbNameVector[1];
       #DB Objects
       objectTables <- NULL;
       objectViews <- NULL;
       objectFunctions <- NULL;
       objectProcedures <- NULL;
+      objectTibble <- NULL;
       objectList <-
         SqlToCsvSqlServerInstanceDbObjectList$new(projectPath,sqlServiceInstance,sqlServerInstance,dbName);
       objectList$getFile();
@@ -90,7 +92,16 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       objectList$getPiechartGgplot2();
       rm(objectList);
       #DB Constraints
-      objectConstraints <- NULL;
+      projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServerInstanceDbConstraintList.R");
+      write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+      source(projectSourceFile);
+      constraintTibble <- NULL;
+      constraintList <-
+        SqlToCsvSqlServerInstanceDbConstraintList$new(projectPath,sqlServiceInstance,sqlServerInstance,dbName);
+      constraintList$getFile();
+      constraintList$fileToTibble();
+      constraintTibble <- constraintList$getTibble();
+      rm(constraintList);
     #}
     
     # rm(dbName);
