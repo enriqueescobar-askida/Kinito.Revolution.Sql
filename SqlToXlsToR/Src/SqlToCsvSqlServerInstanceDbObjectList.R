@@ -20,20 +20,21 @@ SqlToCsvSqlServerInstanceDbObjectList <- R6Class("SqlToCsvSqlServerInstanceDbObj
       super$fileToTibble();
       return(private$fixTibble());
     },
-    getPiechartGgplot2 = function(){
+    getPiechartGgplot2 = function(aTibble = NULL){
       piechart <- NULL;
-      if (!is.null(private$Tibble) & (ncol(private$Tibble) == 2)) {
+      if (missing(aTibble)) aTibble <- private$Tibble;
+      if (!is.null(aTibble) & (ncol(aTibble) == 2)) {
         # titles
-        xTitle <- colnames(private$Tibble)[1];
-        yTitle <- colnames(private$Tibble)[2];
+        xTitle <- colnames(aTibble)[1];
+        yTitle <- colnames(aTibble)[2];
         mainTitle <- paste0("Object", " PieChart");
         # lists
-        PercentList <- round(private$Tibble$ObjectCount / sum(private$Tibble$ObjectCount) * 100, digits = 2);
-        labelList <- paste0(private$Tibble$ObjectName, " ", PercentList, "%");
+        PercentList <- round(aTibble$ObjectCount / sum(aTibble$ObjectCount) * 100, digits = 2);
+        labelList <- paste0(aTibble$ObjectName, " ", PercentList, "%");
         labelName <- paste0(xTitle, " list");
         ColorList <- heat.colors(length(PercentList));
         # graph
-        piechart <- ggplot(private$Tibble,
+        piechart <- ggplot(aTibble,
                            aes(x = factor(1), y = PercentList, fill = labelList)) +
           # make stacked bar chart with black border
           geom_bar(stat = "identity",
@@ -50,17 +51,16 @@ SqlToCsvSqlServerInstanceDbObjectList <- R6Class("SqlToCsvSqlServerInstanceDbObj
       
       return(piechart);
     },
-    getBarplotGgplot2 = function(){
-      if (is.null(private$Tibble)) {
-        
-        return(NULL);
-      }else{
+    getBarplotGgplot2 = function(aTibble = NULL){
+      barplot <- NULL;
+      if (missing(aTibble)) aTibble <- private$Tibble;
+      if (!is.null(aTibble) & (ncol(aTibble) == 2)) {
         # titles
-        xTitle <- colnames(private$Tibble)[1];
-        yTitle <- colnames(private$Tibble)[-1];
+        xTitle <- colnames(aTibble)[1];
+        yTitle <- colnames(aTibble)[-1];
         mainTitle <- "ObjectList count";
         # graph
-        barplot <- ggplot(private$Tibble,
+        barplot <- ggplot(aTibble,
                           aes(x = factor(ObjectName), y = ObjectCount)) +
           geom_bar(stat = "identity",
                    width = 0.8,
@@ -70,9 +70,9 @@ SqlToCsvSqlServerInstanceDbObjectList <- R6Class("SqlToCsvSqlServerInstanceDbObj
           xlab(xTitle) +
           ylab(yTitle) +
           theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5));
-        
-        return(barplot);
       }
+      
+      return(barplot);
     },
     getTables = function(){
       return(private$TableTibble);
