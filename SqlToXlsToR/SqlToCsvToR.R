@@ -59,6 +59,11 @@ sqlServerInstanceRunningList <- sqlToCsvSqlServerInstanceFactory$getRunningList(
 ## sourceFile Sql Server Instance DB Spec List
 sqlServerInstanceSpecList <- sqlToCsvSqlServerInstanceFactory$getSpecList();
 rm(sqlToCsvSqlServerInstanceFactory);
+rm(sqlServerInstanceLinkedList);
+rm(sqlServerInstanceUsageList);
+rm(sqlServerInstanceBackupList);
+rm(sqlServerInstanceRunningList);
+rm(sqlServerInstanceSpecList);
 rm(sourceVector);
 gc();
 # Screen DB list
@@ -120,21 +125,19 @@ if (file.exists(sqlServerInstanceUsageFile)) {
     #}
     
       rm(objectTibble);
+      rm(objectTables);
+      rm(objectViews);
+      rm(objectFunctions);
+      rm(objectProcedures);
       rm(constraintTibble);
       rm(triggerTibble);
-    # rm(dbName);
-    # rm(objectList);
-    # rm(dbNameVector);
-    # rm(sqlServerInstanceUsageFile);
+      rm(dbName);
+      rm(dbNameVector);
   }
 }
 
+rm(sqlServerInstanceUsageFile);
 rm(sqlServiceInstance);
 rm(sqlServerInstance);
 rm(sqlServerVersionVector);
-rm(sqlServerInstanceLinkedList);
-rm(sqlServerInstanceUsageList);
-rm(sqlServerInstanceBackupList);
-rm(sqlServerInstanceRunningList);
-rm(sqlServerInstanceSpecList);
 
