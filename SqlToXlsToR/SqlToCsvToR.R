@@ -92,7 +92,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
     # DB list
     dbNameVector <- scan(file = sqlServerInstanceUsageFile, what = character());
     #for (dbName in dbNameVector) {
-      dbName <- dbNameVector[1];
+      dbName <- dbNameVector[3];
       ## DB Object items
       objectTables <- NULL;
       objectViews <- NULL;

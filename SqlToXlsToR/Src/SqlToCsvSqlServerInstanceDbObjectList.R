@@ -23,7 +23,7 @@ SqlToCsvSqlServerInstanceDbObjectList <- R6Class("SqlToCsvSqlServerInstanceDbObj
     getPiechartGgplot2 = function(aTibble = NULL){
       piechart <- NULL;
       if (missing(aTibble)) aTibble <- private$Tibble;
-      if (!is.null(aTibble) & (ncol(aTibble) == 2)) {
+      if (!is.null(aTibble) && (length(aTibble)!=0) && (ncol(aTibble) == 2)) {
         # titles
         xTitle <- colnames(aTibble)[1];
         yTitle <- colnames(aTibble)[2];
@@ -54,7 +54,7 @@ SqlToCsvSqlServerInstanceDbObjectList <- R6Class("SqlToCsvSqlServerInstanceDbObj
     getBarplotGgplot2 = function(aTibble = NULL){
       barplot <- NULL;
       if (missing(aTibble)) aTibble <- private$Tibble;
-      if (!is.null(aTibble) & (ncol(aTibble) == 2)) {
+      if (!is.null(aTibble) && (length(aTibble)!=0) && (ncol(aTibble) == 2)) {
         # titles
         xTitle <- colnames(aTibble)[1];
         yTitle <- colnames(aTibble)[-1];
