@@ -72,6 +72,10 @@ if (file.exists(sqlServerInstanceUsageFile)) {
     projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServerInstanceDbConstraintList.R");
     write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
     source(projectSourceFile);
+    # DB trigger source
+    projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServerInstanceDbTriggerList.R");
+    write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+    source(projectSourceFile);
     # DB list
     dbNameVector <- scan(file = sqlServerInstanceUsageFile, what = character());
     #for (dbName in dbNameVector) {
@@ -104,10 +108,20 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       constraintList$fileToTibble();
       constraintTibble <- constraintList$getTibble();
       rm(constraintList);
+      ## DB trigger items
+      triggerTibble <- NULL;
+      triggerList <-
+        SqlToCsvSqlServerInstanceDbTriggerList$new(projectPath,sqlServiceInstance,sqlServerInstance,dbName);
+      ## DB trigger actions
+      triggerList$getFile();
+      triggerList$fileToTibble();
+      triggerTibble <- triggerList$getTibble();
+      rm(triggerList);
     #}
     
       rm(objectTibble);
       rm(constraintTibble);
+      rm(triggerTibble);
     # rm(dbName);
     # rm(objectList);
     # rm(dbNameVector);
