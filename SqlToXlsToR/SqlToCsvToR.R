@@ -81,6 +81,10 @@ if (file.exists(sqlServerInstanceUsageFile)) {
     projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServerInstanceDbTriggerList.R");
     write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
     source(projectSourceFile);
+    # DB principal key source
+    projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServerInstanceDbPrincipalKeyList.R");
+    write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+    source(projectSourceFile);
     # DB list
     dbNameVector <- scan(file = sqlServerInstanceUsageFile, what = character());
     #for (dbName in dbNameVector) {
@@ -122,6 +126,15 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       triggerList$fileToTibble();
       triggerTibble <- triggerList$getTibble();
       rm(triggerList);
+      ## DB principal key items
+      principalKeyTibble <- NULL;
+      principalKeyList <-
+        SqlToCsvSqlServerInstanceDbPrincipalKeyList$new(projectPath,sqlServiceInstance,sqlServerInstance,dbName);
+      ## DB principal key actions
+      principalKeyList$getFile();
+      principalKeyList$fileToTibble();
+      principalKeyTibble <- principalKeyList$getTibble();
+      rm(principalKeyList);
     #}
     
       rm(objectTibble);
@@ -131,6 +144,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       rm(objectProcedures);
       rm(constraintTibble);
       rm(triggerTibble);
+      rm(principalKeyTibble);
       rm(dbName);
       rm(dbNameVector);
   }
