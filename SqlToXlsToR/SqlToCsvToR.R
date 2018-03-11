@@ -110,7 +110,13 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       if(objectList$HasFunctions) objectFunctions <- objectList$getFunctions();
       if(objectList$HasProcedures) objectProcedures <- objectList$getProcedures();
       objectList$getBarplotGgplot2();
+      objectList$getTablesBarplot();
+      objectList$getFunctionsBarplot();
+      objectList$getProceduresBarplot();
       objectList$getPiechartGgplot2();
+      objectList$getTablesPiechart();
+      objectList$getFunctionsPiechart();
+      objectList$getProceduresPiechart();
       rm(objectList);
       ## DB Constraint items
       constraintTibble <- NULL;

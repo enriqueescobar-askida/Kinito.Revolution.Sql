@@ -85,6 +85,24 @@ SqlToCsvSqlServerInstanceDbObjectList <- R6Class("SqlToCsvSqlServerInstanceDbObj
     },
     getProcedures = function(){
       return(private$ProcedureTibble);
+    },
+    getTablesBarplot = function(){
+      return(self$getBarplotGgplot2(private$TableTibble));
+    },
+    getFunctionsBarplot = function(){
+      return(self$getBarplotGgplot2(private$FunctionTibble));
+    },
+    getProceduresBarplot = function(){
+      return(self$getBarplotGgplot2(private$ProcedureTibble));
+    },
+    getTablesPiechart = function(){
+      return(self$getPiechartGgplot2(private$TableTibble));
+    },
+    getFunctionsPiechart = function(){
+      return(self$getPiechartGgplot2(private$FunctionTibble));
+    },
+    getProceduresPiechart = function(){
+      return(self$getPiechartGgplot2(private$ProcedureTibble));
     }
   ),
   active = list(
