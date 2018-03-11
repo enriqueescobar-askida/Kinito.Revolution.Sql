@@ -105,18 +105,29 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       objectList$getFile();
       objectList$fileToTibble();
       objectTibble <- objectList$getTibble();
-      if(objectList$HasTables) objectTables <- objectList$getTables();
-      if(objectList$HasViews) objectViews <- objectList$getViews();
-      if(objectList$HasFunctions) objectFunctions <- objectList$getFunctions();
-      if(objectList$HasProcedures) objectProcedures <- objectList$getProcedures();
       objectList$getBarplotGgplot2();
-      objectList$getTablesBarplot();
-      objectList$getFunctionsBarplot();
-      objectList$getProceduresBarplot();
       objectList$getPiechartGgplot2();
-      objectList$getTablesPiechart();
-      objectList$getFunctionsPiechart();
-      objectList$getProceduresPiechart();
+      
+      if(objectList$HasTables) {
+        objectTables <- objectList$getTables();
+        objectList$getTablesBarplot();
+        objectList$getTablesPiechart();
+      }
+      
+      if(objectList$HasViews) objectViews <- objectList$getViews();
+      
+      if(objectList$HasFunctions) {
+        objectFunctions <- objectList$getFunctions();
+        objectList$getFunctionsBarplot();
+        objectList$getFunctionsPiechart();
+      }
+      
+      if(objectList$HasProcedures) {
+        objectProcedures <- objectList$getProcedures();
+        objectList$getProceduresBarplot();
+        objectList$getProceduresPiechart();
+      }
+      
       rm(objectList);
       ## DB Constraint items
       constraintTibble <- NULL;
