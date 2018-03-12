@@ -69,23 +69,23 @@ gc();
 # Screen DB list
 if (file.exists(sqlServerInstanceUsageFile)) {
   if (file.info(sqlServerInstanceUsageFile)$size > 0) {
-    # DB object source
+    # DB Object source
     projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServerInstanceDbObjectList.R");
     write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
     source(projectSourceFile);
-    # DB constraint source
+    # DB Constraint source
     projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServerInstanceDbConstraintList.R");
     write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
     source(projectSourceFile);
-    # DB trigger source
+    # DB Trigger source
     projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServerInstanceDbTriggerList.R");
     write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
     source(projectSourceFile);
-    # DB principal key source
+    # DB Principal key source
     projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServerInstanceDbPrincipalKeyList.R");
     write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
     source(projectSourceFile);
-    # DB foreign key source
+    # DB Foreign key source
     projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServerInstanceDbForeignKeyList.R");
     write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
     source(projectSourceFile);
@@ -101,7 +101,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       objectTibble <- NULL;
       objectList <-
         SqlToCsvSqlServerInstanceDbObjectList$new(projectPath,sqlServiceInstance,sqlServerInstance,dbName);
-      ## DB object actions
+      ## DB Object actions
       objectList$getFile();
       objectList$fileToTibble();
       objectTibble <- objectList$getTibble();
@@ -112,6 +112,17 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         objectTables <- objectList$getTables();
         objectList$getTablesBarplot();
         objectList$getTablesPiechart();
+        ### DB Object Table source
+        projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServerInstanceDbTableList.R");
+        write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+        source(projectSourceFile);
+        ### DB Object Table items
+        tableList <-
+          SqlToCsvSqlServerInstanceDbTableList$new(projectPath,sqlServiceInstance,sqlServerInstance,dbName,objectTables);
+        ### DB Object Table actions
+        tableList$getFile();
+        tableList$fileToTibble();
+        tableList$getTibble();
       }
       
       if(objectList$HasViews) objectViews <- objectList$getViews();
@@ -120,12 +131,24 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         objectFunctions <- objectList$getFunctions();
         objectList$getFunctionsBarplot();
         objectList$getFunctionsPiechart();
+        ### DB Object Function source
+        
+        ### DB Object Function items
+        
+        ### DB Object Function actions
+        
       }
       
       if(objectList$HasProcedures) {
         objectProcedures <- objectList$getProcedures();
         objectList$getProceduresBarplot();
         objectList$getProceduresPiechart();
+        ### DB Object Procedure source
+        
+        ### DB Object Procedure items
+        
+        ### DB Object Procedure actions
+        
       }
       
       rm(objectList);
@@ -138,29 +161,29 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       constraintList$fileToTibble();
       constraintTibble <- constraintList$getTibble();
       rm(constraintList);
-      ## DB trigger items
+      ## DB Trigger items
       triggerTibble <- NULL;
       triggerList <-
         SqlToCsvSqlServerInstanceDbTriggerList$new(projectPath,sqlServiceInstance,sqlServerInstance,dbName);
-      ## DB trigger actions
+      ## DB Trigger actions
       triggerList$getFile();
       triggerList$fileToTibble();
       triggerTibble <- triggerList$getTibble();
       rm(triggerList);
-      ## DB principal key items
+      ## DB Principal key items
       principalKeyTibble <- NULL;
       principalKeyList <-
         SqlToCsvSqlServerInstanceDbPrincipalKeyList$new(projectPath,sqlServiceInstance,sqlServerInstance,dbName);
-      ## DB principal key actions
+      ## DB Principal key actions
       principalKeyList$getFile();
       principalKeyList$fileToTibble();
       principalKeyTibble <- principalKeyList$getTibble();
       rm(principalKeyList);
-      ## DB foreign key items
+      ## DB Foreign key items
       foreignKeyTibble <- NULL;
       foreignKeyList <-
         SqlToCsvSqlServerInstanceDbForeignKeyList$new(projectPath,sqlServiceInstance,sqlServerInstance,dbName);
-      ## DB foreign key actions
+      ## DB Foreign key actions
       foreignKeyList$getFile();
       foreignKeyList$fileToTibble();
       foreignKeyTibble <- foreignKeyList$getTibble();
