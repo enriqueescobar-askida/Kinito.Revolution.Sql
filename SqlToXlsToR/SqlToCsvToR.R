@@ -125,6 +125,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         tableList$getFile();
         tableList$fileToTibble();
         tableList$getTibble();
+        rm(tableList);
       }
       
       if(objectList$HasViews) {
@@ -141,6 +142,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         viewList$getFile();
         viewList$fileToTibble();
         viewList$getTibble();
+        rm(viewList);
       }
       
       if(objectList$HasFunctions) {
@@ -159,6 +161,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         functionList$getFile();
         functionList$fileToTibble();
         functionList$getTibble();
+        rm(functionList);
       }
       
       if(objectList$HasProcedures) {
@@ -177,6 +180,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         procedureList$getFile();
         procedureList$fileToTibble();
         procedureList$getTibble();
+        rm(procedureList);
       }
       
       rm(objectList);
