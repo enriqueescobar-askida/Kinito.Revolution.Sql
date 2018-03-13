@@ -92,7 +92,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
     # DB list
     dbNameVector <- scan(file = sqlServerInstanceUsageFile, what = character());
     #for (dbName in dbNameVector) {
-      dbName <- dbNameVector[3];
+      dbName <- dbNameVector[1];
       ## DB Object items
       objectTables <- NULL;
       objectViews <- NULL;
@@ -100,7 +100,8 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       objectProcedures <- NULL;
       objectTibble <- NULL;
       objectList <-
-        SqlToCsvSqlServerInstanceDbObjectList$new(projectPath,sqlServiceInstance,sqlServerInstance,dbName);
+        SqlToCsvSqlServerInstanceDbObjectList$new(
+          projectPath,sqlServiceInstance,sqlServerInstance,dbName);
       ## DB Object actions
       objectList$getFile();
       objectList$fileToTibble();
@@ -118,14 +119,29 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         source(projectSourceFile);
         ### DB Object Table items
         tableList <-
-          SqlToCsvSqlServerInstanceDbTableList$new(projectPath,sqlServiceInstance,sqlServerInstance,dbName,objectTables);
+          SqlToCsvSqlServerInstanceDbTableList$new(
+            projectPath,sqlServiceInstance,sqlServerInstance,dbName,objectTables);
         ### DB Object Table actions
         tableList$getFile();
         tableList$fileToTibble();
         tableList$getTibble();
       }
       
-      if(objectList$HasViews) objectViews <- objectList$getViews();
+      if(objectList$HasViews) {
+        objectViews <- objectList$getViews();
+        ### DB Object View source
+        projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServerInstanceDbViewList.R");
+        write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+        source(projectSourceFile);
+        ### DB Object View items
+        viewList <-
+          SqlToCsvSqlServerInstanceDbViewList$new(
+            projectPath,sqlServiceInstance,sqlServerInstance,dbName,objectViews);
+        ### DB Object View actions
+        viewList$getFile();
+        viewList$fileToTibble();
+        viewList$getTibble();
+      }
       
       if(objectList$HasFunctions) {
         objectFunctions <- objectList$getFunctions();
