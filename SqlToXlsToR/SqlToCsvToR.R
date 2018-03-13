@@ -154,7 +154,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         ### DB Object Function items
         functionList <-
           SqlToCsvSqlServerInstanceDbFunctionList$new(
-            projectPath,sqlServiceInstance,sqlServerInstance,dbName,objectViews);
+            projectPath,sqlServiceInstance,sqlServerInstance,dbName,objectFunctions);
         ### DB Object Function actions
         functionList$getFile();
         functionList$fileToTibble();
@@ -172,7 +172,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         ### DB Object Procedure items
         procedureList <-
           SqlToCsvSqlServerInstanceDbProcedureList$new(
-            projectPath,sqlServiceInstance,sqlServerInstance,dbName,objectViews);
+            projectPath,sqlServiceInstance,sqlServerInstance,dbName,objectProcedures);
         ### DB Object Procedure actions
         procedureList$getFile();
         procedureList$fileToTibble();

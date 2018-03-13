@@ -12,6 +12,13 @@ SqlToCsvSqlServerInstanceDbTableList <- R6Class("SqlToCsvSqlServerInstanceDbTabl
       instance <- paste0(instance, "_", dbName);
       private$objectTibble <- if(!is.null(objectList) && (length(objectList)!=0) && (ncol(objectList) > 0)) objectList else NULL;
       super$initialize(path, serviceInstance, instance);
+    },
+    fileToTibble = function() {
+      super$fileToTibble();
+      tibbleSize <- dim(private$Tibble)[1];
+      isOk <- FALSE;
+      for(num in private$objectTibble$ObjectCount) isOk <- isOk || (tibbleSize==num);
+      if (!isOk) private$Tibble <- NULL;
     }
   ),
   active = list(
