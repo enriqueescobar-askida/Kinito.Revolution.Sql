@@ -2,7 +2,7 @@ require("R6");
 require("readr");
 require("tibble");
 # class
-SqlToCsvSqlServerInstanceDbViewList <- R6Class("SqlToCsvSqlServerInstanceDbViewList",
+SqlToCsvSqlServerInstanceDbProcedureList <- R6Class("SqlToCsvSqlServerInstanceDbProcedureList",
   inherit = SqlToCsvSqlServerInstanceAbstractList,
   portable = TRUE,
   class = TRUE,
@@ -12,19 +12,15 @@ SqlToCsvSqlServerInstanceDbViewList <- R6Class("SqlToCsvSqlServerInstanceDbViewL
       instance <- paste0(instance, "_", dbName);
       private$objectTibble <- if(!is.null(objectList) && (length(objectList)!=0) && (ncol(objectList) > 0)) objectList else NULL;
       super$initialize(path, serviceInstance, instance);
-    },
-    fileToTibble = function() {
-      super$fileToTibble();
-      if (private$objectTibble[[2]] != dim(private$Tibble)[1]) private$Tibble <- NULL;
     }
   ),
   active = list(
     Tail = function(value) {
-      if (missing(value)) return("_DbViewList");
+      if (missing(value)) return("_DbProcedureList");
     },
     ColumnTitles = function(value) {
-      if (missing(value)) return(c("ViewName", "ViewID", "ViewType", "ViewDesc", "ViewCreated",
-                                   "ViewModified","IsIndexed","IsIndexable"));
+      if (missing(value)) return(c("ProcedureName", "ProcedureID", "ProcedureType", "ProcedureDesc", "ProcedureCreated",
+                                   "ProcedureModified","IsProcedureMSShipped"));
     }
   ),
   private = list(

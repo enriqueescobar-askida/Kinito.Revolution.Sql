@@ -148,11 +148,17 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         objectList$getFunctionsBarplot();
         objectList$getFunctionsPiechart();
         ### DB Object Function source
-        
+        projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServerInstanceDbFunctionList.R");
+        write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+        source(projectSourceFile);
         ### DB Object Function items
-        
+        functionList <-
+          SqlToCsvSqlServerInstanceDbFunctionList$new(
+            projectPath,sqlServiceInstance,sqlServerInstance,dbName,objectViews);
         ### DB Object Function actions
-        
+        functionList$getFile();
+        functionList$fileToTibble();
+        functionList$getTibble();
       }
       
       if(objectList$HasProcedures) {
@@ -160,11 +166,17 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         objectList$getProceduresBarplot();
         objectList$getProceduresPiechart();
         ### DB Object Procedure source
-        
+        projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServerInstanceDbProcedureList.R");
+        write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+        source(projectSourceFile);
         ### DB Object Procedure items
-        
+        procedureList <-
+          SqlToCsvSqlServerInstanceDbProcedureList$new(
+            projectPath,sqlServiceInstance,sqlServerInstance,dbName,objectViews);
         ### DB Object Procedure actions
-        
+        procedureList$getFile();
+        procedureList$fileToTibble();
+        procedureList$getTibble();
       }
       
       rm(objectList);
