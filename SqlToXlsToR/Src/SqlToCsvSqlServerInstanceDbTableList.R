@@ -1,6 +1,7 @@
 require("R6");
 require("readr");
 require("tibble");
+require("stringr");
 # class
 SqlToCsvSqlServerInstanceDbTableList <- R6Class("SqlToCsvSqlServerInstanceDbTableList",
   inherit = SqlToCsvSqlServerInstanceAbstractList,
@@ -17,8 +18,33 @@ SqlToCsvSqlServerInstanceDbTableList <- R6Class("SqlToCsvSqlServerInstanceDbTabl
       super$fileToTibble();
       tibbleSize <- dim(private$Tibble)[1];
       isOk <- FALSE;
+      
       for(num in private$objectTibble$ObjectCount) isOk <- isOk || (tibbleSize==num);
-      if (!isOk) private$Tibble <- NULL;
+      
+      if (!isOk) {
+        private$Tibble <- NULL;
+      } else {
+        private$FileCount <- gsub("DbTableList.", "DbTableListCount.", private$File);
+      }
+    },
+    getFileCount = function() private$FileCount,
+    getTibbleCount = function() {
+      isNull <- !file.exists(private$FileCount);
+      isEmpty <- if(file.exists(private$FileCount)) (file.info(private$FileCount)$size == 0) else FALSE;
+      isFileNullOrEmpty <- isNull || isEmpty;
+      df <- NULL;
+      
+      if(!isFileNullOrEmpty){
+        df <-
+          read_csv(private$FileCount, col_names = c("TableName","TableCount"),
+                   locale = locale(asciify = TRUE), na = c("NULL","NA","","NAN","NaN"));
+      }
+      
+      private$TibbleCount <- tibble::as_tibble(df);
+      rm(df);
+      private$cleanTibbleCount();
+      
+      return(private$TibbleCount);
     }
   ),
   active = list(
@@ -31,6 +57,13 @@ SqlToCsvSqlServerInstanceDbTableList <- R6Class("SqlToCsvSqlServerInstanceDbTabl
     }
   ),
   private = list(
-    objectTibble = NULL
+    objectTibble = NULL,
+    FileCount = "",
+    TibbleCount = NULL,
+    cleanTibbleCount = function(){
+      private$TibbleCount$TableName <- str_split_fixed(private$TibbleCount$TableName, "\\.", 2)[,2];
+      private$TibbleCount$TableName <- gsub("]", "", private$TibbleCount$TableName);
+      private$TibbleCount$TableName <- gsub("\\[", "", private$TibbleCount$TableName);
+    }
   )
 )
