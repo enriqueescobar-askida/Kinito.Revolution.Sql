@@ -45,6 +45,45 @@ SqlToCsvSqlServerInstanceDbTableList <- R6Class("SqlToCsvSqlServerInstanceDbTabl
       private$cleanTibbleCount();
       
       return(private$TibbleCount);
+    },
+    getTibbleRowRepeats = function(){
+      df <- aggregate(
+        list(RowRepeats = rep(1, nrow(private$TibbleCount[-1]))),
+        private$TibbleCount[-1],
+        length);
+      aMean <- mean(df$RowRepeats);
+      df <- subset(df, RowRepeats > aMean);
+      colnames(df) <- c("TableRows","RowRepeats");
+      
+      if(dim(df)[1]!=0){
+        return(tibble::as_tibble(df));
+      } else {
+        return(NULL);
+      }
+      
+    },
+    getRowRepeatsBarplot = function(){
+      t <- self$getTibbleRowRepeats();
+      barplot <- NULL;
+      
+      if(!is.null(t)){
+        # titles
+        xTitle <- colnames(t)[1];
+        yTitle <- colnames(rev(t)[1]);
+        mainTitle <- "";
+        mainTitle <- paste0(private$Instance, " Table Row List count Barplot");
+        # graph
+        barplot <- ggplot(t, aes(x = factor(TableRows), y = RowRepeats)) +
+          ##barplot <- ggplot(t, aes(x = factor(TableRows), y = sqrt(RowRepeats))) +
+          geom_bar(stat = "identity", width = 0.8, position = "dodge", fill = "lightblue") +
+          ##scale_y_sqrt(paste0("Square root of ", yTitle)) +
+          ggtitle(mainTitle) +
+          xlab(xTitle) +
+          ylab(yTitle) +
+          theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5));
+      }
+      
+      return(barplot);
     }
   ),
   active = list(
