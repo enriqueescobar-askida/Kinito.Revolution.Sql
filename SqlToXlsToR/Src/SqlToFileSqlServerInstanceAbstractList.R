@@ -84,7 +84,7 @@ SqlToFileSqlServerInstanceAbstractList <-
     ServiceInstance = "_service_instance_",
     Instance = "_instance_",
     File = "_file_",
-    Tibble = tibble::as_tibble(data.frame(NULL)),
+    Tibble = NULL,
     setServiceInstance = function(value) private$ServiceInstance <- value,
     setInstance = function(value) private$Instance <- value,
     setFile = function() {
@@ -93,6 +93,15 @@ SqlToFileSqlServerInstanceAbstractList <-
       isNull <- !file.exists(private$File);
       isEmpty <- if(file.exists(private$File)) (file.info(private$File)$size == 0) else FALSE;
       self$IsFileNullOrEmpty <- isNull || isEmpty;
+    },
+    getFrequencyTable = function(colName = "") {
+      frequencyTable <- NULL;
+      
+      if (!is.null(private$Tibble) & !is.null(colName)) {
+        frequencyTable <- table(private$Tibble[colName]);
+      }
+      
+      return(frequencyTable);
     }
   )
 )

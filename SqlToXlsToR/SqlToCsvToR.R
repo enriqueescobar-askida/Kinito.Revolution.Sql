@@ -92,7 +92,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
     # DB list
     dbNameVector <- scan(file = sqlServerInstanceUsageFile, what = character());
     #for (dbName in dbNameVector) {
-      dbName <- dbNameVector[1];
+      dbName <- dbNameVector[2];
       ## DB Object items
       objectTables <- NULL;
       objectViews <- NULL;
@@ -193,6 +193,9 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       constraintList$getFile();
       constraintList$fileToTibble();
       constraintTibble <- constraintList$getTibble();
+      constraintList$getTableNameFrequency();
+      constraintList$getTableNameFrequencyTibble();
+      constraintList$getTableNameFrequencyBarplot();
       rm(constraintList);
       ## DB Trigger items
       triggerTibble <- NULL;
