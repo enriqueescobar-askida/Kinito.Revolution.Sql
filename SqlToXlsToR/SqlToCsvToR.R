@@ -187,7 +187,8 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       ## DB Constraint items
       constraintTibble <- NULL;
       constraintList <-
-        SqlToCsvSqlServerInstanceDbConstraintList$new(projectPath,sqlServiceInstance,sqlServerInstance,dbName);
+        SqlToCsvSqlServerInstanceDbConstraintList$new(
+          projectPath,sqlServiceInstance,sqlServerInstance,dbName);
       ## DB Constraint actions
       constraintList$getFile();
       constraintList$fileToTibble();
@@ -196,7 +197,8 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       ## DB Trigger items
       triggerTibble <- NULL;
       triggerList <-
-        SqlToCsvSqlServerInstanceDbTriggerList$new(projectPath,sqlServiceInstance,sqlServerInstance,dbName);
+        SqlToCsvSqlServerInstanceDbTriggerList$new(
+          projectPath,sqlServiceInstance,sqlServerInstance,dbName);
       ## DB Trigger actions
       triggerList$getFile();
       triggerList$fileToTibble();
@@ -205,7 +207,8 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       ## DB Principal key items
       principalKeyTibble <- NULL;
       principalKeyList <-
-        SqlToCsvSqlServerInstanceDbPrincipalKeyList$new(projectPath,sqlServiceInstance,sqlServerInstance,dbName);
+        SqlToCsvSqlServerInstanceDbPrincipalKeyList$new(
+          projectPath,sqlServiceInstance,sqlServerInstance,dbName);
       ## DB Principal key actions
       principalKeyList$getFile();
       principalKeyList$fileToTibble();
@@ -214,7 +217,8 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       ## DB Foreign key items
       foreignKeyTibble <- NULL;
       foreignKeyList <-
-        SqlToCsvSqlServerInstanceDbForeignKeyList$new(projectPath,sqlServiceInstance,sqlServerInstance,dbName);
+        SqlToCsvSqlServerInstanceDbForeignKeyList$new(
+          projectPath,sqlServiceInstance,sqlServerInstance,dbName);
       ## DB Foreign key actions
       foreignKeyList$getFile();
       foreignKeyList$fileToTibble();
