@@ -37,9 +37,9 @@ SqlToCsvSqlServerInstanceDbConstraintList <- R6Class("SqlToCsvSqlServerInstanceD
       
       return(t);
     },
-    getTableNameFrequencyBarplot = function(){
+    getTableNameFrequencyHistogram = function(){
       barplot <- NULL;
-      mainTitle <- paste0(private$Instance, " Constraint TableName Frequency Barplot");
+      mainTitle <- paste0(private$Instance, " Constraint TableName Frequency Histogram");
       t <- self$getTableNameFrequencyTibble();
       
       if (is.null(t)) {
