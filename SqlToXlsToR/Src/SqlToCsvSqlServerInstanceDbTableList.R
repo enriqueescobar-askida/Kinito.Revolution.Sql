@@ -9,6 +9,7 @@ SqlToCsvSqlServerInstanceDbTableList <- R6Class("SqlToCsvSqlServerInstanceDbTabl
   class = TRUE,
   cloneable = TRUE,
   public = list(
+    HasRowRepeats = FALSE,
     initialize = function(path, serviceInstance, instance, dbName, objectList) {
       instance <- paste0(instance, "_", dbName);
       private$objectTibble <- if(!is.null(objectList) && (length(objectList)!=0) && (ncol(objectList) > 0)) objectList else NULL;
@@ -54,8 +55,9 @@ SqlToCsvSqlServerInstanceDbTableList <- R6Class("SqlToCsvSqlServerInstanceDbTabl
       aMean <- mean(df$RowRepeats);
       df <- subset(df, RowRepeats > aMean);
       colnames(df) <- c("TableRows","RowRepeats");
+      self$HasRowRepeats <- dim(df)[1]!=0;
       
-      if(dim(df)[1]!=0){
+      if(self$HasRowRepeats){
         return(tibble::as_tibble(df));
       } else {
         return(NULL);
@@ -70,7 +72,6 @@ SqlToCsvSqlServerInstanceDbTableList <- R6Class("SqlToCsvSqlServerInstanceDbTabl
         # titles
         xTitle <- colnames(t)[1];
         yTitle <- colnames(rev(t)[1]);
-        mainTitle <- "";
         mainTitle <- paste0(private$Instance, " Table Row List count Barplot");
         # graph
         barplot <- ggplot(t, aes(x = factor(TableRows), y = RowRepeats)) +

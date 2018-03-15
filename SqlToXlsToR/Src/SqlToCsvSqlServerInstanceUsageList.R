@@ -16,7 +16,7 @@ SqlToCsvSqlServerInstanceUsageList <- R6Class("SqlToCsvSqlServerInstanceUsageLis
         # titles
         xTitle <- colnames(private$Tibble)[2];
         yTitle <- colnames(rev(private$Tibble)[1]);
-        mainTitle <- "Usage List Piechart";
+        mainTitle <- paste0(private$Instance, " Usage List count Piechart");
         # lists
         PercentList <- round(private$Tibble$DBBufferMB / sum(private$Tibble$DBBufferMB) * 100, digits = 2);
         labelList <- paste0(private$Tibble$DBName," ",PercentList, "%");
@@ -48,7 +48,7 @@ SqlToCsvSqlServerInstanceUsageList <- R6Class("SqlToCsvSqlServerInstanceUsageLis
         # titles
         xTitle <- colnames(private$Tibble)[2];
         yTitle <- colnames(rev(private$Tibble)[1]);
-        mainTitle <- "Usage List count";
+        mainTitle <- paste0(private$Instance, " Usage List count Barplot");
         # graph
         barplot <- ggplot(private$Tibble,
                           aes(x = factor(DBName), y = DBBufferMB)) +

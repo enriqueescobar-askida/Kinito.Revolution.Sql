@@ -27,7 +27,7 @@ SqlToCsvSqlServerInstanceDbObjectList <- R6Class("SqlToCsvSqlServerInstanceDbObj
         # titles
         xTitle <- colnames(aTibble)[1];
         yTitle <- colnames(aTibble)[2];
-        mainTitle <- paste0("Object", " PieChart");
+        mainTitle <- paste0(private$Instance, " Object List PieChart");
         # lists
         PercentList <- round(aTibble$ObjectCount / sum(aTibble$ObjectCount) * 100, digits = 2);
         labelList <- paste0(aTibble$ObjectName, " ", PercentList, "%");
@@ -58,7 +58,7 @@ SqlToCsvSqlServerInstanceDbObjectList <- R6Class("SqlToCsvSqlServerInstanceDbObj
         # titles
         xTitle <- colnames(aTibble)[1];
         yTitle <- colnames(aTibble)[-1];
-        mainTitle <- "ObjectList count";
+        mainTitle <- paste0(private$Instance, " Object List Barplot");
         # graph
         barplot <- ggplot(aTibble,
                           aes(x = factor(ObjectName), y = ObjectCount)) +

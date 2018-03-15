@@ -109,7 +109,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       objectList$getBarplotGgplot2();
       objectList$getPiechartGgplot2();
       
-      if(objectList$HasTables) {
+       if(objectList$HasTables) {
         objectTables <- objectList$getTables();
         objectList$getTablesBarplot();
         objectList$getTablesPiechart();
@@ -127,8 +127,12 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         tableList$getTibble();
         tableList$getFileCount();
         tableList$getTibbleCount();
-        tableList$getTibbleRowRepeats();
-        tableList$getRowRepeatsBarplot();
+        
+        if(tableList$HasRowRepeats){
+          tableList$getTibbleRowRepeats();
+          tableList$getRowRepeatsBarplot();
+        }
+        
         rm(tableList);
       }
       
