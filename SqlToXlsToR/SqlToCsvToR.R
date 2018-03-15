@@ -92,7 +92,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
     # DB list
     dbNameVector <- scan(file = sqlServerInstanceUsageFile, what = character());
     #for (dbName in dbNameVector) {
-      dbName <- dbNameVector[3];
+      dbName <- dbNameVector[2];
       ## DB Object items
       objectTables <- NULL;
       objectViews <- NULL;
@@ -109,7 +109,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       objectList$getBarplotGgplot2();
       objectList$getPiechartGgplot2();
       
-       if(objectList$HasTables) {
+      if(objectList$HasTables) {
         objectTables <- objectList$getTables();
         objectList$getTablesBarplot();
         objectList$getTablesPiechart();
@@ -244,6 +244,9 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       foreignKeyList$getFile();
       foreignKeyList$fileToTibble();
       foreignKeyTibble <- foreignKeyList$getTibble();
+      foreignKeyList$getTableNameFrequency();
+      foreignKeyList$getTableNameFrequencyTibble();
+      foreignKeyList$getTableNameFrequencyHistogram();
       rm(foreignKeyList);
     #}
     
