@@ -92,7 +92,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
     # DB list
     dbNameVector <- scan(file = sqlServerInstanceUsageFile, what = character());
     #for (dbName in dbNameVector) {
-      dbName <- dbNameVector[1];
+      dbName <- dbNameVector[3];
       ## DB Object items
       objectTables <- NULL;
       objectViews <- NULL;
@@ -231,6 +231,9 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       principalKeyList$getFile();
       principalKeyList$fileToTibble();
       principalKeyTibble <- principalKeyList$getTibble();
+      principalKeyList$getTableNameFrequency();
+      principalKeyList$getTableNameFrequencyTibble();
+      principalKeyList$getTableNameFrequencyHistogram();
       rm(principalKeyList);
       ## DB Foreign key items
       foreignKeyTibble <- NULL;
