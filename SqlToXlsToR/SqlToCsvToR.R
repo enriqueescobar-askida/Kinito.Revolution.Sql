@@ -219,6 +219,8 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       triggerList$getBarplotGgplot2();
       triggerList$getPiechartGgplot2();
       triggerList$getTriggerGroupFrequencyHistogram();
+      triggerList$getTriggerSubgroupFrequency();
+      triggerList$getTriggerSubgroupFrequencyTibble();
       rm(triggerList);
       ## DB Principal key items
       principalKeyTibble <- NULL;

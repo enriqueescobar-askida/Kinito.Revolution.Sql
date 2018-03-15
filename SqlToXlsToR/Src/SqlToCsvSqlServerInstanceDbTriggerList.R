@@ -83,9 +83,15 @@ SqlToCsvSqlServerInstanceDbTriggerList <- R6Class("SqlToCsvSqlServerInstanceDbTr
         return(NULL);
       }
     },
+    getTriggerSubgroupFrequency = function(){
+      
+      if(!is.null(private$Tibble) && dim(private$Tibble)[1]!=0 && dim(private$Tibble)[2]!=0){
+        return(private$getFrequencyTable(colName = "TriggerSubgroup"));
+      } else {
+        return(NULL);
+      }
+    },
     getTriggerGroupFrequencyTibble = function(){
-      t <- tibble(c("AfterTrigger","InsteadOfTrigger"),c(0,0));
-      colnames(t) <- c("TriggerGroup", "TriggerCount");
       t <- NULL;
 
       if (!is.null(private$Tibble) && dim(private$Tibble)[1]!=0 && dim(private$Tibble)[2]!=0) {
@@ -111,35 +117,56 @@ SqlToCsvSqlServerInstanceDbTriggerList <- R6Class("SqlToCsvSqlServerInstanceDbTr
       
       return(t);
     },
-    getTriggerGroupFrequencyHistogram = function(){
-      barplot <- NULL;
-      mainTitle <- paste0(private$Instance, " Trigger TriggerGroup Frequency Histogram");
-      t <- self$getTableNameFrequencyTibble();
+    getTriggerSubgroupFrequencyTibble = function(){
+      t <- NULL;
       
-      if (is.null(t)) {
+      if (!is.null(private$Tibble) && dim(private$Tibble)[1]!=0 && dim(private$Tibble)[2]!=0) {
+        t <- data.frame(sort(table(private$Tibble$TriggerSubgroup), decreasing = TRUE));
         
-        return(NULL);
-      } else {
+        if(ncol(t) == 1){
+          TriggerSubgroup <- row.names(t);
+          t <- data.frame(TriggerSubgroup, t, row.names = NULL);
+        }
+        
+        colnames(t) <- c("TriggerSubgroup", "TriggerCount");
+        t <- tibble::as_tibble(t);
+        t$TriggerCount <- as.integer(t$TriggerCount);
+      }
+      
+      return(t);
+    },
+    getTriggerGroupFrequencyHistogram = function(){
+      histo <- NULL;
+      
+      if(!is.null(private$Tibble) && dim(private$Tibble)[1]!=0 && dim(private$Tibble)[2]!=0){
+        t <- data.frame(sort(table(private$Tibble$TableName), decreasing = TRUE));
+        
+        if(ncol(t) == 1){
+          TableName <- row.names(t);
+          t <- data.frame(TableName, t, row.names = NULL);
+        }
+        
+        colnames(t) <- c("TableName", "TriggerCount");
+        t <- tibble::as_tibble(t);
         t <- head(t, 50);
         # titles
         xTitle <- colnames(t)[1];
         yTitle <- colnames(t)[2];
+        mainTitle <- paste0(private$Instance, " Trigger TableName Frequency Histogram");
         colnames(t) <- NULL;
         names(t)[1] <- "X";
         names(t)[2] <- "Y";
         # graph
-        barplot <- ggplot(t,
+        histo <- ggplot(t,
                           aes(x = factor(X), y = Y)) +
           geom_bar(stat = "identity", width = 0.8, position = "dodge", fill = "lightblue") +
           xlab(xTitle) +
           ylab(yTitle) +
           ggtitle(mainTitle) +
           theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5));
-        
-        return(barplot);
       }
-      
-      return(barplot);
+        
+      return(histo);
     }
   ),
   active = list(
