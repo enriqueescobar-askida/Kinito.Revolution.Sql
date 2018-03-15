@@ -15,8 +15,8 @@ SqlToCsvSqlServerInstanceAbstractList <-
         df <-
           read_csv(private$File, col_names = self$ColumnTitles,
                    locale = locale(asciify = TRUE), na = c("NULL","NA","","NAN","NaN"));
+        private$Tibble <- tibble::as_tibble(df);
       }
-      private$Tibble <- tibble::as_tibble(df);
       rm(df);
     }
   ),
