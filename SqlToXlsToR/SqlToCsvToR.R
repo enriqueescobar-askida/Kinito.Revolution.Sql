@@ -214,7 +214,11 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       triggerList$getFile();
       triggerList$fileToTibble();
       triggerTibble <- triggerList$getTibble();
-      triggerTibble[,11:17];
+      triggerList$getTriggerGroupFrequency();
+      triggerList$getTriggerGroupFrequencyTibble();
+      triggerList$getBarplotGgplot2();
+      triggerList$getPiechartGgplot2();
+      triggerList$getTriggerGroupFrequencyHistogram();
       rm(triggerList);
       ## DB Principal key items
       principalKeyTibble <- NULL;
