@@ -28,6 +28,32 @@ SqlToCsvSqlServerInstanceDbTableList <- R6Class("SqlToCsvSqlServerInstanceDbTabl
         private$FileCount <- gsub("DbTableList.", "DbTableListCount.", private$File);
       }
     },
+    getBarplotGgplot2 = function(aTibble = NULL){
+      barplot <- NULL;
+      
+      if (missing(aTibble)) aTibble <- private$TibbleCount;
+      aTibble <- head(aTibble, 50);
+      
+      if (!is.null(aTibble) && (length(aTibble)!=0) && (ncol(aTibble) == 2)) {
+        # titles
+        xTitle <- colnames(aTibble)[1];
+        yTitle <- colnames(aTibble)[-1];
+        mainTitle <- paste0(private$Instance, " Table Count List Barplot");
+        # graph
+        barplot <- ggplot(aTibble,
+                          aes(x = factor(TableName), y = TableCount)) +
+          geom_bar(stat = "identity",
+                   width = 0.8,
+                   position = "dodge",
+                   fill = "lightblue") +
+          ggtitle(mainTitle) +
+          xlab(xTitle) +
+          ylab(yTitle) +
+          theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5));
+      }
+      
+      return(barplot);
+    },
     getFileCount = function() private$FileCount,
     getTibbleCount = function() {
       isNull <- !file.exists(private$FileCount);
@@ -39,11 +65,10 @@ SqlToCsvSqlServerInstanceDbTableList <- R6Class("SqlToCsvSqlServerInstanceDbTabl
         df <-
           read_csv(private$FileCount, col_names = c("TableName","TableCount"),
                    locale = locale(asciify = TRUE), na = c("NULL","NA","","NAN","NaN"));
+        private$TibbleCount <- tibble::as_tibble(df);
+        private$cleanTibbleCount();
       }
-      
-      private$TibbleCount <- tibble::as_tibble(df);
       rm(df);
-      private$cleanTibbleCount();
       
       return(private$TibbleCount);
     },

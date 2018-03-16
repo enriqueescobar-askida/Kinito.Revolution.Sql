@@ -89,10 +89,14 @@ if (file.exists(sqlServerInstanceUsageFile)) {
     projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServerInstanceDbForeignKeyList.R");
     write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
     source(projectSourceFile);
+    # DB Index source
+    projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServerInstanceDbIndexList.R");
+    write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+    source(projectSourceFile);
     # DB list
     dbNameVector <- scan(file = sqlServerInstanceUsageFile, what = character());
     #for (dbName in dbNameVector) {
-      dbName <- dbNameVector[2];
+      dbName <- dbNameVector[3];
       ## DB Object items
       objectTables <- NULL;
       objectViews <- NULL;
@@ -127,6 +131,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         tableList$getTibble();
         tableList$getFileCount();
         tableList$getTibbleCount();
+        tableList$getBarplotGgplot2();
         
         if(tableList$HasRowRepeats){
           tableList$getTibbleRowRepeats();
@@ -248,6 +253,15 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       foreignKeyList$getTableNameFrequencyTibble();
       foreignKeyList$getTableNameFrequencyHistogram();
       rm(foreignKeyList);
+      ## DB Index items
+      indexTibble <- NULL;
+      indexList <-
+        SqlToCsvSqlServerInstanceDbIndexList$new(
+          projectPath,sqlServiceInstance,sqlServerInstance,dbName);
+      ## DB Index actions
+      indexList$getFile();
+      indexList$fileToTibble();
+      indexTibble <- indexList$getTibble();
     #}
     
       rm(objectTibble);
