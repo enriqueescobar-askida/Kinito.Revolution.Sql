@@ -28,6 +28,7 @@ SqlToCsvSqlServerInstanceDbTableList <- R6Class("SqlToCsvSqlServerInstanceDbTabl
         private$FileCount <- gsub("DbTableList.", "DbTableListCount.", private$File);
         private$FileKey <- gsub("DbTableList.", "DbTableKeyList.", private$File);
         private$FileFootprint <- gsub("DbTableList.", "DbTableFootprintList.", private$File);
+        private$FileIO <- gsub("DbTableList.", "DbTableIOList.", private$File);
       }
     },
     getBarplotGgplot2 = function(aTibble = NULL){
@@ -146,6 +147,23 @@ SqlToCsvSqlServerInstanceDbTableList <- R6Class("SqlToCsvSqlServerInstanceDbTabl
       rm(df);
       
       return(private$TibbleFootprint);
+    },
+    getFileIO = function() private$FileIO,
+    getTibbleIO = function() {
+      isNull <- !file.exists(private$FileIO);
+      isEmpty <- if(file.exists(private$FileIO)) (file.info(private$FileIO)$size == 0) else FALSE;
+      isFileNullOrEmpty <- isNull || isEmpty;
+      df <- NULL;
+      
+      if(!isFileNullOrEmpty){
+        df <-
+          read_csv(private$FileIO, col_names = c("ObjectSchema","ObjectName","ReadRatio","WriteRatio","TotalReads","TotalWrites"),
+                   locale = locale(asciify = TRUE), na = c("NULL","NA","","NAN","NaN"));
+        private$TibbleIO <- tibble::as_tibble(df);
+      }
+      rm(df);
+      
+      return(private$TibbleIO);
     }
   ),
   active = list(
@@ -162,9 +180,11 @@ SqlToCsvSqlServerInstanceDbTableList <- R6Class("SqlToCsvSqlServerInstanceDbTabl
     FileCount = "",
     FileKey = "",
     FileFootprint = "",
+    FileIO = NULL,
     TibbleCount = NULL,
     TibbleKey = NULL,
     TibbleFootprint = NULL,
+    TibbleIO = NULL,
     cleanTibbleCount = function(){
       private$TibbleCount$TableName <- str_split_fixed(private$TibbleCount$TableName, "\\.", 2)[,2];
       private$TibbleCount$TableName <- gsub("]", "", private$TibbleCount$TableName);

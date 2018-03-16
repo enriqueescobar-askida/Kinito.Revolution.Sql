@@ -133,12 +133,15 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         tableList$getTibbleCount();
         tableList$getBarplotGgplot2();
         tableList$getTibbleRowRepeats();
+        
+        if(tableList$HasRowRepeats) tableList$getRowRepeatsHistogram();
+        
         tableList$getFileKey();
         tableList$getTibbleKey();
         tableList$getFileFootprint();
         tableList$getTibbleFootprint();
-        
-        if(tableList$HasRowRepeats) tableList$getRowRepeatsHistogram();
+        tableList$getFileIO();
+        tableList$getTibbleIO();
         
         rm(tableList);
       }
