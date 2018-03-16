@@ -96,7 +96,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
     # DB list
     dbNameVector <- scan(file = sqlServerInstanceUsageFile, what = character());
     #for (dbName in dbNameVector) {
-      dbName <- dbNameVector[3];
+      dbName <- dbNameVector[1];
       ## DB Object items
       objectTables <- NULL;
       objectViews <- NULL;
@@ -133,6 +133,10 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         tableList$getTibbleCount();
         tableList$getBarplotGgplot2();
         tableList$getTibbleRowRepeats();
+        tableList$getFileKey();
+        tableList$getTibbleKey();
+        tableList$getFileFootprint();
+        tableList$getTibbleFootprint();
         
         if(tableList$HasRowRepeats) tableList$getRowRepeatsHistogram();
         
