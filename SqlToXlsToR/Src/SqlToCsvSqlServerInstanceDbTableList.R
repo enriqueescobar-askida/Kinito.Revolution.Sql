@@ -89,7 +89,7 @@ SqlToCsvSqlServerInstanceDbTableList <- R6Class("SqlToCsvSqlServerInstanceDbTabl
       }
       
     },
-    getRowRepeatsBarplot = function(){
+    getRowRepeatsHistogram = function(){
       t <- self$getTibbleRowRepeats();
       barplot <- NULL;
       
@@ -97,7 +97,7 @@ SqlToCsvSqlServerInstanceDbTableList <- R6Class("SqlToCsvSqlServerInstanceDbTabl
         # titles
         xTitle <- colnames(t)[1];
         yTitle <- colnames(rev(t)[1]);
-        mainTitle <- paste0(private$Instance, " Table Row List count Barplot");
+        mainTitle <- paste0(private$Instance, " Table Row List count Histogram");
         # graph
         barplot <- ggplot(t, aes(x = factor(TableRows), y = RowRepeats)) +
           ##barplot <- ggplot(t, aes(x = factor(TableRows), y = sqrt(RowRepeats))) +
