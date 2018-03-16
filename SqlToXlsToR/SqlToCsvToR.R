@@ -179,6 +179,8 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         functionList$getFile();
         functionList$fileToTibble();
         functionList$getTibble();
+        functionList$getFileParam();
+        functionList$getTibbleParam();
         rm(functionList);
       }
       
