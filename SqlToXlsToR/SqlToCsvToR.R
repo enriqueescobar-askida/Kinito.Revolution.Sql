@@ -96,7 +96,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
     # DB list
     dbNameVector <- scan(file = sqlServerInstanceUsageFile, what = character());
     #for (dbName in dbNameVector) {
-      dbName <- dbNameVector[1];
+      dbName <- dbNameVector[2];
       ## DB Object items
       objectTables <- NULL;
       objectViews <- NULL;
@@ -138,6 +138,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         
         tableList$getFileKey();
         tableList$getTibbleKey();
+        tableList$getHistogramKey();
         tableList$getFileFootprint();
         tableList$getTibbleFootprint();
         tableList$getFileIO();
