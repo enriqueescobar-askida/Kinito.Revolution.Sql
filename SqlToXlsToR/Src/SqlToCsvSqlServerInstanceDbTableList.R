@@ -10,6 +10,7 @@ SqlToCsvSqlServerInstanceDbTableList <- R6Class("SqlToCsvSqlServerInstanceDbTabl
   cloneable = TRUE,
   public = list(
     HasRowRepeats = FALSE,
+    HasFootprint = FALSE,
     initialize = function(path, serviceInstance, instance, dbName, objectList) {
       instance <- paste0(instance, "_", dbName);
       private$objectTibble <- if(!is.null(objectList) && (length(objectList)!=0) && (ncol(objectList) > 0)) objectList else NULL;
@@ -29,6 +30,7 @@ SqlToCsvSqlServerInstanceDbTableList <- R6Class("SqlToCsvSqlServerInstanceDbTabl
         private$FileKey <- gsub("DbTableList.", "DbTableKeyList.", private$File);
         private$FileFootprint <- gsub("DbTableList.", "DbTableFootprintList.", private$File);
         private$FileIO <- gsub("DbTableList.", "DbTableIOList.", private$File);
+        private$PngFootprint <- gsub(".csv", "_Worcloud.png", private$FileFootprint);
       }
     },
     getBarplotGgplot2 = function(aTibble = NULL){
@@ -170,6 +172,18 @@ SqlToCsvSqlServerInstanceDbTableList <- R6Class("SqlToCsvSqlServerInstanceDbTabl
       return(barplot);
     },
     getFileFootprint = function() private$FileFootprint,
+    PngFootprintWordcloud = function() {
+      t <- self$getTibbleFootprintAboveMeans();
+      png(filename = private$PngFootprint, width = 800, height = 800);
+      wordcloud(words = t$word,
+                freq = t$freq,
+                min.freq = 1,
+                max.words = 200,
+                random.order = FALSE,
+                rot.per = 0.35,
+                colors = brewer.pal(8, "Dark2"));
+      dev.off();
+    },
     getTibbleFootprint = function() {
       isNull <- !file.exists(private$FileFootprint);
       isEmpty <- if(file.exists(private$FileFootprint)) (file.info(private$FileFootprint)$size == 0) else FALSE;
@@ -177,14 +191,55 @@ SqlToCsvSqlServerInstanceDbTableList <- R6Class("SqlToCsvSqlServerInstanceDbTabl
       df <- NULL;
       
       if(!isFileNullOrEmpty){
+        self$HasFootprint <- TRUE;
         df <-
           read_csv(private$FileFootprint, col_names = c("TableName","IndexName","RecordCount","TotalPages","UsedPages","DataPages","TotalSpaceMB","UsedSpaceMB","DataSpaceMB"),
                    locale = locale(asciify = TRUE), na = c("NULL","NA","","NAN","NaN"));
+        df$IndexName <- NULL;
         private$TibbleFootprint <- tibble::as_tibble(df);
       }
       rm(df);
       
       return(private$TibbleFootprint);
+    },
+    getTibbleFootprintAboveMeans = function() {
+      tableWords <- NULL;
+      corpusWords <- NULL;
+      aTibble <- private$TibbleFootprint;
+      meanRecordCount <- mean(aTibble$RecordCount);
+      tableWords <- c(tableWords,
+                      as.vector(aTibble[which(aTibble$RecordCount >= meanRecordCount),1]));
+      meanTotalPages <- mean(aTibble$TotalPages);
+      tableWords <- c(tableWords,
+                      as.vector(aTibble[which(aTibble$TotalPages >= meanTotalPages),1]));
+      meanUsedPages <- mean(aTibble$UsedPages);
+      tableWords <- c(tableWords,
+                      as.vector(aTibble[which(aTibble$UsedPages >= meanUsedPages),1]));
+      meanDataPages <- mean(aTibble$DataPages);
+      tableWords <- c(tableWords,
+                      as.vector(aTibble[which(aTibble$DataPages >= meanDataPages),1]));
+      meanTotalSpaceMB <- mean(aTibble$TotalSpaceMB);
+      tableWords <- c(tableWords,
+                      as.vector(aTibble[which(aTibble$TotalSpaceMB >= meanTotalSpaceMB),1]));
+      meanUsedSpaceMB <- mean(aTibble$UsedSpaceMB);
+      tableWords <- c(tableWords,
+                      as.vector(aTibble[which(aTibble$UsedSpaceMB >= meanUsedSpaceMB),1]));
+      meanDataSpaceMB <- mean(aTibble$DataSpaceMB);
+      tableWords <- c(tableWords,
+                      as.vector(aTibble[which(aTibble$DataSpaceMB >= meanDataSpaceMB),1]));
+      rm(aTibble);
+      # DB table footprint means
+      print(names(tableWords));
+      # DB table footprint wordcloud
+      corpusWords <- Corpus(VectorSource(tableWords))
+      inspect(corpusWords);
+      termDocMatrixSortDesc <- sort(rowSums(as.matrix(TermDocumentMatrix(corpusWords))),
+                                    decreasing  = TRUE);
+      termDocDataFrameSortDesc <- data.frame(word = names(termDocMatrixSortDesc),
+                                             freq = termDocMatrixSortDesc);
+      termDocDataFrameSortDesc <- tibble::as_tibble(termDocDataFrameSortDesc);
+      
+      return(termDocDataFrameSortDesc);
     },
     getFileIO = function() private$FileIO,
     getTibbleIO = function() {
@@ -218,6 +273,7 @@ SqlToCsvSqlServerInstanceDbTableList <- R6Class("SqlToCsvSqlServerInstanceDbTabl
     FileCount = "",
     FileKey = "",
     FileFootprint = "",
+    PngFootprint = "",
     FileIO = NULL,
     TibbleCount = NULL,
     TibbleKey = NULL,

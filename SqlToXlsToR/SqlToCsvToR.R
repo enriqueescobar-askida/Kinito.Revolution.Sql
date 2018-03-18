@@ -141,6 +141,11 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         tableList$getHistogramKey();
         tableList$getFileFootprint();
         tableList$getTibbleFootprint();
+        
+        if(tableList$HasFootprint) {
+          tableList$getTibbleFootprintAboveMeans();
+          tableList$PngFootprintWordcloud();
+        }
         tableList$getFileIO();
         tableList$getTibbleIO();
         
