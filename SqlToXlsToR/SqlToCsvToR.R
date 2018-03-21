@@ -142,7 +142,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         tableList$getFileFootprint();
         tableList$getTibbleFootprint();
         
-        if(tableList$HasFootprint) {
+        if(tableList$HasFootprint) { #t2<-t2[!is.na(t2$FKName),]
           tableList$getTibbleFootprintAboveMeans();
           tableList$PngFootprintWordcloud();
         }
