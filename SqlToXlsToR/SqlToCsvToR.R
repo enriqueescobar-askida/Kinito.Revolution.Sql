@@ -147,6 +147,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
           tableList$getTibbleFootprintAboveMeans();
           tableList$PngFootprintWordcloud();
         }
+        
         tableList$getFileIO();
         tableList$getTibbleIO();
         
