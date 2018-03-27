@@ -132,13 +132,14 @@ SqlToCsvSqlServerInstanceDbTableList <- R6Class("SqlToCsvSqlServerInstanceDbTabl
       
       return(private$TibbleKey);
     },
-    getHistogramKey = function(){
+    getPrimaryKeyHistogram = function(){
       df <- NULL;
       
       if(!is.null(private$TibbleKey)){
         df <- cbind(private$TibbleKey$TableName, private$TibbleKey$PKName);
         colnames(df) <- c("TableName", "PKName");
         df <- tibble::as_tibble(df);
+        df <- df[!is.na(df$PKName),];
         df <- aggregate(
           list(KeyRepeats = rep(1, nrow(df[-2]))),
           df[-2],
@@ -157,7 +158,7 @@ SqlToCsvSqlServerInstanceDbTableList <- R6Class("SqlToCsvSqlServerInstanceDbTabl
         # titles
         xTitle <- colnames(df)[1];
         yTitle <- colnames(rev(df)[1]);
-        mainTitle <- paste0(private$Instance, " Table Row List Key Histogram");
+        mainTitle <- paste0(private$Instance, " Table Row List Primary Key Histogram");
         # graph
         barplot <- ggplot(df, aes(x = factor(TableName), y = KeyRepeats)) +
           ##barplot <- ggplot(t, aes(x = factor(TableRows), y = sqrt(KeyRepeats))) +
@@ -169,6 +170,46 @@ SqlToCsvSqlServerInstanceDbTableList <- R6Class("SqlToCsvSqlServerInstanceDbTabl
           theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5));
       }
 
+      return(barplot);
+    },
+    getForeignKeyHistogram = function(){
+      df <- NULL;
+      
+      if(!is.null(private$TibbleKey)){
+        df <- cbind(private$TibbleKey$TableName, private$TibbleKey$FKName);
+        colnames(df) <- c("TableName", "FKName");
+        df <- tibble::as_tibble(df);
+        df <- df[!is.na(df$FKName),];
+        df <- aggregate(
+          list(KeyRepeats = rep(1, nrow(df[-2]))),
+          df[-2],
+          length);
+        if(!is.na(mean(df$KeyRepeats))){
+          aMean <- mean(df$KeyRepeats);
+          df <- subset(df, KeyRepeats > aMean);
+          colnames(df) <- c("TableName","KeyRepeats");
+        }
+        df <- tibble::as_tibble(df);
+      }
+      
+      barplot <- NULL;
+      
+      if(!is.null(df)){
+        # titles
+        xTitle <- colnames(df)[1];
+        yTitle <- colnames(rev(df)[1]);
+        mainTitle <- paste0(private$Instance, " Table Row List Foreign Key Histogram");
+        # graph
+        barplot <- ggplot(df, aes(x = factor(TableName), y = KeyRepeats)) +
+          ##barplot <- ggplot(t, aes(x = factor(TableRows), y = sqrt(KeyRepeats))) +
+          geom_bar(stat = "identity", width = 0.8, position = "dodge", fill = "lightblue") +
+          ##scale_y_sqrt(paste0("Square root of ", yTitle)) +
+          ggtitle(mainTitle) +
+          xlab(xTitle) +
+          ylab(yTitle) +
+          theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5));
+      }
+      
       return(barplot);
     },
     getFileFootprint = function() private$FileFootprint,

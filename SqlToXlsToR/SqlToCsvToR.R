@@ -138,7 +138,8 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         
         tableList$getFileKey();
         tableList$getTibbleKey();
-        tableList$getHistogramKey();
+        tableList$getPrimaryKeyHistogram();
+        tableList$getForeignKeyHistogram();
         tableList$getFileFootprint();
         tableList$getTibbleFootprint();
         
