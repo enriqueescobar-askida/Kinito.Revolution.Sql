@@ -96,7 +96,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
     # DB list
     dbNameVector <- scan(file = sqlServerInstanceUsageFile, what = character());
     #for (dbName in dbNameVector) {
-      dbName <- dbNameVector[3];
+      dbName <- dbNameVector[1];
       ## DB Object items
       objectTables <- NULL;
       objectViews <- NULL;
@@ -151,6 +151,10 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         tableList$getFileIO();
         tableList$getTibbleIO();
         
+        if(table$HasIO){
+          
+        }
+        
         rm(tableList);
       }
       
@@ -187,8 +191,11 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         functionList$getFile();
         functionList$fileToTibble();
         functionList$getTibble();
+        # any graph
         functionList$getFileParam();
         functionList$getTibbleParam();
+        # self$HasParams
+        # 
         rm(functionList);
       }
       

@@ -11,6 +11,7 @@ SqlToCsvSqlServerInstanceDbTableList <- R6Class("SqlToCsvSqlServerInstanceDbTabl
   public = list(
     HasRowRepeats = FALSE,
     HasFootprint = FALSE,
+    HasIO = FALSE,
     initialize = function(path, serviceInstance, instance, dbName, objectList) {
       instance <- paste0(instance, "_", dbName);
       private$objectTibble <- if(!is.null(objectList) && (length(objectList)!=0) && (ncol(objectList) > 0)) objectList else NULL;
@@ -290,6 +291,7 @@ SqlToCsvSqlServerInstanceDbTableList <- R6Class("SqlToCsvSqlServerInstanceDbTabl
       df <- NULL;
       
       if(!isFileNullOrEmpty){
+        self$HasIO <- TRUE;
         df <-
           read_csv(private$FileIO, col_names = c("ObjectSchema","ObjectName","ReadRatio","WriteRatio","TotalReads","TotalWrites"),
                    locale = locale(asciify = TRUE), na = c("NULL","NA","","NAN","NaN"));
