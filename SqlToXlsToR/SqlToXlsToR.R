@@ -67,18 +67,23 @@ rm(sqlServerInstanceSpecList);
 rm(sourceVector);
 gc();
 # Screen DB list
-for (sourceIndex in seq_along(sourceVector)) {
-  projectSourceFile <- paste0(projectSourcePath, "/", sourceVector[sourceIndex]);
-  write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
-  source(projectSourceFile);
+if (file.exists(sqlServerInstanceUsageFile)) {
+  if (file.info(sqlServerInstanceUsageFile)$size > 0) {
+    # DB Object source
+    projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceDbObjectList.R");
+    write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+    source(projectSourceFile);
+    # DB Constraint source
+  }
 }
-rm(sourceIndex);
 
+# for (sourceIndex in seq_along(sourceVector)) {
+#   projectSourceFile <- paste0(projectSourcePath, "/", sourceVector[sourceIndex]);
+#   write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+#   source(projectSourceFile);
+# }
 
-
-
-
-
+rm(sqlServerInstanceUsageFile);
 rm(sqlServiceInstance);
 rm(sqlServerInstance);
 rm(sqlServerVersionVector);
