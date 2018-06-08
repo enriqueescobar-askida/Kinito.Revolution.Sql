@@ -48,20 +48,6 @@ sqlToXlsSqlServerInstanceFactory$setSqlServerInstance(sqlServerInstance);
 sqlToXlsSqlServerInstanceFactory$setSqlServiceInstance(sqlServiceInstance);
 # sourceFile Sql Server Instance Linked List
 sqlServerInstanceLinkedList <- sqlToXlsSqlServerInstanceFactory$getLinkedList();
-
-
-# load
-for (sourceIndex in seq_along(sourceVector)) {
-  projectSourceFile <- paste0(projectSourcePath, "/", sourceVector[sourceIndex]);
-  write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
-  source(projectSourceFile);
-}
-rm(sourceIndex);
-
-
-
-
-
 ## sourceFile Sql Server Instance Usage List
 sqlServerInstanceUsageList <- sqlToXlsSqlServerInstanceFactory$getUsageList();
 sqlToXlsSqlServerInstanceFactory$getUsageListBarplot();
@@ -73,16 +59,27 @@ sqlServerInstanceRunningList <- sqlToXlsSqlServerInstanceFactory$getRunningList(
 ## sourceFile Sql Server Instance DB Spec List
 sqlServerInstanceSpecList <- sqlToXlsSqlServerInstanceFactory$getSpecList();
 rm(sqlToXlsSqlServerInstanceFactory);
-gc();
-##
-rm(sourceVector);
-rm(sqlServiceInstance);
-rm(sqlServerInstance);
-rm(sqlServerVersionVector);
 rm(sqlServerInstanceLinkedList);
 rm(sqlServerInstanceUsageList);
 rm(sqlServerInstanceBackupList);
 rm(sqlServerInstanceRunningList);
 rm(sqlServerInstanceSpecList);
+rm(sourceVector);
 gc();
+# Screen DB list
+for (sourceIndex in seq_along(sourceVector)) {
+  projectSourceFile <- paste0(projectSourcePath, "/", sourceVector[sourceIndex]);
+  write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+  source(projectSourceFile);
+}
+rm(sourceIndex);
+
+
+
+
+
+
+rm(sqlServiceInstance);
+rm(sqlServerInstance);
+rm(sqlServerVersionVector);
 
