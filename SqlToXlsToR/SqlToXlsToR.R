@@ -4,6 +4,7 @@ write(paste0(c("sourcePath ...\t", projectSourcePath), sep = "", collapse = ""),
 # sql server info
 sqlServiceInstance <- "";
 sqlServerInstance <- "";
+sqlServerInstanceUsageFile <- "";
 sqlServerVersionVector <- vector(mode = "character");
 sourceVector <- vector(mode = "character", length = 6);
 sqlServerInstanceLinkedList <- tibble::as_tibble(data.frame(NULL));
@@ -11,16 +12,6 @@ sqlServerInstanceUsageList <- tibble::as_tibble(data.frame(NULL));
 sqlServerInstanceBackupList <- tibble::as_tibble(data.frame(NULL));
 sqlServerInstanceRunningList <- tibble::as_tibble(data.frame(NULL));
 sqlServerInstanceSpecList <- tibble::as_tibble(data.frame(NULL));
-# sourceFile Sql Server
-projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServer.R");
-write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
-source(projectSourceFile);
-sqlToXlsSqlServer <- SqlToXlsSqlServer$new(projectPath);
-sqlServerVersionVector <- sqlToXlsSqlServer$getVersionVector();
-sqlServiceInstance <- sqlToXlsSqlServer$getServiceInstance();
-sqlServerInstance <- sqlToXlsSqlServer$getInstance();
-rm(sqlToXlsSqlServer);
-gc();
 # R source files
 # R source files Sql Server Instance Abstract List
 sourceVector[1] <- "SqlToFileSqlServerInstanceAbstractList.R";
@@ -36,6 +27,16 @@ sourceVector[5] <- "SqlToXlsSqlServerInstanceBackupList.R";
 sourceVector[6] <- "SqlToXlsSqlServerInstanceRunningList.R";
 # Sql Server Instance DB Spec List
 sourceVector[7] <- "SqlToXlsSqlServerInstanceSpecList.R";
+# sourceFile Sql Server
+projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServer.R");
+write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+source(projectSourceFile);
+sqlToXlsSqlServer <- SqlToXlsSqlServer$new(projectPath);
+sqlServerVersionVector <- sqlToXlsSqlServer$getVersionVector();
+sqlServiceInstance <- sqlToXlsSqlServer$getServiceInstance();
+sqlServerInstance <- sqlToXlsSqlServer$getInstance();
+rm(sqlToXlsSqlServer);
+gc();
 # load
 for (sourceIndex in seq_along(sourceVector)) {
   projectSourceFile <- paste0(projectSourcePath, "/", sourceVector[sourceIndex]);
