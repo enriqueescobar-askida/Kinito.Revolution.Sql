@@ -74,6 +74,29 @@ if (file.exists(sqlServerInstanceUsageFile)) {
     write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
     source(projectSourceFile);
     # DB Constraint source
+    projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceDbConstraintList.R");
+    write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+    source(projectSourceFile);
+    # DB Trigger source
+    projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceDbTriggerList.R");
+    write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+    source(projectSourceFile);
+    # DB Principal key source
+    projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceDbPrincipalKeyList.R");
+    write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+    source(projectSourceFile);
+    # DB Foreign key source
+    projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceDbForeignKeyList.R");
+    write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+    source(projectSourceFile);
+    # DB Index source
+    projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceDbIndexList.R");
+    write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+    source(projectSourceFile);
+    # DB list
+    dbNameVector <- scan(file = sqlServerInstanceUsageFile, what = character());
+    #for (dbName in dbNameVector) {
+    #}
   }
 }
 
