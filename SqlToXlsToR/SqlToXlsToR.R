@@ -95,8 +95,14 @@ if (file.exists(sqlServerInstanceUsageFile)) {
     source(projectSourceFile);
     # DB list
     dbNameVector <- scan(file = sqlServerInstanceUsageFile, what = character());
-    #for (dbName in dbNameVector) {
-    #}
+    for (dbName in dbNameVector) {
+      write(paste0(c("dbName dbfile ...\t", dbName), sep = "", collapse = ""), stdout());
+      ## DB Object items
+      ## DB Object actions
+      ### DB Object Table source
+      ### DB Object Table items
+      ### DB Object Table actions
+    }
   }
 }
 
