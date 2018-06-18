@@ -185,8 +185,22 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         objectList$getProceduresBarplot();
         objectList$getProceduresPiechart();
         ### DB Object Procedure source
-        ###
-        ###
+        projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceDbProcedureList.R");
+        write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+        source(projectSourceFile);
+        ### DB Object Procedure items
+        procedureList <-
+          SqlToXlsSqlServerInstanceDbProcedureList$new(
+            projectPath,sqlServiceInstance,sqlServerInstance,dbName,objectProcedures);
+        ### DB Object Procedure actions
+        procedureList$getFile();
+        procedureList$fileToTibble();
+        procedureList$getTibble();
+        procedureList$getFileParam();
+        procedureList$getTibbleParam();
+        procedureList$getFileIO();
+        procedureList$getTibbleIO();
+        rm(procedureList);
         objectListName <- "";
       }
       
