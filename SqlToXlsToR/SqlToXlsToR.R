@@ -98,7 +98,20 @@ if (file.exists(sqlServerInstanceUsageFile)) {
     for (dbName in dbNameVector) {
       write(paste0(c("dbName dbfile ...\t", dbName), sep = "", collapse = ""), stdout());
       ## DB Object items
+      objectTables <- NULL;
+      objectViews <- NULL;
+      objectFunctions <- NULL;
+      objectProcedures <- NULL;
+      objectTibble <- NULL;
+      objectList <-
+        SqlToXlsSqlServerInstanceDbObjectList$new(
+          projectPath,sqlServiceInstance,sqlServerInstance,dbName);
       ## DB Object actions
+      objectList$getFile();
+      objectList$fileToTibble();
+      objectTibble <- objectList$getTibble();
+      objectList$getBarplotGgplot2();
+      objectList$getPiechartGgplot2();
       ### DB Object Table source
       ### DB Object Table items
       ### DB Object Table actions
