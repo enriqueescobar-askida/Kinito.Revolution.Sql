@@ -112,6 +112,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       objectTibble <- objectList$getTibble();
       objectList$getBarplotGgplot2();
       objectList$getPiechartGgplot2();
+      objectListName <- "";
       
       ## DB Object Tables
       if(objectList$HasTables) {
@@ -179,6 +180,12 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       
       ## DB Object Functions
       if(objectList$HasFunctions) {
+        objectListName <- "Functions";
+        objectListName <- gsub(".xls",
+                               paste0(c("_",objectListName), sep = "", collapse = ""),
+                               objectList$getFile());
+        write(paste0(c("dbObject Functions ...\t", objectListName), sep = "", collapse = ""), stdout());
+        ### DB Object Function plot
         objectFunctions <- objectList$getFunctions();
         objectList$getFunctionsBarplot();
         objectList$getFunctionsPiechart();
@@ -200,6 +207,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         # self$HasParams
         # 
         rm(functionList);
+        objectListName <- "";
       }
       
       ## DB Object Procedures
@@ -225,7 +233,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         procedureList$getTibbleIO();
         rm(procedureList);
       }
-      
+      rm(objectListName);
       rm(objectList);
       ## DB Constraint items
       constraintTibble <- NULL;

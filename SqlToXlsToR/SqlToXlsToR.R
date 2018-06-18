@@ -96,7 +96,8 @@ if (file.exists(sqlServerInstanceUsageFile)) {
     # DB list
     dbNameVector <- scan(file = sqlServerInstanceUsageFile, what = character());
     for (dbName in dbNameVector) {
-      write(paste0(c("dbName dbfile ...\t", dbName), sep = "", collapse = ""), stdout());
+      dbName <- dbNameVector[[1]];
+      write(paste0(c("dbList dbName ...\t", dbName), sep = "", collapse = ""), stdout());
       ## DB Object items
       objectTables <- NULL;
       objectViews <- NULL;
@@ -112,35 +113,80 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       objectTibble <- objectList$getTibble();
       objectList$getBarplotGgplot2();
       objectList$getPiechartGgplot2();
+      objectListName <- "";
       
       ## DB Object Tables
       if(objectList$HasTables) {
-      ### DB Object Table source
-      ### DB Object Table items
-      ### DB Object Table actions
+        objectListName <- "Tables";
+        objectListName <- gsub(".xls",
+                               paste0(c("_",objectListName), sep = "", collapse = ""),
+                               objectList$getFile());
+        write(paste0(c("dbObject Tables ...\t", objectListName), sep = "", collapse = ""), stdout());
+        ### DB Object Table source
+        ### DB Object Table items
+        ### DB Object Table actions
+        objectListName <- "";
       }
       
       ## DB Object Views
       if(objectList$HasViews) {
-      ###
-      ###
-      ###
+        objectListName <- "Views";
+        objectListName <- gsub(".xls",
+                               paste0(c("_",objectListName), sep = "", collapse = ""),
+                               objectList$getFile());
+        write(paste0(c("dbObject Views ...\t", objectListName), sep = "", collapse = ""), stdout());
+        ###
+        ###
+        ###
+        objectListName <- "";
       }
       
       ## DB Object Functions
       if(objectList$HasFunctions) {
-      ###
-      ###
-      ###
+        objectListName <- "Functions";
+        objectListName <- gsub(".xls",
+                               paste0(c("_",objectListName), sep = "", collapse = ""),
+                               objectList$getFile());
+        write(paste0(c("dbObject Functions ...\t", objectListName), sep = "", collapse = ""), stdout());
+        ### DB Object Function plot
+        objectFunctions <- objectList$getFunctions();
+        objectList$getFunctionsBarplot();
+        objectList$getFunctionsPiechart();
+        ### DB Object Function source
+        projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceDbFunctionList.R");
+        write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+        source(projectSourceFile);
+        ### DB Object Function items
+        functionList <-
+          SqlToXlsSqlServerInstanceDbFunctionList$new(
+            projectPath,sqlServiceInstance,sqlServerInstance,dbName,objectFunctions);
+        ### DB Object Function actions
+        functionList$getFile();
+        functionList$fileToTibble();
+        functionList$getTibble();
+        # any graph
+        functionList$getFileParam();
+        functionList$getTibbleParam();
+        # self$HasParams
+        # 
+        rm(functionList);
+        objectListName <- "";
       }
       
       ## DB Object Procedures
       if(objectList$HasProcedures) {
-      ###
-      ###
-      ###
+        objectListName <- "Procedures";
+        objectListName <- gsub(".xls",
+                               paste0(c("_",objectListName), sep = "", collapse = ""),
+                               objectList$getFile());
+        write(paste0(c("dbObject Procedures ...\t", objectListName), sep = "", collapse = ""), stdout());
+        ###
+        ###
+        ###
+        objectListName <- "";
       }
       
+      rm(objectListName);
     }
   }
 }
