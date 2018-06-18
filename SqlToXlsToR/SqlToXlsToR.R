@@ -180,7 +180,11 @@ if (file.exists(sqlServerInstanceUsageFile)) {
                                paste0(c("_",objectListName), sep = "", collapse = ""),
                                objectList$getFile());
         write(paste0(c("dbObject Procedures ...\t", objectListName), sep = "", collapse = ""), stdout());
-        ###
+        ### DB Object Procedure plot
+        objectProcedures <- objectList$getProcedures();
+        objectList$getProceduresBarplot();
+        objectList$getProceduresPiechart();
+        ### DB Object Procedure source
         ###
         ###
         objectListName <- "";
