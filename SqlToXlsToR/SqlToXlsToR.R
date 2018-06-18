@@ -112,9 +112,35 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       objectTibble <- objectList$getTibble();
       objectList$getBarplotGgplot2();
       objectList$getPiechartGgplot2();
+      
+      ## DB Object Tables
+      if(objectList$HasTables) {
       ### DB Object Table source
       ### DB Object Table items
       ### DB Object Table actions
+      }
+      
+      ## DB Object Views
+      if(objectList$HasViews) {
+      ###
+      ###
+      ###
+      }
+      
+      ## DB Object Functions
+      if(objectList$HasFunctions) {
+      ###
+      ###
+      ###
+      }
+      
+      ## DB Object Procedures
+      if(objectList$HasProcedures) {
+      ###
+      ###
+      ###
+      }
+      
     }
   }
 }

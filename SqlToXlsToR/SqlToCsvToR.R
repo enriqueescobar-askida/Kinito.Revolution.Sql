@@ -113,6 +113,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       objectList$getBarplotGgplot2();
       objectList$getPiechartGgplot2();
       
+      ## DB Object Tables
       if(objectList$HasTables) {
         objectTables <- objectList$getTables();
         objectList$getTablesBarplot();
@@ -158,6 +159,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         rm(tableList);
       }
       
+      ## DB Object Views
       if(objectList$HasViews) {
         objectViews <- objectList$getViews();
         ### DB Object View source
@@ -175,6 +177,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         rm(viewList);
       }
       
+      ## DB Object Functions
       if(objectList$HasFunctions) {
         objectFunctions <- objectList$getFunctions();
         objectList$getFunctionsBarplot();
@@ -199,6 +202,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         rm(functionList);
       }
       
+      ## DB Object Procedures
       if(objectList$HasProcedures) {
         objectProcedures <- objectList$getProcedures();
         objectList$getProceduresBarplot();
