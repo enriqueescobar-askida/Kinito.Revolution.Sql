@@ -196,8 +196,8 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         procedureList$getFile();
         procedureList$fileToTibble();
         procedureList$getTibble();
-        procedureList$getFileParam();
-        procedureList$getTibbleParam();
+        #procedureList$getFileParam();
+        #procedureList$getTibbleParam();
         procedureList$getFileIO();
         procedureList$getTibbleIO();
         rm(procedureList);
