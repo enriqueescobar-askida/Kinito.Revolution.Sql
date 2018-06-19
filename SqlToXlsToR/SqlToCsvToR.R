@@ -116,6 +116,12 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       
       ## DB Object Tables
       if(objectList$HasTables) {
+        objectListName <- "Tables";
+        objectListName <- gsub(".xls",
+                               paste0(c("_",objectListName), sep = "", collapse = ""),
+                               objectList$getFile());
+        write(paste0(c("dbObject Tables ...\t", objectListName), sep = "", collapse = ""), stdout());
+        ### DB Object Table plot
         objectTables <- objectList$getTables();
         objectList$getTablesBarplot();
         objectList$getTablesPiechart();
@@ -158,10 +164,17 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         }
         
         rm(tableList);
+        objectListName <- "";
       }
       
       ## DB Object Views
       if(objectList$HasViews) {
+        objectListName <- "Views";
+        objectListName <- gsub(".xls",
+                               paste0(c("_",objectListName), sep = "", collapse = ""),
+                               objectList$getFile());
+        write(paste0(c("dbObject Views ...\t", objectListName), sep = "", collapse = ""), stdout());
+        ###
         objectViews <- objectList$getViews();
         ### DB Object View source
         projectSourceFile <- paste0(projectSourcePath, "/", "SqlToCsvSqlServerInstanceDbViewList.R");
@@ -176,6 +189,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         viewList$fileToTibble();
         viewList$getTibble();
         rm(viewList);
+        objectListName <- "";
       }
       
       ## DB Object Functions
@@ -238,7 +252,9 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         procedureList$getFileIO();
         procedureList$getTibbleIO();
         rm(procedureList);
+        objectListName <- "";
       }
+      
       rm(objectListName);
       rm(objectList);
       ## DB Constraint items

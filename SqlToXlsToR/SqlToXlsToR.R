@@ -122,9 +122,49 @@ if (file.exists(sqlServerInstanceUsageFile)) {
                                paste0(c("_",objectListName), sep = "", collapse = ""),
                                objectList$getFile());
         write(paste0(c("dbObject Tables ...\t", objectListName), sep = "", collapse = ""), stdout());
+        ### DB Object Table plot
+        objectTables <- objectList$getTables();
+        objectList$getTablesBarplot();
+        objectList$getTablesPiechart();
         ### DB Object Table source
+        projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceDbTableList.R");
+        write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+        source(projectSourceFile);
         ### DB Object Table items
+        tableList <-
+          SqlToXlsSqlServerInstanceDbTableList$new(
+            projectPath,sqlServiceInstance,sqlServerInstance,dbName,objectTables);
         ### DB Object Table actions
+        tableList$getFile();
+        tableList$fileToTibble();
+        tableList$getTibble();
+        tableList$getFileCount();
+        tableList$getTibbleCount();
+        tableList$getBarplotGgplot2();
+        tableList$getTibbleRowRepeats();
+        
+        if(tableList$HasRowRepeats) tableList$getRowRepeatsHistogram();
+        
+        tableList$getFileKey();
+        tableList$getTibbleKey();
+        tableList$getPrimaryKeyHistogram();
+        tableList$getForeignKeyHistogram();
+        tableList$getFileFootprint();
+        tableList$getTibbleFootprint();
+        
+        if(tableList$HasFootprint) { #t2<-t2[!is.na(t2$FKName),]
+          tableList$getTibbleFootprintAboveMeans();
+          tableList$PngFootprintWordcloud();
+        }
+        
+        tableList$getFileIO();
+        tableList$getTibbleIO();
+        
+        if(table$HasIO){
+          
+        }
+        
+        rm(tableList);
         objectListName <- "";
       }
       
@@ -136,8 +176,20 @@ if (file.exists(sqlServerInstanceUsageFile)) {
                                objectList$getFile());
         write(paste0(c("dbObject Views ...\t", objectListName), sep = "", collapse = ""), stdout());
         ###
-        ###
-        ###
+        objectViews <- objectList$getViews();
+        ### DB Object View source
+        projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceDbViewList.R");
+        write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+        source(projectSourceFile);
+        ### DB Object View items
+        viewList <-
+          SqlToXlsSqlServerInstanceDbViewList$new(
+            projectPath,sqlServiceInstance,sqlServerInstance,dbName,objectViews);
+        ### DB Object View actions
+        viewList$getFile();
+        viewList$fileToTibble();
+        viewList$getTibble();
+        rm(viewList);
         objectListName <- "";
       }
       
