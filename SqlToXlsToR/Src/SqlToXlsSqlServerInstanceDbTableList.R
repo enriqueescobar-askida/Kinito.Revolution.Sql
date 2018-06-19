@@ -69,8 +69,9 @@ SqlToXlsSqlServerInstanceDbTableList <- R6Class("SqlToXlsSqlServerInstanceDbTabl
       
       if(!isFileNullOrEmpty){
         df <-
-          read_csv(private$FileCount, col_names = c("TableName","TableCount"),
-                   locale = locale(asciify = TRUE), na = c("NULL","NA","","NAN","NaN"));
+          read_excel(private$FileCount, na = "NA", skip = 0,
+                     trim_ws = TRUE);#locale = locale(asciify = TRUE)
+          # col_names = c("TableName","TableCount"),
         private$TibbleCount <- tibble::as_tibble(df);
         private$cleanTibbleCount();
       }
