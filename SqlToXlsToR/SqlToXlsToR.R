@@ -272,6 +272,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       constraintList$getTableNameFrequencyHistogram();
       rm(constraintList);
       ## DB Trigger items
+      
     }
   }
 }
