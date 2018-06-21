@@ -159,7 +159,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         tableList$getFileIO();
         tableList$getTibbleIO();
         
-        if(table$HasIO){
+        if(tableList$HasIO){
           
         }
         

@@ -257,6 +257,13 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       }
       
       rm(objectListName);
+      rm(objectList);
+      ## DB Constraint items
+      constraintTibble <- NULL;
+      constraintList <-
+        SqlToXlsSqlServerInstanceDbConstraintList$new(
+          projectPath,sqlServiceInstance,sqlServerInstance,dbName);
+      ## DB Constraint actions
     }
   }
 }
