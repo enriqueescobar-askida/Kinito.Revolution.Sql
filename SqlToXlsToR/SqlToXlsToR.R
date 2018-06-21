@@ -264,6 +264,14 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         SqlToXlsSqlServerInstanceDbConstraintList$new(
           projectPath,sqlServiceInstance,sqlServerInstance,dbName);
       ## DB Constraint actions
+      constraintList$getFile();
+      constraintList$fileToTibble();
+      constraintTibble <- constraintList$getTibble();
+      constraintList$getTableNameFrequency();
+      constraintList$getTableNameFrequencyTibble();
+      constraintList$getTableNameFrequencyHistogram();
+      rm(constraintList);
+      ## DB Trigger items
     }
   }
 }
