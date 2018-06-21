@@ -289,6 +289,19 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       triggerList$getTriggerSubgroupFrequencyTibble();
       rm(triggerList);
       ## DB Principal key items
+      principalKeyTibble <- NULL;
+      principalKeyList <-
+        SqlToXlsSqlServerInstanceDbPrincipalKeyList$new(
+          projectPath,sqlServiceInstance,sqlServerInstance,dbName);
+      ## DB Principal key actions
+      principalKeyList$getFile();
+      principalKeyList$fileToTibble();
+      principalKeyTibble <- principalKeyList$getTibble();
+      principalKeyList$getTableNameFrequency();
+      principalKeyList$getTableNameFrequencyTibble();
+      principalKeyList$getTableNameFrequencyHistogram();
+      rm(principalKeyList);
+      ## DB Foreign key items
     }
   }
 }
