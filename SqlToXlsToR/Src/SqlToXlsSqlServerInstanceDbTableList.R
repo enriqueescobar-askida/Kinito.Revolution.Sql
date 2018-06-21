@@ -296,8 +296,9 @@ SqlToXlsSqlServerInstanceDbTableList <- R6Class("SqlToXlsSqlServerInstanceDbTabl
       if(!isFileNullOrEmpty){
         self$HasIO <- TRUE;
         df <-
-          read_csv(private$FileIO, col_names = c("ObjectSchema","ObjectName","ReadRatio","WriteRatio","TotalReads","TotalWrites"),
-                   locale = locale(asciify = TRUE), na = c("NULL","NA","","NAN","NaN"));
+          read_excel(private$FileIO, na = "NA", skip = 0,
+                     trim_ws = TRUE);#locale = locale(asciify = TRUE)
+        # col_names = c("ObjectSchema","ObjectName","ReadRatio","WriteRatio","TotalReads","TotalWrites"),
         private$TibbleIO <- tibble::as_tibble(df);
       }
       rm(df);
