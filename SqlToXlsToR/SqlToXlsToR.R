@@ -272,7 +272,23 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       constraintList$getTableNameFrequencyHistogram();
       rm(constraintList);
       ## DB Trigger items
-      
+      triggerTibble <- NULL;
+      triggerList <-
+        SqlToXlsSqlServerInstanceDbTriggerList$new(
+          projectPath,sqlServiceInstance,sqlServerInstance,dbName);
+      ## DB Trigger actions
+      triggerList$getFile();
+      triggerList$fileToTibble();
+      triggerTibble <- triggerList$getTibble();
+      triggerList$getTriggerGroupFrequency();
+      triggerList$getTriggerGroupFrequencyTibble();
+      triggerList$getBarplotGgplot2();
+      triggerList$getPiechartGgplot2();
+      triggerList$getTriggerGroupFrequencyHistogram();
+      triggerList$getTriggerSubgroupFrequency();
+      triggerList$getTriggerSubgroupFrequencyTibble();
+      rm(triggerList);
+      ## DB Principal key items
     }
   }
 }
