@@ -95,8 +95,8 @@ if (file.exists(sqlServerInstanceUsageFile)) {
     source(projectSourceFile);
     # DB list
     dbNameVector <- scan(file = sqlServerInstanceUsageFile, what = character());
-    #for (dbName in dbNameVector) {
-      dbName <- dbNameVector[1];
+    for (dbName in dbNameVector) {
+      write(paste0(c("dbList dbName ...\t", dbName), sep = "", collapse = ""), stdout());
       ## DB Object items
       objectTables <- NULL;
       objectViews <- NULL;
@@ -322,8 +322,8 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       indexList$getFile();
       indexList$fileToTibble();
       indexTibble <- indexList$getTibble();
-    #}
-    
+      rm(indexList);
+      ##
       rm(objectTibble);
       rm(objectTables);
       rm(objectViews);
@@ -333,8 +333,10 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       rm(triggerTibble);
       rm(principalKeyTibble);
       rm(foreignKeyTibble);
+      rm(indexTibble);
       rm(dbName);
       rm(dbNameVector);
+    }
   }
 }
 

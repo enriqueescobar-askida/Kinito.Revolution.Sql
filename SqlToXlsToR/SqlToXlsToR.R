@@ -96,7 +96,6 @@ if (file.exists(sqlServerInstanceUsageFile)) {
     # DB list
     dbNameVector <- scan(file = sqlServerInstanceUsageFile, what = character());
     for (dbName in dbNameVector) {
-      dbName <- dbNameVector[[1]];
       write(paste0(c("dbList dbName ...\t", dbName), sep = "", collapse = ""), stdout());
       ## DB Object items
       objectTables <- NULL;
@@ -315,15 +314,31 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       foreignKeyList$getTableNameFrequencyHistogram();
       rm(foreignKeyList);
       ## DB Index items
+      indexTibble <- NULL;
+      indexList <-
+        SqlToXlsSqlServerInstanceDbIndexList$new(
+          projectPath,sqlServiceInstance,sqlServerInstance,dbName);
+      ## DB Index actions
+      indexList$getFile();
+      indexList$fileToTibble();
+      indexTibble <- indexList$getTibble();
+      rm(indexList);
+      ##
+      rm(objectTibble);
+      rm(objectTables);
+      rm(objectViews);
+      rm(objectFunctions);
+      rm(objectProcedures);
+      rm(constraintTibble);
+      rm(triggerTibble);
+      rm(principalKeyTibble);
+      rm(foreignKeyTibble);
+      rm(indexTibble);
+      rm(dbName);
+      rm(dbNameVector);
     }
   }
 }
-
-# for (sourceIndex in seq_along(sourceVector)) {
-#   projectSourceFile <- paste0(projectSourcePath, "/", sourceVector[sourceIndex]);
-#   write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
-#   source(projectSourceFile);
-# }
 
 rm(sqlServerInstanceUsageFile);
 rm(sqlServiceInstance);
