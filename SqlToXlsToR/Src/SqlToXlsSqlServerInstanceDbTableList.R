@@ -237,8 +237,9 @@ SqlToXlsSqlServerInstanceDbTableList <- R6Class("SqlToXlsSqlServerInstanceDbTabl
       if(!isFileNullOrEmpty){
         self$HasFootprint <- TRUE;
         df <-
-          read_csv(private$FileFootprint, col_names = c("TableName","IndexName","RecordCount","TotalPages","UsedPages","DataPages","TotalSpaceMB","UsedSpaceMB","DataSpaceMB"),
-                   locale = locale(asciify = TRUE), na = c("NULL","NA","","NAN","NaN"));
+          read_excel(private$FileKey, na = "NA", skip = 0,
+                     trim_ws = TRUE);#locale = locale(asciify = TRUE)
+        # col_names = c("TableName","IndexName","RecordCount","TotalPages","UsedPages","DataPages","TotalSpaceMB","UsedSpaceMB","DataSpaceMB"),
         df$IndexName <- NULL;
         private$TibbleFootprint <- tibble::as_tibble(df);
       }
