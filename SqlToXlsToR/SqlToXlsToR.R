@@ -302,6 +302,19 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       principalKeyList$getTableNameFrequencyHistogram();
       rm(principalKeyList);
       ## DB Foreign key items
+      foreignKeyTibble <- NULL;
+      foreignKeyList <-
+        SqlToXlsSqlServerInstanceDbForeignKeyList$new(
+          projectPath,sqlServiceInstance,sqlServerInstance,dbName);
+      ## DB Foreign key actions
+      foreignKeyList$getFile();
+      foreignKeyList$fileToTibble();
+      foreignKeyTibble <- foreignKeyList$getTibble();
+      foreignKeyList$getTableNameFrequency();
+      foreignKeyList$getTableNameFrequencyTibble();
+      foreignKeyList$getTableNameFrequencyHistogram();
+      rm(foreignKeyList);
+      ## DB Index items
     }
   }
 }
