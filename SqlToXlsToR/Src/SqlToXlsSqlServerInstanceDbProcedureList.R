@@ -52,7 +52,7 @@ SqlToXlsSqlServerInstanceDbProcedureList <- R6Class("SqlToXlsSqlServerInstanceDb
       
       if(!isFileNullOrEmpty){
         df <-
-          read_excel(private$FileParam, na = "NA", skip = 65000,
+          read_excel(private$FileParam, na = "NA", skip = 0,
                      trim_ws = TRUE);#locale = locale(asciify = TRUE),
           #col_names = c("ProcedureName","SchemaName","ProcedureType","ProcedureDesc","ParameterID","ParameterName","ParameterType","ParamMaxLength","ParameterPrecision","ParameterScale","IsParamOutput")
         private$TibbleParam <- tibble::as_tibble(df);
