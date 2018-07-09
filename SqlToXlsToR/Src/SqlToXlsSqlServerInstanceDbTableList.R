@@ -113,6 +113,8 @@ SqlToXlsSqlServerInstanceDbTableList <- R6Class("SqlToXlsSqlServerInstanceDbTabl
           xlab(xTitle) +
           ylab(yTitle) +
           theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5));
+        
+        rm(t);
       }
       
       return(barplot);
@@ -304,6 +306,32 @@ SqlToXlsSqlServerInstanceDbTableList <- R6Class("SqlToXlsSqlServerInstanceDbTabl
       rm(df);
       
       return(private$TibbleIO);
+    },
+    getTibbleIOHistogram = function(){
+      t <- private$TibbleIO;
+      barplot <- NULL;
+      
+      if(!is.null(t)){
+        # titles
+        xTitle <- colnames(t)[1];
+        yTitle <- colnames(rev(t)[1]);
+        mainTitle <- paste0(private$Instance, " Table IO List count Histogram");
+        write(paste0(c("TibbleIO ...\t", xTitle), sep = "", collapse = ""), stdout());
+        write(paste0(c("TibbleIO ...\t", yTitle), sep = "", collapse = ""), stdout());
+        write(paste0(c("TibbleIO ...\t", mainTitle), sep = "", collapse = ""), stdout());
+      #   # graph
+      #   barplot <- ggplot(t, aes(x = factor(TableRows), y = RowRepeats)) +
+      #     ##barplot <- ggplot(t, aes(x = factor(TableRows), y = sqrt(RowRepeats))) +
+      #     geom_bar(stat = "identity", width = 0.8, position = "dodge", fill = "lightblue") +
+      #     ##scale_y_sqrt(paste0("Square root of ", yTitle)) +
+      #     ggtitle(mainTitle) +
+      #     xlab(xTitle) +
+      #     ylab(yTitle) +
+      #     theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5));
+        rm(t);
+      }
+      # return(barplot);
+      return(summary(private$TibbleIO));
     }
   ),
   active = list(

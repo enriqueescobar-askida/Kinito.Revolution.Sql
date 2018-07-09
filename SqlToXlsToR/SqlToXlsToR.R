@@ -160,7 +160,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         tableList$getTibbleIO();
         
         if(tableList$HasIO){
-          
+          tableList$getTibbleIOHistogram();
         }
         
         rm(tableList);
