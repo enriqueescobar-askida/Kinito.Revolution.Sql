@@ -34,6 +34,9 @@ SqlToXlsSqlServerInstanceDbTableList <- R6Class("SqlToXlsSqlServerInstanceDbTabl
         private$PngFootprint <- gsub(".csv", "_Worcloud.png", private$FileFootprint);
       }
     },
+    #' Title  getBarplotGgplot2
+    #' @param aTibble
+    #' @return       barplot
     getBarplotGgplot2 = function(aTibble = NULL){
       barplot <- NULL;
       
@@ -56,6 +59,10 @@ SqlToXlsSqlServerInstanceDbTableList <- R6Class("SqlToXlsSqlServerInstanceDbTabl
           xlab(xTitle) +
           ylab(yTitle) +
           theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5));
+        
+        rm(xTitle);
+        rm(yTitle);
+        rm(mainTitle);
       }
       
       return(barplot);
@@ -95,6 +102,8 @@ SqlToXlsSqlServerInstanceDbTableList <- R6Class("SqlToXlsSqlServerInstanceDbTabl
         return(NULL);
       }
     },
+    #' Title  getRowRepeatsHistogram
+    #' @return Histogram
     getRowRepeatsHistogram = function(){
       t <- self$getTibbleRowRepeats();
       barplot <- NULL;
@@ -115,6 +124,9 @@ SqlToXlsSqlServerInstanceDbTableList <- R6Class("SqlToXlsSqlServerInstanceDbTabl
           theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5));
         
         rm(t);
+        rm(xTitle);
+        rm(yTitle);
+        rm(mainTitle);
       }
       
       return(barplot);
@@ -137,6 +149,8 @@ SqlToXlsSqlServerInstanceDbTableList <- R6Class("SqlToXlsSqlServerInstanceDbTabl
       
       return(private$TibbleKey);
     },
+    #' Title  getPrimaryKeyHistogram
+    #' @return  Histogram
     getPrimaryKeyHistogram = function(){
       df <- NULL;
       
@@ -173,10 +187,17 @@ SqlToXlsSqlServerInstanceDbTableList <- R6Class("SqlToXlsSqlServerInstanceDbTabl
           xlab(xTitle) +
           ylab(yTitle) +
           theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5));
+        
+        rm(df);
+        rm(xTitle);
+        rm(yTitle);
+        rm(mainTitle);
       }
 
       return(barplot);
     },
+    #' Title  getForeignKeyHistogram
+    #' @return  Histogram
     getForeignKeyHistogram = function(){
       df <- NULL;
       
@@ -213,6 +234,11 @@ SqlToXlsSqlServerInstanceDbTableList <- R6Class("SqlToXlsSqlServerInstanceDbTabl
           xlab(xTitle) +
           ylab(yTitle) +
           theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5));
+        
+        rm(df);
+        rm(xTitle);
+        rm(yTitle);
+        rm(mainTitle);
       }
       
       return(barplot);
@@ -308,30 +334,50 @@ SqlToXlsSqlServerInstanceDbTableList <- R6Class("SqlToXlsSqlServerInstanceDbTabl
       return(private$TibbleIO);
     },
     getTibbleIOHistogram = function(){
-      t <- private$TibbleIO;
-      barplot <- NULL;
+      df <- NULL;
       
-      if(!is.null(t)){
+      if(!is.null(private$TibbleIO)){
+        df <- cbind(private$TibbleIO$ObjectName, private$TibbleIO$ReadRatio);
+        colnames(df) <- c("ObjectName", "ReadRatio");
+        df <- tibble::as_tibble(df);
+        df <- df[!is.na(df$ReadRatio),];
+        df <- aggregate(
+          list(KeyRepeats = rep(1, nrow(df[-2]))),
+          df[-2],
+          length);
+        if(!is.na(mean(df$KeyRepeats))){
+          aMean <- mean(df$KeyRepeats);
+          df <- subset(df, KeyRepeats > aMean);
+          colnames(df) <- c("ObjectName","KeyRepeats");
+        }
+        df <- tibble::as_tibble(df);
+      }
+      
+      if(!is.null(df)){
         # titles
-        xTitle <- colnames(t)[1];
-        yTitle <- colnames(rev(t)[1]);
+        xTitle <- colnames(df)[1];
+        yTitle <- colnames(rev(df)[1]);
         mainTitle <- paste0(private$Instance, " Table IO List count Histogram");
         write(paste0(c("TibbleIO ...\t", xTitle), sep = "", collapse = ""), stdout());
         write(paste0(c("TibbleIO ...\t", yTitle), sep = "", collapse = ""), stdout());
         write(paste0(c("TibbleIO ...\t", mainTitle), sep = "", collapse = ""), stdout());
-      #   # graph
-      #   barplot <- ggplot(t, aes(x = factor(TableRows), y = RowRepeats)) +
-      #     ##barplot <- ggplot(t, aes(x = factor(TableRows), y = sqrt(RowRepeats))) +
-      #     geom_bar(stat = "identity", width = 0.8, position = "dodge", fill = "lightblue") +
-      #     ##scale_y_sqrt(paste0("Square root of ", yTitle)) +
-      #     ggtitle(mainTitle) +
-      #     xlab(xTitle) +
-      #     ylab(yTitle) +
-      #     theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5));
-        rm(t);
+        # graph
+        barplot <- ggplot(df, aes(x = factor(ObjectName), y = KeyRepeats)) +
+          ##barplot <- ggplot(t, aes(x = factor(TableRows), y = sqrt(KeyRepeats))) +
+          geom_bar(stat = "identity", width = 0.8, position = "dodge", fill = "lightblue") +
+          ##scale_y_sqrt(paste0("Square root of ", yTitle)) +
+          ggtitle(mainTitle) +
+          xlab(xTitle) +
+          ylab(yTitle) +
+          theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5));
+        
+        rm(df);
+        rm(xTitle);
+        rm(yTitle);
+        rm(mainTitle);
       }
-      # return(barplot);
-      return(summary(private$TibbleIO));
+      return(barplot);
+      #return(summary(private$TibbleIO));
     }
   ),
   active = list(
