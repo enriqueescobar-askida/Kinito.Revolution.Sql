@@ -177,7 +177,7 @@ SqlToXlsSqlServerInstanceDbTableList <- R6Class("SqlToXlsSqlServerInstanceDbTabl
         # titles
         xTitle <- colnames(df)[1];
         yTitle <- colnames(rev(df)[1]);
-        mainTitle <- paste0(private$Instance, " Table Row List Primary Key Histogram");
+        mainTitle <- paste0(private$Instance, " Table Row List Primary Key ", yTitle, " Histogram");
         # graph
         barplot <- ggplot(df, aes(x = factor(TableName), y = KeyRepeats)) +
           ##barplot <- ggplot(t, aes(x = factor(TableRows), y = sqrt(KeyRepeats))) +
@@ -224,7 +224,7 @@ SqlToXlsSqlServerInstanceDbTableList <- R6Class("SqlToXlsSqlServerInstanceDbTabl
         # titles
         xTitle <- colnames(df)[1];
         yTitle <- colnames(rev(df)[1]);
-        mainTitle <- paste0(private$Instance, " Table Row List Foreign Key Histogram");
+        mainTitle <- paste0(private$Instance, " Table Row List Foreign Key ", yTitle, " Histogram");
         # graph
         barplot <- ggplot(df, aes(x = factor(TableName), y = KeyRepeats)) +
           ##barplot <- ggplot(t, aes(x = factor(TableRows), y = sqrt(KeyRepeats))) +
@@ -333,23 +333,15 @@ SqlToXlsSqlServerInstanceDbTableList <- R6Class("SqlToXlsSqlServerInstanceDbTabl
       
       return(private$TibbleIO);
     },
+    #' Title getTibbleIOHistogram
+    #' @return Histogram
     getTibbleIOHistogram = function(){
       df <- NULL;
       
       if(!is.null(private$TibbleIO)){
-        df <- cbind(private$TibbleIO$ObjectName, private$TibbleIO$ReadRatio);
-        colnames(df) <- c("ObjectName", "ReadRatio");
-        df <- tibble::as_tibble(df);
-        df <- df[!is.na(df$ReadRatio),];
-        df <- aggregate(
-          list(KeyRepeats = rep(1, nrow(df[-2]))),
-          df[-2],
-          length);
-        if(!is.na(mean(df$KeyRepeats))){
-          aMean <- mean(df$KeyRepeats);
-          df <- subset(df, KeyRepeats > aMean);
-          colnames(df) <- c("ObjectName","KeyRepeats");
-        }
+        #df <- cbind(private$TibbleIO$ObjectName, private$TibbleIO$ReadRatio);
+        # colnames(df) <- c("ObjectName", "ReadRatio");
+        df <- private$TibbleIO[, c(2, 3)];
         df <- tibble::as_tibble(df);
       }
       
@@ -357,12 +349,9 @@ SqlToXlsSqlServerInstanceDbTableList <- R6Class("SqlToXlsSqlServerInstanceDbTabl
         # titles
         xTitle <- colnames(df)[1];
         yTitle <- colnames(rev(df)[1]);
-        mainTitle <- paste0(private$Instance, " Table IO List count Histogram");
-        write(paste0(c("TibbleIO ...\t", xTitle), sep = "", collapse = ""), stdout());
-        write(paste0(c("TibbleIO ...\t", yTitle), sep = "", collapse = ""), stdout());
-        write(paste0(c("TibbleIO ...\t", mainTitle), sep = "", collapse = ""), stdout());
+        mainTitle <- paste0(private$Instance, " Table IO List ", yTitle, " Histogram");
         # graph
-        barplot <- ggplot(df, aes(x = factor(ObjectName), y = KeyRepeats)) +
+        barplot <- ggplot(df, aes(x = factor(ObjectName), y = ReadRatio)) +
           ##barplot <- ggplot(t, aes(x = factor(TableRows), y = sqrt(KeyRepeats))) +
           geom_bar(stat = "identity", width = 0.8, position = "dodge", fill = "lightblue") +
           ##scale_y_sqrt(paste0("Square root of ", yTitle)) +
@@ -377,7 +366,6 @@ SqlToXlsSqlServerInstanceDbTableList <- R6Class("SqlToXlsSqlServerInstanceDbTabl
         rm(mainTitle);
       }
       return(barplot);
-      #return(summary(private$TibbleIO));
     }
   ),
   active = list(

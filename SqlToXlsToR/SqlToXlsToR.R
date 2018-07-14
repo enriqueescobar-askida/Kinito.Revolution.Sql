@@ -96,6 +96,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
     # DB list
     dbNameVector <- scan(file = sqlServerInstanceUsageFile, what = character());
     for (dbName in dbNameVector) {
+      dbName<-dbNameVector[[1]];
       write(paste0(c("dbList dbName ...\t", dbName), sep = "", collapse = ""), stdout());
       ## DB Object items
       objectTables <- NULL;
@@ -158,10 +159,8 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         
         tableList$getFileIO();
         tableList$getTibbleIO();
-        
-        if(tableList$HasIO){
-          tableList$getTibbleIOHistogram();
-        }
+
+        if(tableList$HasIO) tableList$getTibbleIOHistogram();
         
         rm(tableList);
         objectListName <- "";

@@ -158,10 +158,8 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         
         tableList$getFileIO();
         tableList$getTibbleIO();
-        
-        if(tableList$HasIO){
-          
-        }
+
+        if(tableList$HasIO) tableList$getTibbleIOHistogram();
         
         rm(tableList);
         objectListName <- "";
