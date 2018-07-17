@@ -216,9 +216,10 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         functionList$getTibble();
         # any graph
         functionList$getFileParam();
+        functionList$fileToTibbleParam();
         functionList$getTibbleParam();
         # self$HasParams
-        # 
+        # any graph
         rm(functionList);
         objectListName <- "";
       }

@@ -25,19 +25,33 @@ SqlToXlsSqlServerInstanceDbFunctionList <- R6Class("SqlToXlsSqlServerInstanceDbF
       # }
     },
     getFileParam = function() private$FileParam,
-    getTibbleParam = function() {
+    fileToTibbleParam = function() {
       isNull <- !file.exists(private$FileParam);
       isEmpty <- if(file.exists(private$FileParam)) (file.info(private$FileParam)$size == 0) else FALSE;
       isFileNullOrEmpty <- isNull || isEmpty;
       df <- NULL;
       
       if(!isFileNullOrEmpty){
-        df <-
-          read_excel(private$FileParam, na = "NA",
-                   trim_ws = TRUE);#, locale = locale(asciify = TRUE)
+        df <- 
+          read_excel(private$FileParam, na = "NA", skip = 1, #col_names = self$ColumnTitles, 
+                     trim_ws = TRUE);#locale = locale(asciify = TRUE),
         private$TibbleParam <- tibble::as_tibble(df);
       }
       rm(df);
+    },
+    getTibbleParam = function() {
+      # isNull <- !file.exists(private$FileParam);
+      # isEmpty <- if(file.exists(private$FileParam)) (file.info(private$FileParam)$size == 0) else FALSE;
+      # isFileNullOrEmpty <- isNull || isEmpty;
+      # df <- NULL;
+      # 
+      # if(!isFileNullOrEmpty){
+      #   df <-
+      #     read_excel(private$FileParam, na = "NA", skip = 0,
+      #                trim_ws = TRUE);#locale = locale(asciify = TRUE)
+      #   private$TibbleParam <- tibble::as_tibble(df);
+      # }
+      # rm(df);
       
       return(private$TibbleParam);
     }
