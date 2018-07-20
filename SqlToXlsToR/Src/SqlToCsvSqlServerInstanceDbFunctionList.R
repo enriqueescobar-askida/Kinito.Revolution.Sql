@@ -40,18 +40,18 @@ SqlToCsvSqlServerInstanceDbFunctionList <- R6Class("SqlToCsvSqlServerInstanceDbF
       rm(df);
     },
     getTibbleParam = function() {
-      isNull <- !file.exists(private$FileParam);
-      isEmpty <- if(file.exists(private$FileParam)) (file.info(private$FileParam)$size == 0) else FALSE;
-      isFileNullOrEmpty <- isNull || isEmpty;
-      df <- NULL;
-      
-      if(!isFileNullOrEmpty){
-        df <-
-          read_csv(private$FileParam, col_names = c("FunctionName","SchemaName","FunctionType","FunctionDesc","ParameterID","ParameterName","ParameterType","ParamMaxLength","ParameterPrecision","ParameterScale","IsParamOutput"),
-                   locale = locale(asciify = TRUE), na = c("NULL","NA","","NAN","NaN"));
-        private$TibbleParam <- tibble::as_tibble(df);
-      }
-      rm(df);
+      # isNull <- !file.exists(private$FileParam);
+      # isEmpty <- if(file.exists(private$FileParam)) (file.info(private$FileParam)$size == 0) else FALSE;
+      # isFileNullOrEmpty <- isNull || isEmpty;
+      # df <- NULL;
+      # 
+      # if(!isFileNullOrEmpty){
+      #   df <-
+      #     read_csv(private$FileParam, col_names = c("FunctionName","SchemaName","FunctionType","FunctionDesc","ParameterID","ParameterName","ParameterType","ParamMaxLength","ParameterPrecision","ParameterScale","IsParamOutput"),
+      #              locale = locale(asciify = TRUE), na = c("NULL","NA","","NAN","NaN"));
+      #   private$TibbleParam <- tibble::as_tibble(df);
+      # }
+      # rm(df);
       
       return(private$TibbleParam);
     }

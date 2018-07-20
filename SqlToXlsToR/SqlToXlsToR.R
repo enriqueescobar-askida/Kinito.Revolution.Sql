@@ -214,12 +214,14 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         functionList$getFile();
         functionList$fileToTibble();
         functionList$getTibble();
-        # any graph
+        # no graph
         functionList$getFileParam();
         functionList$fileToTibbleParam();
         functionList$getTibbleParam();
-        # self$HasParams
-        # any graph
+        # needs self$HasParams
+        # ParameterID is not int dbo->int
+        # many histograms as nbParam/FunctionName graph on col 'FunctionType' 
+        # Has{Inline,Scalar,Valued}
         rm(functionList);
         objectListName <- "";
       }
