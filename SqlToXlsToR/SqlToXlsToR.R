@@ -218,10 +218,13 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         functionList$getFileParam();
         functionList$fileToTibbleParam();
         functionList$getTibbleParam();
-        # needs self$HasParams
-        # ParameterID is not int dbo->int
-        # many histograms as nbParam/FunctionName graph on col 'FunctionType' 
-        # Has{Inline,Scalar,Valued}
+        
+        if(functionList$HasParams){
+          if(functionList$HasParamsIF) functionList$getHistogramParams("IF");
+          if(functionList$HasParamsFN) functionList$getHistogramParams("FN");
+          if(functionList$HasParamsTF) functionList$getHistogramParams("TF");
+        }
+
         rm(functionList);
         objectListName <- "";
       }
