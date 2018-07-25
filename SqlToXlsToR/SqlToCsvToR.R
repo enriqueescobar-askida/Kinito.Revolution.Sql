@@ -213,11 +213,15 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         functionList$getFile();
         functionList$fileToTibble();
         functionList$getTibble();
-        # any graph
+        # no graph
         functionList$getFileParam();
+        functionList$fileToTibbleParam();
         functionList$getTibbleParam();
-        # self$HasParams
-        # 
+
+        if(functionList$HasParamsIF && functionList$HasParams) functionList$getHistogramParams("IF");
+        if(functionList$HasParamsFN && functionList$HasParams) functionList$getHistogramParams("FN");
+        if(functionList$HasParamsTF && functionList$HasParams) functionList$getHistogramParams("TF");
+
         rm(functionList);
         objectListName <- "";
       }
@@ -245,10 +249,17 @@ if (file.exists(sqlServerInstanceUsageFile)) {
         procedureList$getFile();
         procedureList$fileToTibble();
         procedureList$getTibble();
+        # no graph
         procedureList$getFileParam();
+        procedureList$fileToTibbleParam();
         procedureList$getTibbleParam();
+        
+        if(procedureList$HasParamsP && procedureList$HasParams) procedureList$getHistogramParams("P");
+        
         procedureList$getFileIO();
+        # procedureList$fileToTibbleIO();
         procedureList$getTibbleIO();
+        
         rm(procedureList);
         objectListName <- "";
       }

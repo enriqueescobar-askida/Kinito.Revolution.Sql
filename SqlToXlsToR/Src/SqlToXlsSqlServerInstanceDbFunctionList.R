@@ -37,7 +37,7 @@ SqlToXlsSqlServerInstanceDbFunctionList <- R6Class("SqlToXlsSqlServerInstanceDbF
       
       if(!isFileNullOrEmpty){
         self$HasParams <- TRUE;
-        df <- 
+        df <-
           read_excel(private$FileParam, na = "NA", skip = 0, #col_names = self$ColumnTitles, 
                      trim_ws = TRUE);#locale = locale(asciify = TRUE),
         private$TibbleParam <- tibble::as_tibble(df);
