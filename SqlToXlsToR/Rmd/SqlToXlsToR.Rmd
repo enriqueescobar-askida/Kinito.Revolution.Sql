@@ -1,0 +1,193 @@
+---
+title: "SqlToXlsToR"
+author: "Kinito Solutions"
+date: "July 25, 2018"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown Setup
+
+This is an R Markdown document. This document is on folder `./Rmd`.
+
+```{r cars, echo=FALSE, fig.height=5, fig.width=8, message=FALSE, warning=FALSE}
+# modify this path to you local repository
+# Windows machines have a environment variable SystemDrive=C:
+# I use my own for working directory as DataDrive & REPO_DIR
+localRepository <- Sys.getenv("DataDrive");
+localRepository <- paste0(localRepository, "/", Sys.getenv("REPO_DIR"));
+# solution is the folder containing the project
+projectSolution <- "Kinito.Revolution.Sql";
+write(paste0(c("Solution .....\t", projectSolution), sep = "", collapse = ""), stdout());
+# project is the project's name
+projectName <- "SqlToXlsToR";
+# namespace
+projectNamespace <- "SqlToXlsToR";
+projectNamespace <- if (projectSolution == projectName) projectSolution else paste0(projectSolution, ".", projectName);
+write(paste0(c("Namespace ....\t", projectNamespace), sep = "", collapse = ""), stdout());
+# common
+projectCommon <- "RCommon";
+# path
+projectPath <- "";
+projectPath <- if (projectSolution == projectName) projectSolution else paste0(projectSolution, "/", projectName);
+projectPath <- paste0(localRepository, "/", projectPath);
+write(paste0(c("Path new .....\t", projectPath), sep = "", collapse = ""), stdout());
+setwd(projectPath);
+# clean
+rm(localRepository);
+# options
+options(scipen = 100);
+```
+
+### R Session Info
+
+We use the following session:
+
+```{r sessionInfo, echo=FALSE}
+# session info
+sessionInfo();
+```
+
+We have attached the following packages:
+
+```{r search, echo=FALSE}
+# attached
+search();
+```
+
+We have the following objects:
+
+```{r ls, echo=FALSE}
+# Create a listing of all objects in the "global environment".
+ls();
+```
+
+### R code source
+
+The source path library red from:
+
+```{r sourcePath, echo=FALSE}
+# sourcePath
+projectSourcePath <- paste0(projectPath, "/Src");
+write(paste0(c("sourcePath ...\t", projectSourcePath), sep = "", collapse = ""), stdout());
+```
+
+## R SQL Server Info
+
+```{r sqlServerInfo, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+# sql server info
+sqlServiceInstance <- "";
+sqlServerInstance <- "";
+sqlServerInstanceUsageFile <- "";
+sqlServerVersionVector <- vector(mode = "character");
+sourceVector <- vector(mode = "character", length = 6);
+sqlServerInstanceLinkedList <- tibble::as_tibble(data.frame(NULL));
+sqlServerInstanceUsageList <- tibble::as_tibble(data.frame(NULL));
+sqlServerInstanceBackupList <- tibble::as_tibble(data.frame(NULL));
+sqlServerInstanceRunningList <- tibble::as_tibble(data.frame(NULL));
+sqlServerInstanceSpecList <- tibble::as_tibble(data.frame(NULL));
+# R source files
+# R source files Sql Server Instance Abstract List
+sourceVector[1] <- "SqlToFileSqlServerInstanceAbstractList.R";
+# R source Xls Sql Server Instance Abstract List
+sourceVector[2] <- "SqlToXlsSqlServerInstanceAbstractList.R";
+# Sql Server Instance Linked List
+sourceVector[3] <- "SqlToXlsSqlServerInstanceLinkedList.R";
+# Sql Server Instance Usage List
+sourceVector[4] <- "SqlToXlsSqlServerInstanceUsageList.R";
+# Sql Server Instance DB Backup List
+sourceVector[5] <- "SqlToXlsSqlServerInstanceBackupList.R";
+# Sql Server Instance Running List
+sourceVector[6] <- "SqlToXlsSqlServerInstanceRunningList.R";
+# Sql Server Instance DB Spec List
+sourceVector[7] <- "SqlToXlsSqlServerInstanceSpecList.R";
+# sourceFile Sql Server
+projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServer.R");
+write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+source(projectSourceFile);
+sqlToXlsSqlServer <- SqlToXlsSqlServer$new(projectPath);
+sqlServerVersionVector <- sqlToXlsSqlServer$getVersionVector();
+sqlServiceInstance <- sqlToXlsSqlServer$getServiceInstance();
+sqlServerInstance <- sqlToXlsSqlServer$getInstance();
+sqlServerInstanceUsageFile <- sqlToXlsSqlServer$getUsageFile();
+rm(sqlToXlsSqlServer);
+gc();
+```
+
+### R SQL Server Info source files
+
+```{r sourceFiles, echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE}
+# sourceFile Sql Server Instance Abstract Factory
+projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceFactory.R");
+write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+source(projectSourceFile);
+sqlToXlsSqlServerInstanceFactory <-
+  SqlToXlsSqlServerInstanceFactory$new(projectSourcePath, sourceVector);
+sqlToXlsSqlServerInstanceFactory$setSqlServerInstance(sqlServerInstance);
+sqlToXlsSqlServerInstanceFactory$setSqlServiceInstance(sqlServiceInstance);
+```
+
+#### R SQL Server Instance Linked List
+
+```{r SqlServerInstanceLinkedList, echo=FALSE, paged.print=TRUE}
+# sourceFile Sql Server Instance Linked List
+sqlServerInstanceLinkedList <- sqlToXlsSqlServerInstanceFactory$getLinkedList();
+sqlServerInstanceLinkedList;
+```
+
+##### R SQL Server Instance Usage List
+
+```{r SqlServerInstanceUsageList, echo=FALSE, fig.height=6, fig.width=8, paged.print=TRUE}
+## sourceFile Sql Server Instance Usage List
+sqlServerInstanceUsageList <- sqlToXlsSqlServerInstanceFactory$getUsageList();
+sqlServerInstanceUsageList;
+require(gridExtra)
+plot1 <- sqlToXlsSqlServerInstanceFactory$getUsageListBarplot();
+plot2 <- sqlToXlsSqlServerInstanceFactory$getUsageListPiechart();
+grid.arrange(plot1, plot2, ncol=2);
+```
+
+##### R SQL Server Instance DB Backup List
+```{r SqlServerInstanceDBBackupList, echo=FALSE, paged.print=TRUE}
+## sourceFile Sql Server Instance DB Backup List
+sqlServerInstanceBackupList <- sqlToXlsSqlServerInstanceFactory$getBackupList();
+sqlServerInstanceBackupList
+```
+
+##### R SQL Server Instance Running List
+
+```{r SqlServerInstanceRunningList, echo=FALSE, fig.height=3, fig.width=4, paged.print=TRUE}
+## sourceFile Sql Server Instance Running List
+sqlServerInstanceRunningList <- sqlToXlsSqlServerInstanceFactory$getRunningList();
+sqlServerInstanceRunningList;
+```
+
+##### R SQL Server Instance DB Spec List
+
+```{r SqlServerInstanceDBSpecList, echo=FALSE, fig.height=3, fig.width=4, paged.print=TRUE}
+## sourceFile Sql Server Instance DB Spec List
+sqlServerInstanceSpecList <- sqlToXlsSqlServerInstanceFactory$getSpecList();
+sqlServerInstanceSpecList;
+rm(sqlToXlsSqlServerInstanceFactory);
+rm(sqlServerInstanceLinkedList);
+rm(sqlServerInstanceUsageList);
+rm(sqlServerInstanceBackupList);
+rm(sqlServerInstanceRunningList);
+rm(sqlServerInstanceSpecList);
+rm(sourceVector);
+gc();
+```
+
+
+
+
+
+
+
+
+
