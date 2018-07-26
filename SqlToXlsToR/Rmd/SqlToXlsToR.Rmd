@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 This is an R Markdown document. This document is on folder `./Rmd`.
 
-```{r cars, echo=FALSE, fig.height=5, fig.width=8, message=FALSE, warning=FALSE}
+```{r cars, echo=FALSE, message=FALSE, warning=FALSE}
 # modify this path to you local repository
 # Windows machines have a environment variable SystemDrive=C:
 # I use my own for working directory as DataDrive & REPO_DIR
@@ -69,7 +69,7 @@ ls();
 
 ### R code source
 
-The source path library red from:
+The source path library read from:
 
 ```{r sourcePath, echo=FALSE}
 # sourcePath
@@ -79,7 +79,9 @@ write(paste0(c("sourcePath ...\t", projectSourcePath), sep = "", collapse = ""),
 
 ## R SQL Server Info
 
-```{r sqlServerInfo, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+The source path file read from:
+
+```{r sqlServerInfo, echo=TRUE}
 # sql server info
 sqlServiceInstance <- "";
 sqlServerInstance <- "";
@@ -119,9 +121,33 @@ rm(sqlToXlsSqlServer);
 gc();
 ```
 
+#### SQL Server Version
+
+```{r sqlServerVersionVector, echo=TRUE}
+sqlServerVersionVector;
+```
+
+#### SQL Service Instance
+
+```{r sqlServiceInstance, echo=TRUE}
+sqlServiceInstance;
+```
+
+#### SQL Server Instance
+
+```{r sqlServerInstance, echo=TRUE}
+sqlServerInstance;
+```
+
+#### SQL Server Instance Usage
+
+```{r sqlServerInstanceUsageFile, echo=TRUE}
+sqlServerInstanceUsageFile;
+```
+
 ### R SQL Server Info source files
 
-```{r sourceFiles, echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE}
+```{r sourceFiles, echo=TRUE}
 # sourceFile Sql Server Instance Abstract Factory
 projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceFactory.R");
 write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
@@ -134,7 +160,7 @@ sqlToXlsSqlServerInstanceFactory$setSqlServiceInstance(sqlServiceInstance);
 
 #### R SQL Server Instance Linked List
 
-```{r SqlServerInstanceLinkedList, echo=FALSE, paged.print=TRUE}
+```{r SqlServerInstanceLinkedList, echo=TRUE}
 # sourceFile Sql Server Instance Linked List
 sqlServerInstanceLinkedList <- sqlToXlsSqlServerInstanceFactory$getLinkedList();
 sqlServerInstanceLinkedList;
@@ -142,7 +168,7 @@ sqlServerInstanceLinkedList;
 
 ##### R SQL Server Instance Usage List
 
-```{r SqlServerInstanceUsageList, echo=FALSE, fig.height=6, fig.width=8, paged.print=TRUE}
+```{r SqlServerInstanceUsageList, echo=TRUE, fig.height=6, fig.width=8}
 ## sourceFile Sql Server Instance Usage List
 sqlServerInstanceUsageList <- sqlToXlsSqlServerInstanceFactory$getUsageList();
 sqlServerInstanceUsageList;
@@ -150,18 +176,21 @@ require(gridExtra)
 plot1 <- sqlToXlsSqlServerInstanceFactory$getUsageListBarplot();
 plot2 <- sqlToXlsSqlServerInstanceFactory$getUsageListPiechart();
 grid.arrange(plot1, plot2, ncol=2);
+rm(plot1);
+rm(plot2);
 ```
 
 ##### R SQL Server Instance DB Backup List
-```{r SqlServerInstanceDBBackupList, echo=FALSE, paged.print=TRUE}
+
+```{r SqlServerInstanceDBBackupList, echo=TRUE}
 ## sourceFile Sql Server Instance DB Backup List
 sqlServerInstanceBackupList <- sqlToXlsSqlServerInstanceFactory$getBackupList();
-sqlServerInstanceBackupList
+sqlServerInstanceBackupList;
 ```
 
 ##### R SQL Server Instance Running List
 
-```{r SqlServerInstanceRunningList, echo=FALSE, fig.height=3, fig.width=4, paged.print=TRUE}
+```{r SqlServerInstanceRunningList, echo=TRUE}
 ## sourceFile Sql Server Instance Running List
 sqlServerInstanceRunningList <- sqlToXlsSqlServerInstanceFactory$getRunningList();
 sqlServerInstanceRunningList;
@@ -169,10 +198,13 @@ sqlServerInstanceRunningList;
 
 ##### R SQL Server Instance DB Spec List
 
-```{r SqlServerInstanceDBSpecList, echo=FALSE, fig.height=3, fig.width=4, paged.print=TRUE}
+```{r SqlServerInstanceDBSpecList, echo=TRUE}
 ## sourceFile Sql Server Instance DB Spec List
 sqlServerInstanceSpecList <- sqlToXlsSqlServerInstanceFactory$getSpecList();
 sqlServerInstanceSpecList;
+```
+
+```{r RmSqlServerInstanceDBSpecList, echo=FALSE}
 rm(sqlToXlsSqlServerInstanceFactory);
 rm(sqlServerInstanceLinkedList);
 rm(sqlServerInstanceUsageList);
@@ -181,13 +213,37 @@ rm(sqlServerInstanceRunningList);
 rm(sqlServerInstanceSpecList);
 rm(sourceVector);
 gc();
+hasList<-file.exists(sqlServerInstanceUsageFile);
+hasList<-hasList && file.info(sqlServerInstanceUsageFile)$size > 0;
 ```
 
-
-
-
-
-
-
+```{r IfHasList, echo=hasList}
+if(hasList){
+  # DB Object source
+  projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceDbObjectList.R");
+  write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+  source(projectSourceFile);
+  # DB Constraint source
+  projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceDbConstraintList.R");
+  write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+  source(projectSourceFile);
+  # DB Trigger source
+  projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceDbTriggerList.R");
+  write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+  source(projectSourceFile);
+  # DB Principal key source
+  projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceDbPrincipalKeyList.R");
+  write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+  source(projectSourceFile);
+  # DB Foreign key source
+  projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceDbForeignKeyList.R");
+  write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+  source(projectSourceFile);
+  # DB Index source
+  projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceDbIndexList.R");
+  write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+  source(projectSourceFile);
+}
+```
 
 
