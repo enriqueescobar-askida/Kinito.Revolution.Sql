@@ -24,13 +24,13 @@ SqlToFileSqlServerInstanceAbstractList <-
       cat(self$toString());
     },
     finalize = function() {
-      print("SqlToFileSqlServerInstanceAbstractList.finalize has been called!");
+      write("SqlToFileSqlServerInstanceAbstractList.finalize has been called!", stderr());
       private$Path <- NULL;
       private$ServiceInstance <- NULL;
       private$Instance <- NULL;
       private$File <- NULL;
       private$Tibble <- NULL;
-      cat(self$toString());
+      write(self$toString(), stderr());
     },
     toString = function() {
       aStr <- paste0("--\n", projectNamespace, "\t", self$Ext, "\n\t");

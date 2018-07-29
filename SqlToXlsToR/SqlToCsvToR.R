@@ -106,7 +106,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       objectList <-
         SqlToCsvSqlServerInstanceDbObjectList$new(
           projectPath,sqlServiceInstance,sqlServerInstance,dbName);
-      ## DB Object actions
+      ## DB Object plot
       objectList$getFile();
       objectList$fileToTibble();
       objectTibble <- objectList$getTibble();

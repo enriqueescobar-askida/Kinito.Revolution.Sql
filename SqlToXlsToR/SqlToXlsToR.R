@@ -107,7 +107,7 @@ if (file.exists(sqlServerInstanceUsageFile)) {
       objectList <-
         SqlToXlsSqlServerInstanceDbObjectList$new(
           projectPath,sqlServiceInstance,sqlServerInstance,dbName);
-      ## DB Object actions
+      ## DB Object plot
       objectList$getFile();
       objectList$fileToTibble();
       objectTibble <- objectList$getTibble();

@@ -26,7 +26,7 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
 #' Destructor
 #' @export
     finalize = function() {
-      print("SqlToCsvSqlServer.Finalizer has been called!");
+      write("SqlToCsvSqlServer.Finalizer has been called!", stderr());
       private$Path <- NULL;
       self$HasVersion <- NULL;
       private$VersionVector <- NULL;
@@ -34,7 +34,7 @@ SqlToCsvSqlServer <- R6Class("SqlToCsvSqlServer",
       private$ServiceInstance <- NULL;
       self$HasInstance <- NULL;
       private$Instance <- NULL;
-      cat(self$toString());
+      write(self$toString(), stderr());
     },
     getPath = function() private$Path,
     getVersionVector = function() private$VersionVector,

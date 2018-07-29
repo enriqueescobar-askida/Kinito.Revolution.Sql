@@ -215,9 +215,7 @@ rm(sourceVector);
 gc();
 hasList<-file.exists(sqlServerInstanceUsageFile);
 hasList<-hasList && file.info(sqlServerInstanceUsageFile)$size > 0;
-```
 
-```{r IfHasList, echo=hasList}
 if(hasList){
   # DB Object source
   projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceDbObjectList.R");
@@ -243,7 +241,143 @@ if(hasList){
   projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceDbIndexList.R");
   write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
   source(projectSourceFile);
+  # DB list
+    dbNameVector <- scan(file = sqlServerInstanceUsageFile, what = character());
+}
+
+hasList <- hasList && (length(dbNameVector) >= 1);
+```
+
+##### R SQL Server Instance DB Object items
+
+```{r items, echo=hasList, fig.height=6, fig.width=8}
+if(hasList){
+  for (dbName in dbNameVector) {
+        dbName<-dbNameVector[[1]];
+        write(paste0(c("dbList dbName ...\t", dbName), sep = "", collapse = ""), stdout());
+      ## DB Object items
+      objectTables <- NULL;
+      objectViews <- NULL;
+      objectFunctions <- NULL;
+      objectProcedures <- NULL;
+      objectTibble <- NULL;
+      objectList <-
+        SqlToXlsSqlServerInstanceDbObjectList$new(
+          projectPath,sqlServiceInstance,sqlServerInstance,dbName);
+      ## DB Object actions
+      objectList$getFile();
+      objectList$fileToTibble();
+      objectTibble <- objectList$getTibble();
+      plot1 <- objectList$getBarplotGgplot2();
+      plot2 <- objectList$getPiechartGgplot2();
+      objectListName <- "";
+      grid.arrange(plot1, plot2, ncol=2);
+      rm(plot1);
+      rm(plot2);
+  }
 }
 ```
 
+1.- R SQL Server Instance DB Object items-Tables
+
+```{r itemsTables, echo=hasList, fig.height=6, fig.width=8}
+if(hasList && objectList$HasTables){
+  for (dbName in dbNameVector) {
+        dbName<-dbNameVector[[1]];
+        write(paste0(c("dbList dbName ...\t", dbName), sep = "", collapse = ""), stdout());
+        objectListName <- "Tables";
+        objectListName <- gsub(".xls",
+                               paste0(c("_",objectListName), sep = "", collapse = ""),
+                               objectList$getFile());
+        write(paste0(c("dbObject Tables ...\t", objectListName), sep = "", collapse = ""), stdout());
+        ### DB Object Table plot
+        objectTables <- objectList$getTables();
+        plot1 <- objectList$getTablesBarplot();
+        plot2 <- objectList$getTablesPiechart();
+        grid.arrange(plot1, plot2, ncol=2);
+        rm(plot1);
+        rm(plot2);
+        ### DB Object Table source
+        projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceDbTableList.R");
+        write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+        source(projectSourceFile);
+  }
+}
+```
+
+2.- R SQL Server Instance DB Object items-Views
+
+```{r items-Views, echo=hasList, fig.height=6, fig.width=8}
+if(hasList && objectList$HasViews){
+  for (dbName in dbNameVector) {
+        dbName<-dbNameVector[[1]];
+        write(paste0(c("dbList dbName ...\t", dbName), sep = "", collapse = ""), stdout());
+        objectListName <- "Views";
+        objectListName <- gsub(".xls",
+                               paste0(c("_",objectListName), sep = "", collapse = ""),
+                               objectList$getFile());
+        write(paste0(c("dbObject Views ...\t", objectListName), sep = "", collapse = ""), stdout());
+        ###
+        objectViews <- objectList$getViews();
+        ### DB Object View source
+        projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceDbViewList.R");
+        write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+        source(projectSourceFile);
+  }
+}
+```
+
+3.- R SQL Server Instance DB Object items-Functions
+
+```{r items-Functions, echo=hasList, fig.height=6, fig.width=8}
+if(hasList && objectList$HasFunctions){
+  for (dbName in dbNameVector) {
+        dbName<-dbNameVector[[1]];
+        write(paste0(c("dbList dbName ...\t", dbName), sep = "", collapse = ""), stdout());
+        objectListName <- "Functions";
+        objectListName <- gsub(".xls",
+                               paste0(c("_",objectListName), sep = "", collapse = ""),
+                               objectList$getFile());
+        write(paste0(c("dbObject Functions ...\t", objectListName), sep = "", collapse = ""), stdout());
+        ### DB Object Function plot
+        objectFunctions <- objectList$getFunctions();
+        plot1 <- objectList$getFunctionsBarplot();
+        plot2 <- objectList$getFunctionsPiechart();
+        grid.arrange(plot1, plot2, ncol=2);
+        rm(plot1);
+        rm(plot2);
+        ### DB Object Function source
+        projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceDbFunctionList.R");
+        write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+        source(projectSourceFile);
+  }
+}
+```
+
+4.- R SQL Server Instance DB Object items-Procedures
+
+```{r itemsProcedures, echo=hasList, fig.height=6, fig.width=8}
+if(hasList && objectList$HasProcedures){
+  for (dbName in dbNameVector) {
+        dbName<-dbNameVector[[1]];
+        write(paste0(c("dbList dbName ...\t", dbName), sep = "", collapse = ""), stdout());
+        objectListName <- "Procedures";
+        objectListName <- gsub(".xls",
+                               paste0(c("_",objectListName), sep = "", collapse = ""),
+                               objectList$getFile());
+        write(paste0(c("dbObject Procedures ...\t", objectListName), sep = "", collapse = ""), stdout());
+        ### DB Object Procedure plot
+        objectProcedures <- objectList$getProcedures();
+        plot1 <- objectList$getProceduresBarplot();
+        plot2 <- objectList$getProceduresPiechart();
+        grid.arrange(plot1, plot2, ncol=2);
+        rm(plot1);
+        rm(plot2);
+        ### DB Object Procedure source
+        projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceDbProcedureList.R");
+        write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+        source(projectSourceFile);
+  }
+}
+```
 
