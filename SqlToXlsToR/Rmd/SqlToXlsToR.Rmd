@@ -242,7 +242,7 @@ if(hasList){
   write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
   source(projectSourceFile);
   # DB list
-    dbNameVector <- scan(file = sqlServerInstanceUsageFile, what = character());
+  dbNameVector <- scan(file = sqlServerInstanceUsageFile, what = character());
 }
 
 hasList <- hasList && (length(dbNameVector) >= 1);
@@ -253,27 +253,25 @@ hasList <- hasList && (length(dbNameVector) >= 1);
 ```{r items, echo=hasList, fig.height=6, fig.width=8}
 if(hasList){
   for (dbName in dbNameVector) {
-        dbName<-dbNameVector[[1]];
-        write(paste0(c("dbList dbName ...\t", dbName), sep = "", collapse = ""), stdout());
-      ## DB Object items
-      objectTables <- NULL;
-      objectViews <- NULL;
-      objectFunctions <- NULL;
-      objectProcedures <- NULL;
-      objectTibble <- NULL;
-      objectList <-
-        SqlToXlsSqlServerInstanceDbObjectList$new(
-          projectPath,sqlServiceInstance,sqlServerInstance,dbName);
-      ## DB Object actions
-      objectList$getFile();
-      objectList$fileToTibble();
-      objectTibble <- objectList$getTibble();
-      plot1 <- objectList$getBarplotGgplot2();
-      plot2 <- objectList$getPiechartGgplot2();
-      objectListName <- "";
-      grid.arrange(plot1, plot2, ncol=2);
-      rm(plot1);
-      rm(plot2);
+    write(paste0(c("dbList dbName ...\t", dbName), sep = "", collapse = ""), stdout());
+    ## DB Object items
+    objectTables <- NULL;
+    objectViews <- NULL;
+    objectFunctions <- NULL;
+    objectProcedures <- NULL;
+    objectTibble <- NULL;
+    objectList <- SqlToXlsSqlServerInstanceDbObjectList$new(
+                    projectPath,sqlServiceInstance,sqlServerInstance,dbName);
+    ## DB Object actions
+    objectList$getFile();
+    objectList$fileToTibble();
+    objectTibble <- objectList$getTibble();
+    plot1 <- objectList$getBarplotGgplot2();
+    plot2 <- objectList$getPiechartGgplot2();
+    objectListName <- "";
+    grid.arrange(plot1, plot2, ncol=2);
+    rm(plot1);
+    rm(plot2);
   }
 }
 ```
@@ -283,24 +281,23 @@ if(hasList){
 ```{r itemsTables, echo=hasList, fig.height=6, fig.width=8}
 if(hasList && objectList$HasTables){
   for (dbName in dbNameVector) {
-        dbName<-dbNameVector[[1]];
-        write(paste0(c("dbList dbName ...\t", dbName), sep = "", collapse = ""), stdout());
-        objectListName <- "Tables";
-        objectListName <- gsub(".xls",
-                               paste0(c("_",objectListName), sep = "", collapse = ""),
-                               objectList$getFile());
-        write(paste0(c("dbObject Tables ...\t", objectListName), sep = "", collapse = ""), stdout());
-        ### DB Object Table plot
-        objectTables <- objectList$getTables();
-        plot1 <- objectList$getTablesBarplot();
-        plot2 <- objectList$getTablesPiechart();
-        grid.arrange(plot1, plot2, ncol=2);
-        rm(plot1);
-        rm(plot2);
-        ### DB Object Table source
-        projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceDbTableList.R");
-        write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
-        source(projectSourceFile);
+    write(paste0(c("dbList dbName ...\t", dbName), sep = "", collapse = ""), stdout());
+    objectListName <- "Tables";
+    objectListName <- gsub(".xls",
+                           paste0(c("_",objectListName), sep = "", collapse = ""),
+                           objectList$getFile());
+    write(paste0(c("dbObject Tables ...\t", objectListName), sep = "", collapse = ""), stdout());
+    ### DB Object Table plot
+    objectTables <- objectList$getTables();
+    plot1 <- objectList$getTablesBarplot();
+    plot2 <- objectList$getTablesPiechart();
+    grid.arrange(plot1, plot2, ncol=2);
+    rm(plot1);
+    rm(plot2);
+    ### DB Object Table source
+    projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceDbTableList.R");
+    write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+    source(projectSourceFile);
   }
 }
 ```
@@ -310,19 +307,18 @@ if(hasList && objectList$HasTables){
 ```{r items-Views, echo=hasList, fig.height=6, fig.width=8}
 if(hasList && objectList$HasViews){
   for (dbName in dbNameVector) {
-        dbName<-dbNameVector[[1]];
-        write(paste0(c("dbList dbName ...\t", dbName), sep = "", collapse = ""), stdout());
-        objectListName <- "Views";
-        objectListName <- gsub(".xls",
-                               paste0(c("_",objectListName), sep = "", collapse = ""),
-                               objectList$getFile());
-        write(paste0(c("dbObject Views ...\t", objectListName), sep = "", collapse = ""), stdout());
-        ###
-        objectViews <- objectList$getViews();
-        ### DB Object View source
-        projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceDbViewList.R");
-        write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
-        source(projectSourceFile);
+    write(paste0(c("dbList dbName ...\t", dbName), sep = "", collapse = ""), stdout());
+    objectListName <- "Views";
+    objectListName <- gsub(".xls",
+                           paste0(c("_",objectListName), sep = "", collapse = ""),
+                           objectList$getFile());
+    write(paste0(c("dbObject Views ...\t", objectListName), sep = "", collapse = ""), stdout());
+    ###
+    objectViews <- objectList$getViews();
+    ### DB Object View source
+    projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceDbViewList.R");
+    write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+    source(projectSourceFile);
   }
 }
 ```
@@ -332,24 +328,23 @@ if(hasList && objectList$HasViews){
 ```{r items-Functions, echo=hasList, fig.height=6, fig.width=8}
 if(hasList && objectList$HasFunctions){
   for (dbName in dbNameVector) {
-        dbName<-dbNameVector[[1]];
-        write(paste0(c("dbList dbName ...\t", dbName), sep = "", collapse = ""), stdout());
-        objectListName <- "Functions";
-        objectListName <- gsub(".xls",
-                               paste0(c("_",objectListName), sep = "", collapse = ""),
-                               objectList$getFile());
-        write(paste0(c("dbObject Functions ...\t", objectListName), sep = "", collapse = ""), stdout());
-        ### DB Object Function plot
-        objectFunctions <- objectList$getFunctions();
-        plot1 <- objectList$getFunctionsBarplot();
-        plot2 <- objectList$getFunctionsPiechart();
-        grid.arrange(plot1, plot2, ncol=2);
-        rm(plot1);
-        rm(plot2);
-        ### DB Object Function source
-        projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceDbFunctionList.R");
-        write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
-        source(projectSourceFile);
+    write(paste0(c("dbList dbName ...\t", dbName), sep = "", collapse = ""), stdout());
+    objectListName <- "Functions";
+    objectListName <- gsub(".xls",
+                           paste0(c("_",objectListName), sep = "", collapse = ""),
+                           objectList$getFile());
+    write(paste0(c("dbObject Functions ...\t", objectListName), sep = "", collapse = ""), stdout());
+    ### DB Object Function plot
+    objectFunctions <- objectList$getFunctions();
+    plot1 <- objectList$getFunctionsBarplot();
+    plot2 <- objectList$getFunctionsPiechart();
+    grid.arrange(plot1, plot2, ncol=2);
+    rm(plot1);
+    rm(plot2);
+    ### DB Object Function source
+    projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceDbFunctionList.R");
+    write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+    source(projectSourceFile);
   }
 }
 ```
@@ -359,25 +354,157 @@ if(hasList && objectList$HasFunctions){
 ```{r itemsProcedures, echo=hasList, fig.height=6, fig.width=8}
 if(hasList && objectList$HasProcedures){
   for (dbName in dbNameVector) {
-        dbName<-dbNameVector[[1]];
-        write(paste0(c("dbList dbName ...\t", dbName), sep = "", collapse = ""), stdout());
-        objectListName <- "Procedures";
-        objectListName <- gsub(".xls",
-                               paste0(c("_",objectListName), sep = "", collapse = ""),
-                               objectList$getFile());
-        write(paste0(c("dbObject Procedures ...\t", objectListName), sep = "", collapse = ""), stdout());
-        ### DB Object Procedure plot
-        objectProcedures <- objectList$getProcedures();
-        plot1 <- objectList$getProceduresBarplot();
-        plot2 <- objectList$getProceduresPiechart();
-        grid.arrange(plot1, plot2, ncol=2);
-        rm(plot1);
-        rm(plot2);
-        ### DB Object Procedure source
-        projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceDbProcedureList.R");
-        write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
-        source(projectSourceFile);
+    write(paste0(c("dbList dbName ...\t", dbName), sep = "", collapse = ""), stdout());
+    objectListName <- "Procedures";
+    objectListName <- gsub(".xls",
+                           paste0(c("_",objectListName), sep = "", collapse = ""),
+                           objectList$getFile());
+    write(paste0(c("dbObject Procedures ...\t", objectListName), sep = "", collapse = ""), stdout());
+    ### DB Object Procedure plot
+    objectProcedures <- objectList$getProcedures();
+    plot1 <- objectList$getProceduresBarplot();
+    plot2 <- objectList$getProceduresPiechart();
+    grid.arrange(plot1, plot2, ncol=2);
+    rm(plot1);
+    rm(plot2);
+    ### DB Object Procedure source
+    projectSourceFile <- paste0(projectSourcePath, "/", "SqlToXlsSqlServerInstanceDbProcedureList.R");
+    write(paste0(c("sourceFile ...\t", projectSourceFile), sep = "", collapse = ""), stdout());
+    source(projectSourceFile);
   }
+}
+
+# rm(objectList);
+# rm(objectListName);
+```
+
+##### R SQL Server Instance DB Constraint items
+
+```{r constraintItems, echo=hasList, fig.height=6, fig.width=8}
+if(hasList){
+  for (dbName in dbNameVector) {
+    write(paste0(c("dbList dbName ...\t", dbName), sep = "", collapse = ""), stdout());
+    ## DB Constraint items
+    constraintTibble <- NULL;
+    constraintList <-
+      SqlToXlsSqlServerInstanceDbConstraintList$new(
+        projectPath,sqlServiceInstance,sqlServerInstance,dbName);
+    ## DB Constraint actions
+    constraintList$getFile();
+    constraintList$fileToTibble();
+    constraintTibble <- constraintList$getTibble();
+    constraintList$getTableNameFrequency();
+    constraintList$getTableNameFrequencyTibble();
+    constraintList$getTableNameFrequencyHistogram();
+    
+    rm(constraintList);
+  }
+}
+```
+
+##### R SQL Server Instance DB Trigger items
+
+```{r triggerItems, echo=hasList, fig.height=6, fig.width=8}
+if(hasList){
+  for (dbName in dbNameVector) {
+    write(paste0(c("dbList dbName ...\t", dbName), sep = "", collapse = ""), stdout());
+    ## DB Trigger items
+    triggerTibble <- NULL;
+    triggerList <-
+      SqlToXlsSqlServerInstanceDbTriggerList$new(
+        projectPath,sqlServiceInstance,sqlServerInstance,dbName);
+    ## DB Trigger actions
+    triggerList$getFile();
+    triggerList$fileToTibble();
+    triggerTibble <- triggerList$getTibble();
+    triggerList$getTriggerGroupFrequency();
+    triggerList$getTriggerGroupFrequencyTibble();
+    triggerList$getBarplotGgplot2();
+    triggerList$getPiechartGgplot2();
+    triggerList$getTriggerGroupFrequencyHistogram();
+    triggerList$getTriggerSubgroupFrequency();
+    triggerList$getTriggerSubgroupFrequencyTibble();
+    rm(triggerList);
+  }
+}
+```
+
+##### R SQL Server Instance DB Principal key items
+
+```{r principalKeyItems, echo=hasList, fig.height=6, fig.width=8}
+if(hasList){
+  for (dbName in dbNameVector) {
+    write(paste0(c("dbList dbName ...\t", dbName), sep = "", collapse = ""), stdout());
+    ## DB Principal key items
+    principalKeyTibble <- NULL;
+    principalKeyList <-
+      SqlToXlsSqlServerInstanceDbPrincipalKeyList$new(
+        projectPath,sqlServiceInstance,sqlServerInstance,dbName);
+    ## DB Principal key actions
+    principalKeyList$getFile();
+    principalKeyList$fileToTibble();
+    principalKeyTibble <- principalKeyList$getTibble();
+    principalKeyList$getTableNameFrequency();
+    principalKeyList$getTableNameFrequencyTibble();
+    principalKeyList$getTableNameFrequencyHistogram();
+    rm(principalKeyList);
+  }
+}
+```
+
+##### R SQL Server Instance DB Foreign key items
+
+```{r foreignKeyItems, echo=hasList, fig.height=6, fig.width=8}
+if(hasList){
+  for (dbName in dbNameVector) {
+    write(paste0(c("dbList dbName ...\t", dbName), sep = "", collapse = ""), stdout());
+    ## DB Foreign key items
+    foreignKeyTibble <- NULL;
+    foreignKeyList <-
+      SqlToXlsSqlServerInstanceDbForeignKeyList$new(
+        projectPath,sqlServiceInstance,sqlServerInstance,dbName);
+    ## DB Foreign key actions
+    foreignKeyList$getFile();
+    foreignKeyList$fileToTibble();
+    foreignKeyTibble <- foreignKeyList$getTibble();
+    foreignKeyList$getTableNameFrequency();
+    foreignKeyList$getTableNameFrequencyTibble();
+    foreignKeyList$getTableNameFrequencyHistogram();
+    rm(foreignKeyList);
+  }
+}
+```
+
+##### R SQL Server Instance DB Index items
+
+```{r indexItems, echo=hasList, fig.height=6, fig.width=8}
+if(hasList){
+  for (dbName in dbNameVector) {
+    write(paste0(c("dbList dbName ...\t", dbName), sep = "", collapse = ""), stdout());
+    ## DB Index items
+    indexTibble <- NULL;
+    indexList <-
+      SqlToXlsSqlServerInstanceDbIndexList$new(
+        projectPath,sqlServiceInstance,sqlServerInstance,dbName);
+    ## DB Index actions
+    indexList$getFile();
+    indexList$fileToTibble();
+    indexTibble <- indexList$getTibble();
+    rm(indexList);
+  }
+  ##
+  rm(objectTibble);
+  rm(objectTables);
+  rm(objectViews);
+  rm(objectFunctions);
+  rm(objectProcedures);
+  rm(constraintTibble);
+  rm(triggerTibble);
+  rm(principalKeyTibble);
+  rm(foreignKeyTibble);
+  rm(indexTibble);
+  rm(dbName);
+  rm(dbNameVector);
 }
 ```
 
