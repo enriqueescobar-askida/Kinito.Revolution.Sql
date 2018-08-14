@@ -7,9 +7,9 @@ The solution `BIWebPortal.sln` contains 15 `C# projects`. Its was created to be 
 
 Downgrading to the lowest possible `DLLs` using `nuget` was possible limiting the solution first to `.NET framework 4.5.0`.
 
-### Jasper-core solution version `.NET 4.5.0`
+### MS SQL Server `object types`
 
-![IMG-BIWebPortal-450](Setup/assets/BIWebPortal_450.png "BIWebPortal 450")
+![IMG-BIWebPortal-450](Doc/MS-SQLServer_sys.object.types.png "BIWebPortal 450")
 
 The following 17 `nuget` libraries could not be updated:
 * CommonServiceLocator.1.3.0
