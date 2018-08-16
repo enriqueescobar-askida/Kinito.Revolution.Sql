@@ -6,7 +6,9 @@ The reason is to have a `proof of concept` using the primitive capabilities of `
 
 In theory, it should be able to connect to any `database type` or feed on any `text file` coming from any of those.
 
-## Script.R
+# MS SQL Server
+
+## MS SQL Server `Script` Script.R
 
 This script `Script.R` works as anchor to find the correct project and calling any program `SqlTo{Csv,Xls}ToR.R`.
 
