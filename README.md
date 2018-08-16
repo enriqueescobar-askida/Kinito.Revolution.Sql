@@ -46,13 +46,13 @@ Specific scripts for `MS SQL Server` information.
 sourcePath ...   E:/Disk_X/Kinito.Revolution.Sql/SqlToXlsToR/Src
 ```
 
-### MS SQL Server Script `SqlToXlsToR/SrcSqlToCsvToR.R`
+### MS SQL Server Script `SqlToXlsToR/Src/SqlToCsvToR.R`
 
 ```
 sourceFile ...   E:/Disk_X/Kinito.Revolution.Sql/SqlToXlsToR/Src/SqlToCsvSqlServer.R
 ```
 
-### MS SQL Server Script `SqlToXlsToR/SrcSqlToXlsToR.R`
+### MS SQL Server Script `SqlToXlsToR/Src/SqlToXlsToR.R`
 
 ```
 sourceFile ...   E:/Disk_X/Kinito.Revolution.Sql/SqlToXlsToR/Src/SqlToXlsSqlServer.R
