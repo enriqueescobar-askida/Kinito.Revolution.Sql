@@ -10,6 +10,17 @@ In theory, it should be able to connect to any `database type` or feed on any `t
 
 Each BD type has its own specefications, in this case the use MS SQL Server. We are using the `ODBC Connector` to ineract with it.
 
+## MS SQL Server `ODBC` setup
+
+| Column A | Column B |
+| -------- | -------- |
+| A1       | B1       |
+| A2       | B2       |
+| A3       | B3       |
+| A1       | B1       |
+| A2       | B2       |
+| A3       | B3       |
+
 ## MS SQL Server `object types`
 
 ![IMG_SqlToXlsToR_MS-SQLServer_sys.object.types](SqlToXlsToR/Doc/MS-SQLServer_sys.object.types.png "SqlToXlsToR MS-SQLServer_sys.object.types")
