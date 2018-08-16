@@ -8,7 +8,7 @@ In theory, it should be able to connect to any `database type` or feed on any `t
 
 # MS SQL Server `SqlToXlsToR`
 
-## MS SQL Server `Script` Script.R
+## MS SQL Server Script `SqlToXlsToR/Script.R`
 
 This script `Script.R` works as anchor to find the correct project and calling any program `SqlTo{Csv,Xls}ToR.R`.
 
@@ -20,7 +20,7 @@ Path new .....   E:/Disk_X/Kinito.Revolution.Sql/SqlToXlsToR
 
 ![IMG_SqlToXlsToR_Kinito.Revolution.Sql.Script](SqlToXlsToR/Doc/Kinito.Revolution.Sql.Script.png "SqlToXlsToR Kinito.Revolution.Sql.Script")
 
-## MS SQL Server `Scripts`
+## MS SQL Server Scripts `SqlToXlsToR/Src`
 
 Specific scripts for `MS SQL Server` information.
 
@@ -28,13 +28,13 @@ Specific scripts for `MS SQL Server` information.
 sourcePath ...   E:/Disk_X/Kinito.Revolution.Sql/SqlToXlsToR/Src
 ```
 
-### MS SQL Server `Script` SqlToCsvToR.R
+### MS SQL Server Script `SqlToXlsToR/SrcSqlToCsvToR.R`
 
 ```
 sourceFile ...   E:/Disk_X/Kinito.Revolution.Sql/SqlToXlsToR/Src/SqlToCsvSqlServer.R
 ```
 
-### MS SQL Server `Script` SqlToXlsToR.R
+### MS SQL Server Script `SqlToXlsToR/SrcSqlToXlsToR.R`
 
 ```
 sourceFile ...   E:/Disk_X/Kinito.Revolution.Sql/SqlToXlsToR/Src/SqlToXlsSqlServer.R
