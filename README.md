@@ -48,11 +48,15 @@ sourcePath ...   E:/Disk_X/Kinito.Revolution.Sql/SqlToXlsToR/Src
 
 ### MS SQL Server Script `SqlToXlsToR/Src/SqlToCsvToR.R`
 
+The `CSV` documentation is in file [Csv/README.md](Csv/README.md)
+
 ```
 sourceFile ...   E:/Disk_X/Kinito.Revolution.Sql/SqlToXlsToR/Src/SqlToCsvSqlServer.R
 ```
 
 ### MS SQL Server Script `SqlToXlsToR/Src/SqlToXlsToR.R`
+
+The `XLS` documentation is in file [Xls/README.md](Xls/README.md)
 
 ```
 sourceFile ...   E:/Disk_X/Kinito.Revolution.Sql/SqlToXlsToR/Src/SqlToXlsSqlServer.R
