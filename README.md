@@ -6,7 +6,7 @@ The reason is to have a `proof of concept` using the primitive capabilities of `
 
 In theory, it should be able to connect to any `database type` or feed on any `text file` coming from any of those.
 
-# MS SQL Server
+# MS SQL Server `SqlToXlsToR`
 
 ## MS SQL Server `Script` Script.R
 
