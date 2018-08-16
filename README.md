@@ -12,14 +12,15 @@ Each BD type has its own specefications, in this case the use MS SQL Server. We 
 
 ## MS SQL Server `ODBC` setup
 
-| Column A | Column B |
-| -------- | -------- |
-| A1       | B1       |
-| A2       | B2       |
-| A3       | B3       |
-| A1       | B1       |
-| A2       | B2       |
-| A3       | B3       |
+| Step | Operation                                        | Image                                                                                                             |
+| ---- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
+| 1    | Create a System ODBC                             | ![IMG_SqlToXlsToR_MS-SQLServer_1](SqlToXlsToR/Doc/MS-SQLServer_sys.object.types.png "SqlToXlsToR MS-SQLServer_1") |
+| 2    | To be used locally                               | ![IMG_SqlToXlsToR_MS-SQLServer_2](SqlToXlsToR/Doc/MS-SQLServer_sys.object.types.png "SqlToXlsToR MS-SQLServer_2") |
+| 3    | In your system                                   | ![IMG_SqlToXlsToR_MS-SQLServer_3](SqlToXlsToR/Doc/MS-SQLServer_sys.object.types.png "SqlToXlsToR MS-SQLServer_3") |
+| 4    | With the correct user, password & ANSI compliant | ![IMG_SqlToXlsToR_MS-SQLServer_4](SqlToXlsToR/Doc/MS-SQLServer_sys.object.types.png "SqlToXlsToR MS-SQLServer_4") |
+| 5    | Set log paths                                    | ![IMG_SqlToXlsToR_MS-SQLServer_5](SqlToXlsToR/Doc/MS-SQLServer_sys.object.types.png "SqlToXlsToR MS-SQLServer_5") |
+| 6    | Get summary                                      | ![IMG_SqlToXlsToR_MS-SQLServer_6](SqlToXlsToR/Doc/MS-SQLServer_sys.object.types.png "SqlToXlsToR MS-SQLServer_6") |
+| 7    | Test ODBC                                        | ![IMG_SqlToXlsToR_MS-SQLServer_7](SqlToXlsToR/Doc/MS-SQLServer_sys.object.types.png "SqlToXlsToR MS-SQLServer_7") |
 
 ## MS SQL Server `object types`
 
