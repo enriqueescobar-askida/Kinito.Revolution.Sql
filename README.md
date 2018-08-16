@@ -14,13 +14,13 @@ Each BD type has its own specefications, in this case the use MS SQL Server. We 
 
 | Step | Operation                                        | Image                                                                                                             |
 | ---- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
-| 1    | Create a System ODBC                             | ![IMG_SqlToXlsToR_MS-SQLServer_1](SqlToXlsToR/Doc/MS-SQLServer_sys.object.types.png "SqlToXlsToR MS-SQLServer_1") |
-| 2    | To be used locally                               | ![IMG_SqlToXlsToR_MS-SQLServer_2](SqlToXlsToR/Doc/MS-SQLServer_sys.object.types.png "SqlToXlsToR MS-SQLServer_2") |
-| 3    | In your system                                   | ![IMG_SqlToXlsToR_MS-SQLServer_3](SqlToXlsToR/Doc/MS-SQLServer_sys.object.types.png "SqlToXlsToR MS-SQLServer_3") |
-| 4    | With the correct user, password & ANSI compliant | ![IMG_SqlToXlsToR_MS-SQLServer_4](SqlToXlsToR/Doc/MS-SQLServer_sys.object.types.png "SqlToXlsToR MS-SQLServer_4") |
-| 5    | Set log paths                                    | ![IMG_SqlToXlsToR_MS-SQLServer_5](SqlToXlsToR/Doc/MS-SQLServer_sys.object.types.png "SqlToXlsToR MS-SQLServer_5") |
-| 6    | Get summary                                      | ![IMG_SqlToXlsToR_MS-SQLServer_6](SqlToXlsToR/Doc/MS-SQLServer_sys.object.types.png "SqlToXlsToR MS-SQLServer_6") |
-| 7    | Test ODBC                                        | ![IMG_SqlToXlsToR_MS-SQLServer_7](SqlToXlsToR/Doc/MS-SQLServer_sys.object.types.png "SqlToXlsToR MS-SQLServer_7") |
+| 1    | Create a System ODBC                             | ![IMG_SqlToXlsToR_MS-SQLServer_1](https://1.bp.blogspot.com/-rn0UkuRCH9Q/V6n-Zht1QPI/AAAAAAAAAqQ/siXDSPCR8VoFh0ctWZhBJ1yQYkGcfm_PQCLcB/s400/image001.png "SqlToXlsToR MS-SQLServer_1") |
+| 2    | To be used locally                               | ![IMG_SqlToXlsToR_MS-SQLServer_2](https://4.bp.blogspot.com/-3V1BOXL_da8/V6n-61Z-khI/AAAAAAAAAqY/PiOTEfeNa5k7RmS4bPG3hLNqQZ7Zjjk9wCEw/s400/image004.png "SqlToXlsToR MS-SQLServer_2") |
+| 3    | In your system                                   | ![IMG_SqlToXlsToR_MS-SQLServer_3](https://1.bp.blogspot.com/-bnrViLFLBhM/V6n-ljERWsI/AAAAAAAAAqU/-bsABkxgOpIaOubDo53ysJCCJGgAFYamQCLcB/s400/image003.png "SqlToXlsToR MS-SQLServer_3") |
+| 4    | With the correct user, password & ANSI compliant | ![IMG_SqlToXlsToR_MS-SQLServer_4](https://2.bp.blogspot.com/-HD0gzn5xcTo/V6oCm0DV2fI/AAAAAAAAAqo/MLkSgrdokPEiN1ucG7GL-jR8txvv-0H9wCLcB/s400/image005.png "SqlToXlsToR MS-SQLServer_4") |
+| 5    | Set log paths                                    | ![IMG_SqlToXlsToR_MS-SQLServer_5](https://4.bp.blogspot.com/-LPO3AVIJguU/V6oC0l9vMBI/AAAAAAAAAqs/dsiTaxvRwrwepAsRP3cmi8Vzyxx_hC3XgCLcB/s400/image006.png "SqlToXlsToR MS-SQLServer_5") |
+| 6    | Get summary                                      | ![IMG_SqlToXlsToR_MS-SQLServer_6](https://2.bp.blogspot.com/-IecvbNG8esc/V6oC6wqz5ZI/AAAAAAAAAqw/CNh5BQe4o3UUTiV5vjvsUW38ZeWbzfcowCLcB/s320/image007.png "SqlToXlsToR MS-SQLServer_6") |
+| 7    | Test ODBC                                        | ![IMG_SqlToXlsToR_MS-SQLServer_7](https://1.bp.blogspot.com/-vnIZdakx3Q4/V6oDM6RkzCI/AAAAAAAAAq0/sBdjdr7D0kAuJ1ECGJKx-4SaIEOVseOkACLcB/s400/image008.png "SqlToXlsToR MS-SQLServer_7") |
 
 ## MS SQL Server `object types`
 
