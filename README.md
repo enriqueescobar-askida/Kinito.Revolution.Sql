@@ -8,7 +8,7 @@ In theory, it should be able to connect to any `database type` or feed on any `t
 
 # MS SQL Server `SqlToXlsToR`
 
-Each BD type has its own specefications, in this case the use MS SQL Server. We are using the `ODBC Connector` to ineract with it.
+Each BD type has its own specifications, in this case the use MS SQL Server. We are using the `ODBC Connector` to interact with it. Please note that prior to `MS SQL Server 2016` this was the way to interact with `MS SQL Server` databases.
 
 ## MS SQL Server `ODBC` setup
 
@@ -29,6 +29,9 @@ Each BD type has its own specefications, in this case the use MS SQL Server. We 
 ## MS SQL Server Script `SqlToXlsToR/Script.R`
 
 This script `Script.R` works as anchor to find the correct project and calling any program `SqlTo{Csv,Xls}ToR.R`.
+These programs are made to read exports from `MS SQL Server` into `{Xls,Csv,*}` static files.
+These exports correspond to `SQL statements queries` saved as `{Xls,Csv,*}` static files.
+They are read in R from any source then processed with graphs and stats.
 
 ```
 Solution .....   Kinito.Revolution.Sql
