@@ -36,7 +36,7 @@ Namespace ....   Kinito.Revolution.Sql.SqlToXlsToR
 Path new .....   E:/Disk_X/Kinito.Revolution.Sql/SqlToXlsToR
 ```
 
-![IMG_SqlToXlsToR_Kinito.Revolution.Sql.Script](SqlToXlsToR/Doc/Kinito.Revolution.Sql.Script.png "SqlToXlsToR Kinito.Revolution.Sql.Script")
+![IMG_SqlToXlsToR_Kinito.Revolution.Sql.SqlToXlsToR](SqlToXlsToR/Doc/Kinito.Revolution.Sql.SqlToXlsToR.png "SqlToXlsToR Kinito.Revolution.Sql.SqlToXlsToR")
 
 ## MS SQL Server Scripts `SqlToXlsToR/Src`
 
