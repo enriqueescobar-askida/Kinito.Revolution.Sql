@@ -1,5 +1,37 @@
-# Jasper-core
-This is the BE part of the bi-platform project, also known as "Jasper". This part is refered to `bi-platform-core`, also known as "Jasper-core".
+# Sql To Xls from `SQL Server`
+This is the part when the information source comes from an Excel output expoerted from `SQL Server`.
+
+# `SQL Server` instance
+
+[Xls/SqlServer-Instance_DEV_DEV01-HS-DEV.xls](Xls/SqlServer-Instance_DEV_DEV01-HS-DEV.xls)
+
+| SQLServerInstance |
+|-------------------|
+| DEV01-HS\DEV      |
+
+```
+DEV01-HS\DEV -> DEV01-HS-DEV
+```
+
+# `SQL Service` instance
+
+[Xls/SqlServer-ServiceInstance_DEV.xls](Xls/SqlServer-ServiceInstance_DEV.xls)
+
+| DEV |
+|-----|
+
+# `SQL Server` version
+
+[Xls/SqlServer-Version_DEV.xls](Xls/SqlServer-Version_DEV.xls)
+
+```
+SQLServerVersion
+"Microsoft SQL Server 2012 - 11.0.5343.0 (X64) 
+	May  4 2015 19:11:32 
+	Copyright (c) Microsoft Corporation
+	Standard Edition (64-bit) on Windows NT 6.1 <X64> (Build 7601: Service Pack 1) (Hypervisor)
+"
+```
 
 ## Jasper-core solution architecture
 
