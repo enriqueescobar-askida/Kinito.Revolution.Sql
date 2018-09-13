@@ -13,6 +13,26 @@
 - [`SQL Server` instance usage file](#sql-server-instance-usage-file)
     - [`SQL Server` instance usage graphs](#sql-server-instance-usage-graphs)
     - [`SQL Server` instance usage filter](#sql-server-instance-usage-filter)
+        - [HYSEC `SQL Server` instance DB objects](#hysec-sql-server-instance-db-objects)
+            - [HYSEC `SQL Server` instance DB objects graphs](#hysec-sql-server-instance-db-objects-graphs)
+        - [HYSEC `SQL Server` instance DB tables](#hysec-sql-server-instance-db-tables)
+            - [HYSEC `SQL Server` instance DB tables graphs](#hysec-sql-server-instance-db-tables-graphs)
+        - [HYSEC `SQL Server` instance DB views](#hysec-sql-server-instance-db-views)
+            - [HYSEC `SQL Server` instance DB views graphs](#hysec-sql-server-instance-db-views-graphs)
+        - [HYSEC `SQL Server` instance DB functions](#hysec-sql-server-instance-db-functions)
+            - [HYSEC `SQL Server` instance DB functions graphs](#hysec-sql-server-instance-db-functions-graphs)
+        - [HYSEC `SQL Server` instance DB procedures](#hysec-sql-server-instance-db-procedures)
+            - [HYSEC `SQL Server` instance DB procedures graphs](#hysec-sql-server-instance-db-procedures-graphs)
+        - [HYSEC `SQL Server` instance DB constraints](#hysec-sql-server-instance-db-constraints)
+            - [HYSEC `SQL Server` instance DB constraints graphs](#hysec-sql-server-instance-db-constraints-graphs)
+        - [HYSEC `SQL Server` instance DB triggers](#hysec-sql-server-instance-db-triggers)
+            - [HYSEC `SQL Server` instance DB triggers graphs](#hysec-sql-server-instance-db-triggers-graphs)
+        - [HYSEC `SQL Server` instance DB principal keys](#hysec-sql-server-instance-db-principal-keys)
+            - [HYSEC `SQL Server` instance DB principal keys graphs](#hysec-sql-server-instance-db-principal-keys-graphs)
+        - [HYSEC `SQL Server` instance DB foreign keys](#hysec-sql-server-instance-db-foreign-keys)
+            - [HYSEC `SQL Server` instance DB foreign keys graphs](#hysec-sql-server-instance-db-foreign-keys-graphs)
+        - [HYSEC `SQL Server` instance DB index](#hysec-sql-server-instance-db-index)
+            - [HYSEC `SQL Server` instance DB index graphs](#hysec-sql-server-instance-db-index-graphs)
         - [MS SQL Server `object types`](#ms-sql-server-object-types)
 
 <!-- /TOC -->
@@ -172,6 +192,46 @@ Histograms for each line from starting date `ServerStarted` with its time length
 
 | HYSEC |
 |-------|
+
+### HYSEC `SQL Server` instance DB objects
+
+#### HYSEC `SQL Server` instance DB objects graphs
+
+### HYSEC `SQL Server` instance DB tables
+
+#### HYSEC `SQL Server` instance DB tables graphs
+
+### HYSEC `SQL Server` instance DB views
+
+#### HYSEC `SQL Server` instance DB views graphs
+
+### HYSEC `SQL Server` instance DB functions
+
+#### HYSEC `SQL Server` instance DB functions graphs
+
+### HYSEC `SQL Server` instance DB procedures
+
+#### HYSEC `SQL Server` instance DB procedures graphs
+
+### HYSEC `SQL Server` instance DB constraints
+
+#### HYSEC `SQL Server` instance DB constraints graphs
+
+### HYSEC `SQL Server` instance DB triggers
+
+#### HYSEC `SQL Server` instance DB triggers graphs
+
+### HYSEC `SQL Server` instance DB principal keys
+
+#### HYSEC `SQL Server` instance DB principal keys graphs
+
+### HYSEC `SQL Server` instance DB foreign keys
+
+#### HYSEC `SQL Server` instance DB foreign keys graphs
+
+### HYSEC `SQL Server` instance DB index
+
+#### HYSEC `SQL Server` instance DB index graphs
 
 ### MS SQL Server `object types`
 
