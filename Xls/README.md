@@ -58,15 +58,9 @@ DEV01-HS\DEV -> DEV01-HS-DEV
 
 ## graphs
 
-| Barplot | Piechart |
-|---------|----------|
-||||
-
-
-![IMG-UsageList-Barplot](Xls/SqlServer-Instance_DEV_DEV01-HS-DEV_UsageList_Barplot.png "UsageList Barplot")
-
-
-![IMG-UsageList-Piechart](Xls/SqlServer-Instance_DEV_DEV01-HS-DEV_UsageList_Piechart.png "UsageList Piechart")
+| Barplot                                                                                                 | Piechart                                                                                                   |
+| ------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| ![IMG-UsageList-Barplot](SqlServer-Instance_DEV_DEV01-HS-DEV_UsageList_Barplot.png "UsageList Barplot") | ![IMG-UsageList-Piechart](SqlServer-Instance_DEV_DEV01-HS-DEV_UsageList_Piechart.png "UsageList Piechart") |
 
 
 ## `SQL Server` instance usage filter
