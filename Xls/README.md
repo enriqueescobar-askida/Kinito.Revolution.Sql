@@ -1,4 +1,4 @@
-# Sql To Xls from `SQL Server`
+# Sql to Xls to `R`
 
 This is the part when the information source comes from an Excel output expoerted from `SQL Server`.
 
@@ -55,6 +55,19 @@ DEV01-HS\DEV -> DEV01-HS-DEV
 | 2            | tempdb      | 500           | 3          |
 | 11           | ASPState    | 1             | 0          |
 | 8            | MR2012      | 2             | 0          |
+
+## graphs
+
+| Barplot | Piechart |
+|---------|----------|
+||||
+
+
+![IMG-UsageList-Barplot](Xls/SqlServer-Instance_DEV_DEV01-HS-DEV_UsageList_Barplot.png "UsageList Barplot")
+
+
+![IMG-UsageList-Piechart](Xls/SqlServer-Instance_DEV_DEV01-HS-DEV_UsageList_Piechart.png "UsageList Piechart")
+
 
 ## `SQL Server` instance usage filter
 
