@@ -1,17 +1,34 @@
+<!-- TOC -->
+
+- [Sql to Xls to `R`](#sql-to-xls-to-r)
+- [`SQL Service` instance](#sql-service-instance)
+- [`SQL Server` version](#sql-server-version)
+- [`SQL Server` instance](#sql-server-instance)
+- [`SQL Server` instance usage file](#sql-server-instance-usage-file)
+    - [`SQL Server` instance usage graphs](#sql-server-instance-usage-graphs)
+    - [`SQL Server` instance usage filter](#sql-server-instance-usage-filter)
+- [`SQL Server` instance linked list](#sql-server-instance-linked-list)
+- [`SQL Server` instance backup list](#sql-server-instance-backup-list)
+- [`SQL Server` instance running list](#sql-server-instance-running-list)
+- [`SQL Server` instance spec list](#sql-server-instance-spec-list)
+        - [MS SQL Server `object types`](#ms-sql-server-object-types)
+
+<!-- /TOC -->
+---
 # Sql to Xls to `R`
 
 This is the part when the information source comes from an Excel output expoerted from `SQL Server`.
 
 # `SQL Service` instance
 
-[Xls/SqlServer-ServiceInstance_DEV.xls](Xls/SqlServer-ServiceInstance_DEV.xls)
+[SqlServer-ServiceInstance_DEV.xls](SqlServer-ServiceInstance_DEV.xls)
 
 | DEV |
 |-----|
 
 # `SQL Server` version
 
-[Xls/SqlServer-Version_DEV.xls](Xls/SqlServer-Version_DEV.xls)
+[SqlServer-Version_DEV.xls](SqlServer-Version_DEV.xls)
 
 ```
 SQLServerVersion
@@ -24,7 +41,7 @@ SQLServerVersion
 
 # `SQL Server` instance
 
-[Xls/SqlServer-Instance_DEV_DEV01-HS-DEV.xls](Xls/SqlServer-Instance_DEV_DEV01-HS-DEV.xls)
+[SqlServer-Instance_DEV_DEV01-HS-DEV.xls](SqlServer-Instance_DEV_DEV01-HS-DEV.xls)
 
 | SQLServerInstance |
 |-------------------|
@@ -36,7 +53,7 @@ DEV01-HS\DEV -> DEV01-HS-DEV
 
 # `SQL Server` instance usage file
 
-[Xls/SqlServer-Instance_DEV_DEV01-HS-DEV_UsageList.xls](Xls/SqlServer-Instance_DEV_DEV01-HS-DEV_UsageList.xls)
+[SqlServer-Instance_DEV_DEV01-HS-DEV_UsageList.xls](SqlServer-Instance_DEV_DEV01-HS-DEV_UsageList.xls)
 
 
 | DBIdentifier | DBName      | DBBufferPages | DBBufferMB |
@@ -65,14 +82,14 @@ DEV01-HS\DEV -> DEV01-HS-DEV
 
 ## `SQL Server` instance usage filter
 
-[Xls/SqlServer-Instance_DEV_DEV01-HS-DEV_UsageList.txt](Xls/SqlServer-Instance_DEV_DEV01-HS-DEV_UsageList.txt)
+[SqlServer-Instance_DEV_DEV01-HS-DEV_UsageList.txt](SqlServer-Instance_DEV_DEV01-HS-DEV_UsageList.txt)
 
 | HYSEC |
 |-------|
 
 # `SQL Server` instance linked list
 
-[Xls/SqlServer-Instance_DEV_DEV01-HS-DEV_LinkedList.xls](Xls/SqlServer-Instance_DEV_DEV01-HS-DEV_LinkedList.xls)
+[SqlServer-Instance_DEV_DEV01-HS-DEV_LinkedList.xls](SqlServer-Instance_DEV_DEV01-HS-DEV_LinkedList.xls)
 
 | ServerName   | LinkedServerID | LinkedServer | Product    | Provider | DataSource   | ModificationDate        | IsLinked |
 |--------------|----------------|--------------|------------|----------|--------------|-------------------------|----------|
@@ -83,7 +100,7 @@ DEV01-HS\DEV -> DEV01-HS-DEV
 
 # `SQL Server` instance backup list
 
-[Xls/SqlServer-Instance_DEV_DEV01-HS-DEV_BackupList.xls](Xls/SqlServer-Instance_DEV_DEV01-HS-DEV_BackupList.xls)
+[SqlServer-Instance_DEV_DEV01-HS-DEV_BackupList.xls](SqlServer-Instance_DEV_DEV01-HS-DEV_BackupList.xls)
 
 | ServerName   | ServiceName | DBName      | Backup_finish_date      | Physical_Device_name                                 |
 |--------------|-------------|-------------|-------------------------|------------------------------------------------------|
@@ -109,7 +126,7 @@ DEV01-HS\DEV -> DEV01-HS-DEV
 
 # `SQL Server` instance running list
 
-[Xls/SqlServer-Instance_DEV_DEV01-HS-DEV_RunningList.xls](Xls/SqlServer-Instance_DEV_DEV01-HS-DEV_RunningList.xls)
+[SqlServer-Instance_DEV_DEV01-HS-DEV_RunningList.xls](SqlServer-Instance_DEV_DEV01-HS-DEV_RunningList.xls)
 
 | ServerName   | ServiceName | ServerStarted           | DaysRunning |
 |--------------|-------------|-------------------------|-------------|
@@ -129,7 +146,7 @@ DEV01-HS\DEV -> DEV01-HS-DEV
 
 # `SQL Server` instance spec list
 
-[Xls/SqlServer-Instance_DEV_DEV01-HS-DEV_SpecList.xls](Xls/SqlServer-Instance_DEV_DEV01-HS-DEV_SpecList.xls)
+[SqlServer-Instance_DEV_DEV01-HS-DEV_SpecList.xls](SqlServer-Instance_DEV_DEV01-HS-DEV_SpecList.xls)
 
 | ServerName   | ServiceName | DBIdentifier | DBName      | OriginalDBName   | RecoveryModel | CompatiblityLevel | DBSize   | DBGrowth | IsPercentGrowth | CreatedDate             | CurrentState | AutoShrink | SnapshotState | IsAutoUpdate | IsArithAbort | PageVerifyOption    | Collation                    | FilePath                                       | IdSourceDB |
 |--------------|-------------|--------------|-------------|------------------|---------------|-------------------|----------|----------|-----------------|-------------------------|--------------|------------|---------------|--------------|--------------|---------------------|------------------------------|------------------------------------------------|------------|
