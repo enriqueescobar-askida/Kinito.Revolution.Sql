@@ -4,13 +4,15 @@
 - [`SQL Service` instance](#sql-service-instance)
 - [`SQL Server` version](#sql-server-version)
 - [`SQL Server` instance](#sql-server-instance)
+- [`SQL Server` instance linked list](#sql-server-instance-linked-list)
+- [`SQL Server` instance backup list](#sql-server-instance-backup-list)
+    - [`SQL Server` instance backup graphs](#sql-server-instance-backup-graphs)
+- [`SQL Server` instance running list](#sql-server-instance-running-list)
+    - [`SQL Server` instance running graphs](#sql-server-instance-running-graphs)
+- [`SQL Server` instance spec list](#sql-server-instance-spec-list)
 - [`SQL Server` instance usage file](#sql-server-instance-usage-file)
     - [`SQL Server` instance usage graphs](#sql-server-instance-usage-graphs)
     - [`SQL Server` instance usage filter](#sql-server-instance-usage-filter)
-- [`SQL Server` instance linked list](#sql-server-instance-linked-list)
-- [`SQL Server` instance backup list](#sql-server-instance-backup-list)
-- [`SQL Server` instance running list](#sql-server-instance-running-list)
-- [`SQL Server` instance spec list](#sql-server-instance-spec-list)
         - [MS SQL Server `object types`](#ms-sql-server-object-types)
 
 <!-- /TOC -->
@@ -51,42 +53,6 @@ SQLServerVersion
 DEV01-HS\DEV -> DEV01-HS-DEV
 ```
 
-# `SQL Server` instance usage file
-
-[SqlServer-Instance_DEV_DEV01-HS-DEV_UsageList.xls](SqlServer-Instance_DEV_DEV01-HS-DEV_UsageList.xls)
-
-
-| DBIdentifier | DBName      | DBBufferPages | DBBufferMB |
-|--------------|-------------|---------------|------------|
-| 9            | HYLTE       | 2             | 0          |
-| 32767        | Resource DB | 29            | 0          |
-| 3            | model       | 1             | 0          |
-| 12           | HYSEC_PDF   | 1             | 0          |
-| 6            | HYSEC_DELTA | 1             | 0          |
-| 7            | POSTECANADA | 1             | 0          |
-| 1            | master      | 14            | 0          |
-| 10           | HYSEC       | 95169         | 743        |
-| 4            | msdb        | 5             | 0          |
-| 13           | HYSEC_MR    | 1             | 0          |
-| 5            | Dynamics    | 2             | 0          |
-| 2            | tempdb      | 500           | 3          |
-| 11           | ASPState    | 1             | 0          |
-| 8            | MR2012      | 2             | 0          |
-
-## `SQL Server` instance usage graphs
-
-| Barplot                                                                                                 | Piechart                                                                                                   |
-| ------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| ![IMG-UsageList-Barplot](SqlServer-Instance_DEV_DEV01-HS-DEV_UsageList_Barplot.png "UsageList Barplot") | ![IMG-UsageList-Piechart](SqlServer-Instance_DEV_DEV01-HS-DEV_UsageList_Piechart.png "UsageList Piechart") |
-
-
-## `SQL Server` instance usage filter
-
-[SqlServer-Instance_DEV_DEV01-HS-DEV_UsageList.txt](SqlServer-Instance_DEV_DEV01-HS-DEV_UsageList.txt)
-
-| HYSEC |
-|-------|
-
 # `SQL Server` instance linked list
 
 [SqlServer-Instance_DEV_DEV01-HS-DEV_LinkedList.xls](SqlServer-Instance_DEV_DEV01-HS-DEV_LinkedList.xls)
@@ -123,6 +89,9 @@ DEV01-HS\DEV -> DEV01-HS-DEV
 | DEV01-HS\DEV | DEV         | msdb        |                         |                                                      |
 | DEV01-HS\DEV | DEV         | tempdb      |                         |                                                      |
 
+## `SQL Server` instance backup graphs
+
+Time series for each DB using each `Backup_finish_date`.
 
 # `SQL Server` instance running list
 
@@ -144,6 +113,10 @@ DEV01-HS\DEV -> DEV01-HS-DEV
 | DEV01-HS\DEV | DEV         | 2014-03-24 09:41:15.680 | 976.2054861 |
 | DEV01-HS\DEV | DEV         | 2016-02-26 20:03:52.593 | 271.7731134 |
 
+## `SQL Server` instance running graphs
+
+Histograms for each line from starting date `ServerStarted` with its time length `DaysRunning`.
+
 # `SQL Server` instance spec list
 
 [SqlServer-Instance_DEV_DEV01-HS-DEV_SpecList.xls](SqlServer-Instance_DEV_DEV01-HS-DEV_SpecList.xls)
@@ -164,6 +137,41 @@ DEV01-HS\DEV -> DEV01-HS-DEV
 | DEV01-HS\DEV | DEV         | 4            | msdb        | MSDBData         | SIMPLE        | 110               | 2856     | 10       | True            | 2012-02-10 21:02:17.770 | ONLINE       | False      | ON            | True         | False        | CHECKSUM            | SQL_Latin1_General_CP1_CI_AS | F:\DEVData\MSSQL11.DEV\MSSQL\DATA\MSDBData.mdf |            |
 | DEV01-HS\DEV | DEV         | 7            | POSTECANADA | POSTECANADA_Data | FULL          | 90                | 2142472  | 10       | True            | 2016-10-28 03:03:44.090 | ONLINE       | False      | OFF           | True         | False        | TORN_PAGE_DETECTION | SQL_Latin1_General_CP1_CI_AS | F:\DEVData\POSTECANADA_Data.MDF                |            |
 | DEV01-HS\DEV | DEV         | 2            | tempdb      | tempdev          | SIMPLE        | 110               | 1024     | 10       | True            | 2016-10-31 08:29:24.907 | ONLINE       | False      | OFF           | True         | False        | CHECKSUM            | SQL_Latin1_General_CP1_CI_AS | F:\DEVData\MSSQL11.DEV\MSSQL\DATA\tempdb.mdf   |            |
+
+# `SQL Server` instance usage file
+
+[SqlServer-Instance_DEV_DEV01-HS-DEV_UsageList.xls](SqlServer-Instance_DEV_DEV01-HS-DEV_UsageList.xls)
+
+
+| DBIdentifier | DBName      | DBBufferPages | DBBufferMB |
+|--------------|-------------|---------------|------------|
+| 9            | HYLTE       | 2             | 0          |
+| 32767        | Resource DB | 29            | 0          |
+| 3            | model       | 1             | 0          |
+| 12           | HYSEC_PDF   | 1             | 0          |
+| 6            | HYSEC_DELTA | 1             | 0          |
+| 7            | POSTECANADA | 1             | 0          |
+| 1            | master      | 14            | 0          |
+| 10           | HYSEC       | 95169         | 743        |
+| 4            | msdb        | 5             | 0          |
+| 13           | HYSEC_MR    | 1             | 0          |
+| 5            | Dynamics    | 2             | 0          |
+| 2            | tempdb      | 500           | 3          |
+| 11           | ASPState    | 1             | 0          |
+| 8            | MR2012      | 2             | 0          |
+
+## `SQL Server` instance usage graphs
+
+| Barplot                                                                                                 | Piechart                                                                                                   |
+| ------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| ![IMG-UsageList-Barplot](SqlServer-Instance_DEV_DEV01-HS-DEV_UsageList_Barplot.png "UsageList Barplot") | ![IMG-UsageList-Piechart](SqlServer-Instance_DEV_DEV01-HS-DEV_UsageList_Piechart.png "UsageList Piechart") |
+
+## `SQL Server` instance usage filter
+
+[SqlServer-Instance_DEV_DEV01-HS-DEV_UsageList.txt](SqlServer-Instance_DEV_DEV01-HS-DEV_UsageList.txt)
+
+| HYSEC |
+|-------|
 
 ### MS SQL Server `object types`
 
